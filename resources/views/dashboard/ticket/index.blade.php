@@ -1,0 +1,113 @@
+@extends('dashboard.layouts.main')
+
+@section('content')
+<div class="card bg-transparent shadow-none border-0 my-4">
+    <div class="card-body row p-0 pb-3">
+        <div class="col-12 col-md-8 card-separator">
+            <h3>Welcome back, Felecia 👋🏻 </h3>
+            <div class="col-12 col-lg-7">
+                <p>Your progress this week is Awesome. let's keep it up and get a lot of points reward !</p>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
+                <div class="d-flex align-items-center gap-3 me-4 me-sm-0">
+                    <span class=" bg-label-primary p-2 rounded">
+                        <i class="bx bx-laptop bx-sm"></i>
+                    </span>
+                    <div class="content-right">
+                        <p class="mb-0">Hours Spent</p>
+                        <h4 class="text-primary mb-0">34h</h4>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="bg-label-info p-2 rounded">
+                        <i class="bx bx-bulb bx-sm"></i>
+                    </span>
+                    <div class="content-right">
+                        <p class="mb-0">Test Results</p>
+                        <h4 class="text-info mb-0">82%</h4>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="bg-label-warning p-2 rounded">
+                        <i class="bx bx-check-circle bx-sm"></i>
+                    </span>
+                    <div class="content-right">
+                        <p class="mb-0">Course Completed </p>
+                        <h4 class="text-warning mb-0">14</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
+            <div class="d-flex justify-content-between align-items-center" style="position: relative;">
+                <div>
+                    <div>
+                        <h5 class="mb-2">Time Spendings</h5>
+                        <p class="mb-4">Weekly report</p>
+                    </div>
+                    <div class="time-spending-chart">
+                        <h3 class="mb-2">231<span class="text-muted">h</span> 14<span class="text-muted">m</span> </h3>
+                        <span class="badge bg-label-success">+18.4%</span>
+                    </div>
+                </div>
+                <div id="leadsReportChart" style="min-height: 139.8px;"><div id="apexchartsgyqwerjr" class="apexcharts-canvas apexchartsgyqwerjr apexcharts-theme-light" style="width: 130px; height: 139.8px;"><svg id="SvgjsSvg1636" width="130" height="139.8" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1638" class="apexcharts-inner apexcharts-graphical" transform="translate(-0.5, 0)"><defs id="SvgjsDefs1637"><clipPath id="gridRectMaskgyqwerjr"><rect id="SvgjsRect1640" width="137" height="155" x="-2" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMaskgyqwerjr"></clipPath><clipPath id="nonForecastMaskgyqwerjr"></clipPath><clipPath id="gridRectMarkerMaskgyqwerjr"><rect id="SvgjsRect1641" width="137" height="159" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath></defs><g id="SvgjsG1642" class="apexcharts-pie"><g id="SvgjsG1643" transform="translate(0, 0) scale(1)"><circle id="SvgjsCircle1644" r="45.658536585365866" cx="66.5" cy="66.5" fill="transparent"></circle><g id="SvgjsG1645" class="apexcharts-slices"><g id="SvgjsG1646" class="apexcharts-series apexcharts-pie-series" seriesName="36h" rel="1" data:realIndex="0"><path id="SvgjsPath1647" d="M 66.5 5.621951219512184 A 60.878048780487816 60.878048780487816 0 0 1 117.38951211290043 33.087511612715616 L 104.66713408467533 41.44063370953671 A 45.658536585365866 45.658536585365866 0 0 0 66.5 20.841463414634134 L 66.5 5.621951219512184 z" fill="#71dd37e8" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-0" index="0" j="0" data:angle="56.71232876712329" data:startAngle="0" data:strokeWidth="0" data:value="23" data:pathOrig="M 66.5 5.621951219512184 A 60.878048780487816 60.878048780487816 0 0 1 117.38951211290043 33.087511612715616 L 104.66713408467533 41.44063370953671 A 45.658536585365866 45.658536585365866 0 0 0 66.5 20.841463414634134 L 66.5 5.621951219512184 z"></path></g><g id="SvgjsG1648" class="apexcharts-series apexcharts-pie-series" seriesName="56h" rel="2" data:realIndex="1"><path id="SvgjsPath1649" d="M 117.38951211290043 33.087511612715616 A 60.878048780487816 60.878048780487816 0 0 1 103.12569906852212 115.12812962742359 L 93.9692743013916 102.97109722056769 A 45.658536585365866 45.658536585365866 0 0 0 104.66713408467533 41.44063370953671 L 117.38951211290043 33.087511612715616 z" fill="#71dd37bf" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-1" index="0" j="1" data:angle="86.30136986301369" data:startAngle="56.71232876712329" data:strokeWidth="0" data:value="35" data:pathOrig="M 117.38951211290043 33.087511612715616 A 60.878048780487816 60.878048780487816 0 0 1 103.12569906852212 115.12812962742359 L 93.9692743013916 102.97109722056769 A 45.658536585365866 45.658536585365866 0 0 0 104.66713408467533 41.44063370953671 L 117.38951211290043 33.087511612715616 z"></path></g><g id="SvgjsG1650" class="apexcharts-series apexcharts-pie-series" seriesName="16h" rel="3" data:realIndex="2"><path id="SvgjsPath1651" d="M 103.12569906852212 115.12812962742359 A 60.878048780487816 60.878048780487816 0 0 1 79.49873670579831 125.9741092188255 L 76.24905252934873 111.10558191411914 A 45.658536585365866 45.658536585365866 0 0 0 93.9692743013916 102.97109722056769 L 103.12569906852212 115.12812962742359 z" fill="rgba(113,221,55,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-2" index="0" j="2" data:angle="24.657534246575352" data:startAngle="143.013698630137" data:strokeWidth="0" data:value="10" data:pathOrig="M 103.12569906852212 115.12812962742359 A 60.878048780487816 60.878048780487816 0 0 1 79.49873670579831 125.9741092188255 L 76.24905252934873 111.10558191411914 A 45.658536585365866 45.658536585365866 0 0 0 93.9692743013916 102.97109722056769 L 103.12569906852212 115.12812962742359 z"></path></g><g id="SvgjsG1652" class="apexcharts-series apexcharts-pie-series" seriesName="32h" rel="4" data:realIndex="3"><path id="SvgjsPath1653" d="M 79.49873670579831 125.9741092188255 A 60.878048780487816 60.878048780487816 0 0 1 29.87430093147789 115.12812962742359 L 39.03072569860842 102.9710972205677 A 45.658536585365866 45.658536585365866 0 0 0 76.24905252934873 111.10558191411914 L 79.49873670579831 125.9741092188255 z" fill="#71dd3799" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-3" index="0" j="3" data:angle="49.315068493150676" data:startAngle="167.67123287671234" data:strokeWidth="0" data:value="20" data:pathOrig="M 79.49873670579831 125.9741092188255 A 60.878048780487816 60.878048780487816 0 0 1 29.87430093147789 115.12812962742359 L 39.03072569860842 102.9710972205677 A 45.658536585365866 45.658536585365866 0 0 0 76.24905252934873 111.10558191411914 L 79.49873670579831 125.9741092188255 z"></path></g><g id="SvgjsG1654" class="apexcharts-series apexcharts-pie-series" seriesName="56h" rel="5" data:realIndex="4"><path id="SvgjsPath1655" d="M 29.87430093147789 115.12812962742359 A 60.878048780487816 60.878048780487816 0 0 1 15.61048788709956 33.08751161271562 L 28.332865915324668 41.44063370953671 A 45.658536585365866 45.658536585365866 0 0 0 39.03072569860842 102.9710972205677 L 29.87430093147789 115.12812962742359 z" fill="#71dd3766" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-4" index="0" j="4" data:angle="86.30136986301372" data:startAngle="216.986301369863" data:strokeWidth="0" data:value="35" data:pathOrig="M 29.87430093147789 115.12812962742359 A 60.878048780487816 60.878048780487816 0 0 1 15.61048788709956 33.08751161271562 L 28.332865915324668 41.44063370953671 A 45.658536585365866 45.658536585365866 0 0 0 39.03072569860842 102.9710972205677 L 29.87430093147789 115.12812962742359 z"></path></g><g id="SvgjsG1656" class="apexcharts-series apexcharts-pie-series" seriesName="16h" rel="6" data:realIndex="5"><path id="SvgjsPath1657" d="M 15.61048788709956 33.08751161271562 A 60.878048780487816 60.878048780487816 0 0 1 66.48937477611985 5.621952146737883 L 66.49203108208988 20.84146411005341 A 45.658536585365866 45.658536585365866 0 0 0 28.332865915324668 41.44063370953671 L 15.61048788709956 33.08751161271562 z" fill="#71dd3733" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-5" index="0" j="5" data:angle="56.71232876712327" data:startAngle="303.28767123287673" data:strokeWidth="0" data:value="23" data:pathOrig="M 15.61048788709956 33.08751161271562 A 60.878048780487816 60.878048780487816 0 0 1 66.48937477611985 5.621952146737883 L 66.49203108208988 20.84146411005341 A 45.658536585365866 45.658536585365866 0 0 0 28.332865915324668 41.44063370953671 L 15.61048788709956 33.08751161271562 z"></path></g></g></g><g id="SvgjsG1658" class="apexcharts-datalabels-group" transform="translate(0, 0) scale(1)" style="opacity: 1;"><text id="SvgjsText1659" font-family="Helvetica, Arial, sans-serif" x="66.5" y="86.5" text-anchor="middle" dominant-baseline="auto" font-size=".7rem" font-weight="400" fill="#a1acb8" class="apexcharts-text apexcharts-datalabel-label" style="font-family: Helvetica, Arial, sans-serif; fill: rgb(161, 172, 184);">Total</text><text id="SvgjsText1660" font-family="Public Sans" x="66.5" y="67.5" text-anchor="middle" dominant-baseline="auto" font-size="1.5rem" font-weight="500" fill="#566a7f" class="apexcharts-text apexcharts-datalabel-value" style="font-family: &quot;Public Sans&quot;;">231h</text></g></g><line id="SvgjsLine1661" x1="0" y1="0" x2="133" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1662" x1="0" y1="0" x2="133" y2="0" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line></g><g id="SvgjsG1639" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend"></div><div class="apexcharts-tooltip apexcharts-theme-false" style="left: -818.133px; top: -169.359px;"><div class="apexcharts-tooltip-series-group apexcharts-active" style="order: 1; display: flex; background-color: rgba(113, 221, 55, 0.4);"><span class="apexcharts-tooltip-marker" style="background-color: rgba(113, 221, 55, 0.4); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">56h: </span><span class="apexcharts-tooltip-text-y-value">35</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 2; display: none; background-color: rgba(113, 221, 55, 0.4);"><span class="apexcharts-tooltip-marker" style="background-color: rgba(113, 221, 55, 0.4); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">56h: </span><span class="apexcharts-tooltip-text-y-value">35</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 3; display: none; background-color: rgba(113, 221, 55, 0.4);"><span class="apexcharts-tooltip-marker" style="background-color: rgba(113, 221, 55, 0.4); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">56h: </span><span class="apexcharts-tooltip-text-y-value">35</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 4; display: none; background-color: rgba(113, 221, 55, 0.4);"><span class="apexcharts-tooltip-marker" style="background-color: rgba(113, 221, 55, 0.4); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">56h: </span><span class="apexcharts-tooltip-text-y-value">35</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 5; display: none; background-color: rgba(113, 221, 55, 0.4);"><span class="apexcharts-tooltip-marker" style="background-color: rgba(113, 221, 55, 0.4); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">56h: </span><span class="apexcharts-tooltip-text-y-value">35</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 6; display: none; background-color: rgba(113, 221, 55, 0.4);"><span class="apexcharts-tooltip-marker" style="background-color: rgba(113, 221, 55, 0.4); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">56h: </span><span class="apexcharts-tooltip-text-y-value">35</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div></div></div>
+                <div class="resize-triggers"><div class="expand-trigger"><div style="width: 280px; height: 141px;"></div></div><div class="contract-trigger"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-8 col-lg-8 mb-0">
+        <div class="card">
+            <div class="card-datatable table-responsive">
+                <table class="invoice-list-table table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Harga</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                            <th class="cell-fit">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <td>
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="avatar-wrapper">
+                                        <div class="avatar avatar-sm me-2">
+                                            <img src="{{ asset('/img/dashboard/avatars/7.png') }}" alt="Avatar" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <a href="pages-profile-user.html" class="text-body text-truncate fw-medium">Henry Barnes lorem10</a>
+                                        <small class="text-truncate text-muted">jok@puc.co.uk</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>$459.65</td>
+                            <td><span class="badge bg-label-success"> Paid </span></td>
+                            <td>
+                                <p>10-10-2002</p>
+                            </td>
+                            <td>
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="javascript:void(0);" class="dropdown-item">Edit</a>
+                                        <a href="javascript:;" class="dropdown-item">Duplicate</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" class="dropdown-item delete-record text-danger">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

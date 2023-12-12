@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,14 @@ Route::get('/', function () {
     return view('main/index');
 })->name('main.index');
 
-
+// Authentication
+Route::get('/login', [AuthController::class, 'index'])->name('login-auth')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout-auth');
 
 // Admin Page
 Route::get('/dashboard', function() {
     return view('dashboard/index');
 })->name('dashboard.index');
+
+Route::resource('/dashboard/ticket', TicketController::class);

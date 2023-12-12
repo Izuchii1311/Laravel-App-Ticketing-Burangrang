@@ -98,6 +98,22 @@
             </ul>
         </li>
 
+        {{-- Ticket --}}
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Ticketing</span></li>
+        {{-- <li class="menu-item">
+            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div data-i18n="Support">Support</div>
+            </a>
+        </li> --}}
+        <li class="menu-item">
+            <a href="/dashboard/ticket" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Documentation">Tiket</div>
+            </a>
+        </li>
+        {{-- EndTicket --}}
+
         <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
