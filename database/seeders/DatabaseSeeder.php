@@ -18,13 +18,25 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::create([
             'name' => 'Luthfi Nur Ramadhan',
-            'username' => 'izuchii',
+            'username' => 'luthfi',
             'email' => 'luthfiramadhan.lr55@gmail.com',
             'email_verified_at' => null,
             'password' => bcrypt('password'),
             'address' => 'Jl. Madesa Rt.005 Rw.011 Blok.K No.21 Kel.Kopo Kec.Bojongloa Kaler 40233 Bandung, Jawa barat',
             'phone_number' => '085722584409',
             'role' => 'admin',
+            'remember_token' => null,
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'Izuchii',
+            'username' => 'izuchii',
+            'email' => 'izuchii@gmail.com',
+            'email_verified_at' => null,
+            'password' => bcrypt('password'),
+            'address' => 'Jl. Madesa Rt.005 Rw.011 Blok.K No.21 Kel.Kopo Kec.Bojongloa Kaler 40233 Bandung, Jawa barat',
+            'phone_number' => '085722584409',
+            'role' => 'cashier',
             'remember_token' => null,
         ]);
 

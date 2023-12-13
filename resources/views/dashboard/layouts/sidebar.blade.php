@@ -65,18 +65,18 @@
                 <div class="badge bg-danger rounded-pill ms-auto">5</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/dashboards-crm.html" target="_blank" class="menu-link">
                         <div data-i18n="CRM">CRM</div>
                         <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item active">
                     <a href="index.html" class="menu-link">
                         <div data-i18n="Analytics">Analytics</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-ecommerce-dashboard.html" target="_blank" class="menu-link">
                         <div data-i18n="eCommerce">eCommerce</div>
                         <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
@@ -94,10 +94,11 @@
                         <div data-i18n="Academy">Academy</div>
                         <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
 
+        @can('cashier')
         {{-- Ticket --}}
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Ticketing</span></li>
         {{-- <li class="menu-item">
@@ -113,8 +114,9 @@
             </a>
         </li>
         {{-- EndTicket --}}
+        @endcan
 
-        <!-- Layouts -->
+        {{-- <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -497,7 +499,7 @@
                 <div data-i18n="Datatables">Datatables</div>
                 <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
             </a>
-        </li>
+        </li> --}}
 
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
@@ -512,6 +514,25 @@
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Documentation">Documentation</div>
             </a>
+        </li>
+
+        <!-- Account -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
+        <li class="menu-item">
+            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Setting">Setting</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <div class="menu-link">
+                <i class="menu-icon tf-icons bx bx-log-out"></i>
+                <form action="{{ route('logout') }}" method="post" style="color: #696cff;">
+                @csrf
+                    <button type="submit" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">Logout</button>
+                </form>
+                {{-- <div data-i18n="Documentation">Logout</div> --}}
+            </div>
         </li>
     </ul>
 </aside>

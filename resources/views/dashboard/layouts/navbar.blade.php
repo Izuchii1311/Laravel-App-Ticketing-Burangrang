@@ -79,7 +79,7 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('main.index') }}">
                             <i class="bx bx-power-off me-2"></i>
-                            <form action="{{ route('logout-auth') }}" method="post">
+                            <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button type="submit" class="align-middle">Logout</button>
                             </form>

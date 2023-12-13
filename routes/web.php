@@ -21,13 +21,14 @@ Route::get('/', function () {
 })->name('main.index');
 
 // Authentication
-Route::get('/login', [AuthController::class, 'index'])->name('login-auth')->middleware('guest');
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout-auth');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Page
-Route::get('/dashboard', function() {
-    return view('dashboard/index');
-})->name('dashboard.index');
-
-Route::resource('/dashboard/ticket', TicketController::class);
+Route::middleware('auth')->group(function() {
+    Route::get('/dashboard', function() {
+        return view('dashboard/index');
+    })->name('dashboard.index');
+    Route::resource('/dashboard/ticket', TicketController::class)->middleware('cashier');
+});
