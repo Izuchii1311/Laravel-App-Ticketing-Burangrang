@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('cd_ticket')->unique();
-            $table->decimal('price', 10, 2);
+            $table->string('name_ticket');
+            $table->decimal('price', 10, 0);
             $table->time('start_time')->default('06:00:00');
             $table->time('end_time')->default('20:00:00');
             $table->string('status')->default('open');
+            $table->string('description');
             $table->timestamps();
         });
     }

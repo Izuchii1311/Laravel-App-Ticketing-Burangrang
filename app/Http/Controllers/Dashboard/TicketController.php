@@ -13,7 +13,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('dashboard.ticket.index');
+        return view('dashboard.ticket.index', [
+            'tickets' => Ticket::get()
+        ]);
     }
 
     /**
@@ -21,7 +23,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.ticket.create');
     }
 
     /**
@@ -29,7 +31,16 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'cd_ticket' => 'required|unique:tickets',
+            'name_ticket' => 'required|max:255',
+            'price' => 'required|numeric',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'description' => 'required'
+        ]);
+
+        return $validatedData;
     }
 
     /**

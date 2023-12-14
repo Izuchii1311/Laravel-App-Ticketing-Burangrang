@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // View Login
     public function index() {
         return view('/auth/login');
     }
 
+    // Login Logic Authentication
     public function authenticate(Request $request) {
         $credentials = $request->validate([
             'email' => 'required|email:dns',
@@ -22,11 +24,13 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended(route('dashboard.index'));
         }
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
 
+    // Logout Logic
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();

@@ -28,7 +28,10 @@
     <link rel="stylesheet" href="{{ asset('/vendor/dashboard/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/dashboard/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- Page CSS -->
+    {{-- Sweet Alert --}}
+    <!-- Include SweetAlert CSS and JS -->
+    <link rel="stylesheet" href="{{ asset('js/dashboard/sweetalert2@11.js') }}">
+    <script src="{{ asset('js/dashboard/sweetalert2@11.js') }}"></script>
 
     <!-- Helpers -->
     <script src="{{ asset('/vendor/dashboard/js/helpers.js') }}"></script>
@@ -36,54 +39,50 @@
 </head>
 
 <body>
-<!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-        {{-- Sidebar Section --}}
-        @include('dashboard.layouts.sidebar')
-        {{-- End Sidebar Section --}}
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            {{-- Sidebar Section --}}
+            @include('dashboard.layouts.sidebar')
+            {{-- End Sidebar Section --}}
 
-        <!-- Layout container -->
-        <div class="layout-page">
+            <!-- Layout container -->
+            <div class="layout-page">
 
-            {{-- Navbar Section --}}
-            @include('dashboard.layouts.navbar')
-            {{-- End Navbar Section --}}
+                {{-- Navbar Section --}}
+                @include('dashboard.layouts.navbar')
+                {{-- End Navbar Section --}}
 
-            <!-- Content wrapper -->
-            <div class="content-wrapper">
-                <!-- Content -->
-                <div class="container-xxl flex-grow-1 container-p-y">
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
                     <!-- Content -->
-                    @yield('content')
-                    <!-- / Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Content -->
+                        @yield('content')
+                        <!-- / Content -->
 
+                    </div>
+                    {{-- End Content --}}
+
+                    {{-- Footer Section --}}
+                    @include('dashboard.layouts.footer')
+                    {{-- End Footer Section --}}
+
+                    <div class="content-backdrop fade"></div>
                 </div>
-                {{-- End Content --}}
-
-                {{-- Footer Section --}}
-                @include('dashboard.layouts.footer')
-                {{-- End Footer Section --}}
-
-                <div class="content-backdrop fade"></div>
+            <!-- Content wrapper -->
             </div>
-        <!-- Content wrapper -->
+            <!-- / Layout page -->
         </div>
-        <!-- / Layout page -->
-    </div>
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-</div>
-<!-- / Layout wrapper -->
-
-    <div class="buy-now">
-        <a href="https://themeselection.com/item/sneat-bootstrap-html-admin-template/" target="_blank" class="btn btn-danger btn-buy-now" >Upgrade to Pro</a >
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    <!-- / Layout wrapper -->
+
+
 
     <!-- Core JS -->
-    <!-- build:{{ asset('') }}/vendor/js/core.js -->
-
     <script src="{{ asset('/vendor/dashboard/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('/vendor/dashboard/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('/vendor/dashboard/js/bootstrap.js') }}"></script>
@@ -91,7 +90,6 @@
     <script src="{{ asset('/vendor/dashboard/js/menu.js') }}"></script>
 
     <!-- endbuild -->
-
     <!-- Vendors JS -->
     <script src="{{ asset('/vendor/dashboard/libs/apex-charts/apexcharts.js') }}"></script>
 
@@ -101,7 +99,7 @@
     <!-- Page JS -->
     <script src="{{ asset('/js/dashboard/dashboards-analytics.js') }}"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    {{-- My Script --}}
+    <script src="{{ asset('js/dashboard/script.js') }}"></script>
 </body>
 </html>

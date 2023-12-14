@@ -11,19 +11,14 @@
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
             <i class="bx bx-search fs-4 lh-0"></i>
-            <input
-                type="text"
-                class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                placeholder="Search..."
-                aria-label="Search..." />
-            </div>
+            <input type="text" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." /> </div>
         </div>
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
             <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub" >Star</a >
+                <a class="text-gray" href="#">Welcome, <span class="fw-bold">{{ auth()->user()->name }}</span></a >
             </li>
 
             <!-- User -->
@@ -76,14 +71,16 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('main.index') }}">
-                            <i class="bx bx-power-off me-2"></i>
-                            <form action="{{ route('logout') }}" method="post">
+                    <li id="logout-li-header" style="cursor: pointer;">
+                        <form action="{{ route('logout') }}" method="post" id="logout-form">
+                            <div class="dropdown-item">
                                 @csrf
-                                <button type="submit" class="align-middle">Logout</button>
-                            </form>
-                        </a>
+                                <button type="button" onclick="confirmLogout()" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="flex-grow-1 align-middle ms-1">Logout</span>
+                                </button>
+                            </div>
+                        </form>
                     </li>
                 </ul>
             </li>

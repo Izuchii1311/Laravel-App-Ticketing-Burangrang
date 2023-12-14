@@ -4,9 +4,9 @@
 <div class="card bg-transparent shadow-none border-0 my-4">
     <div class="card-body row p-0 pb-3">
         <div class="col-12 col-md-8 card-separator">
-            <h3>Welcome back, Felecia 👋🏻 </h3>
-            <div class="col-12 col-lg-7">
-                <p>Your progress this week is Awesome. let's keep it up and get a lot of points reward !</p>
+            <h3>Selamat datang kembali, {{ auth()->user()->name }} 👋🏻 </h3>
+            <div class="col-12 col-lg-8">
+                <p>Kamu bisa menambahkan tiket baru untuk menyesuaikan kemudahan dalam pengelolaan tiket kawasan g.Burangrang</p>
             </div>
             <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
                 <div class="d-flex align-items-center gap-3 me-4 me-sm-0">
@@ -43,7 +43,7 @@
             <div class="d-flex justify-content-between align-items-center" style="position: relative;">
                 <div>
                     <div>
-                        <h5 class="mb-2">Time Spendings</h5>
+                        <h5 class="mb-2"><a href="{{ route('ticket.create') }}">Tambah Tiket Baru</a></h5>
                         <p class="mb-4">Weekly report</p>
                     </div>
                     <div class="time-spending-chart">
@@ -58,52 +58,47 @@
     </div>
 
 <div class="row">
-    <div class="col-md-8 col-lg-8 mb-0">
+    <div class="col-md-12 col-lg-12 mb-0">
         <div class="card">
+            <h5 class="card-header fw-bolder">Data Tiket</h5>
             <div class="card-datatable table-responsive">
                 <table class="invoice-list-table table">
                     <thead>
                         <tr>
-                            <th>Customer</th>
+                            <th>No</th>
+                            <th>Kode Tiket</th>
+                            <th>Nama Tiket</th>
                             <th>Harga</th>
-                            <th>Status</th>
-                            <th>Tanggal</th>
-                            <th class="cell-fit">Actions</th>
+                            <th>Jam Buka</th>
+                            <th>Jam Tutup</th>
+                            <th class="cell-fit">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar avatar-sm me-2">
-                                            <img src="{{ asset('/img/dashboard/avatars/7.png') }}" alt="Avatar" class="rounded-circle">
+                        @forelse ($tickets as $ticket)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $ticket->cd_ticket }}</td>
+                                <td>{{ $ticket->name_ticket }}</td>
+                                <td>{{ $ticket->price }}</td>
+                                <td>{{ $ticket->start_time }}</td>
+                                <td>{{ $ticket->end_time }}</td>
+                                <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="javascript:void(0);" class="dropdown-item">Detail Tiket</a>
+                                            <a href="javascript:void(0);" class="dropdown-item">Edit Tiket</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="javascript:;" class="dropdown-item delete-record text-danger">Hapus Tiket</a>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="pages-profile-user.html" class="text-body text-truncate fw-medium">Henry Barnes lorem10</a>
-                                        <small class="text-truncate text-muted">jok@puc.co.uk</small>
-                                    </div>
                                 </div>
-                            </td>
-                            <td>$459.65</td>
-                            <td><span class="badge bg-label-success"> Paid </span></td>
-                            <td>
-                                <p>10-10-2002</p>
-                            </td>
-                            <td>
-                            <div class="d-flex align-items-center">
-                                <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="javascript:void(0);" class="dropdown-item">Edit</a>
-                                        <a href="javascript:;" class="dropdown-item">Duplicate</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" class="dropdown-item delete-record text-danger">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        @empty
+                            
+                        @endforelse
                     </tbody>
                 </table>
             </div>
