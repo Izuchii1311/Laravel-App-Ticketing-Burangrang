@@ -71,7 +71,7 @@ class TicketController extends Controller
     public function update(Request $request, Ticket $ticket)
     {
         $validatedData = $request->validate([
-            'cd_ticket' => 'required',
+            'cd_ticket' => 'required|unique:tickets,cd_ticket,' . $ticket->id,
             'name_ticket' => 'required|max:255',
             'price' => 'required|numeric',
             'start_time' => 'required',                 // default 06:00

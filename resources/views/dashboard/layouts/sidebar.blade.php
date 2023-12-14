@@ -519,6 +519,12 @@
         <!-- Account -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
         <li class="menu-item">
+            <a href="/" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-alt-2"></i>
+                <div data-i18n="HalamanUtama">Halaman Utama</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Setting">Setting</div>

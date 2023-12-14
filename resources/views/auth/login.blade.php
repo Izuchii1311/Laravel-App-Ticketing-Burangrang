@@ -77,6 +77,9 @@
                 <div class="mb-3">
                     <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
                 </div>
+                <p class="text-center">
+                    <a href="{{ route('main.index')}}" class="text-decoration-none">Kembali</a>
+                </p>
             </form>
 
         </div>
