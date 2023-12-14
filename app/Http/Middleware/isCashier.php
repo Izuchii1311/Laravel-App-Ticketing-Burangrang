@@ -17,6 +17,7 @@ class isCashier
     {
         if(!auth()->check() || auth()->user()->role != 'cashier') {
             abort(403);
+            // return redirect()->route('dashboard.index')->with('error', 'Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.');
             // return redirect()
         }
         return $next($request);

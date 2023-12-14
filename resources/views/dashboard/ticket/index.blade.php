@@ -85,12 +85,19 @@
                                 <td>{{ $ticket->end_time }}</td>
                                 <td>
                                 <div class="d-flex align-items-center">
-                                    <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
+                                    <div class="dropdown">
+                                        <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item">Detail Tiket</a>
-                                            <a href="javascript:void(0);" class="dropdown-item">Edit Tiket</a>
+                                            <a href="/dashboard/ticket/{{ $ticket->id }}" class="dropdown-item">Detail Tiket</a>
+                                            <a href="/dashboard/ticket/{{ $ticket->id }}/edit" class="dropdown-item">Edit Tiket</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" class="dropdown-item delete-record text-danger">Hapus Tiket</a>
+                                        <form action="/dashboard/ticket/{{ $ticket->id }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="dropdown-item delete-record text-danger">Hapus Tiket</button>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>

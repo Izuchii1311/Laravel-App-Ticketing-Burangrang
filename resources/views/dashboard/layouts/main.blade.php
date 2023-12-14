@@ -36,6 +36,9 @@
     <!-- Helpers -->
     <script src="{{ asset('/vendor/dashboard/js/helpers.js') }}"></script>
     <script src="{{ asset('/js/dashboard/config.js') }}"></script>
+
+    {{-- Style inline css --}}
+    @yield('style')
 </head>
 
 <body>
