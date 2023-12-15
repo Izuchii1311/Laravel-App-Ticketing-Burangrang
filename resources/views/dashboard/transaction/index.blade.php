@@ -1,0 +1,93 @@
+@extends('dashboard.layouts.main')
+
+@section('content')
+<div class="card bg-transparent shadow-none border-0 my-4">
+    <div class="card-body row p-0 pb-3">
+        <div class="col-12 col-md-8 card-separator">
+            <h3>Transaksi Tiketing </h3>
+            <div class="col-12 col-lg-8">
+                <p>Lakukan Transaksi pada aplikasi, dan dapatkan kemudahan dengan menggunakannya.</p>
+            </div>
+            <div class="d-flex">
+                <a href="" class="btn btn-primary">Laporan Keuangan 📈</a>
+                <a href="" class="btn btn-success mx-4">Cetak Laporan 📋</a>
+                <a href="" class="btn btn-info">Download Laporan 📄</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
+            <div class="d-flex justify-content-between align-items-center" style="position: relative;">
+                <div>
+                    <div>
+                        <h5 class="mb-2"><a href="{{ route('transaction.create') }}">Tambah Transaksi Baru</a></h5>
+                        <p class="mb-4">Ceritanya Buat Filter</p>
+                    </div>
+                </div>
+                <div class="resize-triggers"><div class="expand-trigger"><div style="width: 280px; height: 141px;"></div></div><div class="contract-trigger"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 mb-0">
+        <div class="card">
+            <h5 class="card-header fw-bolder">Data Tiket</h5>
+            <div class="card-datatable table-responsive">
+                <table class="invoice-list-table table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Kasir</th>
+                            <th>Kode Tiket</th>
+                            <th>Nama Tiket</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Total</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Kode Transaksi</th>
+                            <th class="cell-fit">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @forelse ($transactions as $transaction)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $transaction->name_cashier }}</td>
+                                <td>{{ $transaction->cd_ticket }}</td>
+                                <td>{{ $transaction->name_ticket }}</td>
+                                <td>Rp.{{ $transaction->price }}</td>
+                                <td>{{ $transaction->amount }}</td>
+                                <td>Rp.{{ $transaction->total }}</td>
+                                <td>{{ $transaction->cus_name }}</td>
+                                <td>{{ $transaction->cd_transaction }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="dropdown">
+                                            <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a href="/dashboard/transaction/{{ $transaction->id }}" class="dropdown-item">Detail Transaksi</a>
+                                                <a href="/dashboard/transaction/{{ $transaction->id }}/edit" class="dropdown-item">Edit Transaksi</a>
+                                            <div class="dropdown-divider"></div>
+                                            <form action="/dashboard/transaction/{{ $transaction->id }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>Belum ada transaksi</tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

@@ -69,6 +69,7 @@
                             <th>Kode Tiket</th>
                             <th>Nama Tiket</th>
                             <th>Harga</th>
+                            <th>Status</th>
                             <th>Jam Buka</th>
                             <th>Jam Tutup</th>
                             <th class="cell-fit">Aksi</th>
@@ -81,26 +82,33 @@
                                 <td>{{ $ticket->cd_ticket }}</td>
                                 <td>{{ $ticket->name_ticket }}</td>
                                 <td>{{ $ticket->price }}</td>
+                                <td>
+                                    @if ($ticket->status === 'open')
+                                        <span class="badge bg-success">{{ $ticket->status }}</span>
+                                    @else
+                                        <span class="badge bg-danger">{{ $ticket->status }}</span>
+                                    @endif
+                                </td>
                                 <td>{{ $ticket->start_time }}</td>
                                 <td>{{ $ticket->end_time }}</td>
                                 <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="dropdown">
-                                        <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/dashboard/ticket/{{ $ticket->id }}" class="dropdown-item">Detail Tiket</a>
-                                            <a href="/dashboard/ticket/{{ $ticket->id }}/edit" class="dropdown-item">Edit Tiket</a>
-                                        <div class="dropdown-divider"></div>
-                                        <form action="/dashboard/ticket/{{ $ticket->id }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="dropdown-item delete-record text-danger">Hapus Tiket</button>
-                                        </form>
+                                    <div class="d-flex align-items-center">
+                                        <div class="dropdown">
+                                            <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a href="/dashboard/ticket/{{ $ticket->id }}" class="dropdown-item">Detail Tiket</a>
+                                                <a href="/dashboard/ticket/{{ $ticket->id }}/edit" class="dropdown-item">Edit Tiket</a>
+                                            <div class="dropdown-divider"></div>
+                                            <form action="/dashboard/ticket/{{ $ticket->id }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="dropdown-item delete-record text-danger">Hapus Tiket</button>
+                                            </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 </td>
                             </tr>
                         @empty

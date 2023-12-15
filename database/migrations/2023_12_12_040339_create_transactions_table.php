@@ -17,12 +17,14 @@ return new class extends Migration
             $table->string('name_cashier');
             $table->foreignId('ticket_id');
             $table->string('cd_ticket');
-            $table->decimal('price', 10, 2);
-            $table->decimal('total', 10, 2);
-            $table->string('name');
+            $table->string('name_ticket');
+            $table->decimal('price', 10, 0);
+            $table->decimal('amount', 10, 0);
+            $table->decimal('total', 10, 0);
+            $table->string('cus_name');
             $table->string('cd_transaction')->unique();
             $table->text('description');
-            $table->timestamp('transaction_date')->useCurrent();
+            $table->time('transaction_date');
             $table->timestamps();
         });
     }

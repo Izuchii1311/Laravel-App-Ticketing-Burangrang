@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\TicketController;
+use App\Http\Controllers\Dashboard\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Page
 Route::middleware('auth')->group(function() {
+    // View Dashboard
     Route::get('/dashboard', function() {
         return view('dashboard/index');
     })->name('dashboard.index');
+
+    // View Dashboard Ticket
     Route::resource('/dashboard/ticket', TicketController::class)->middleware('cashier');
+
+    // View Dashboard Transaction
+    Route::resource('/dashboard/transaction', TransactionController::class)->middleware('cashier');
 });

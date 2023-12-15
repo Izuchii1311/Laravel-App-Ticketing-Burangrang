@@ -25,3 +25,22 @@ document.getElementById('logout-li-header').addEventListener('click', function()
 document.getElementById('logout-li-sidebar').addEventListener('click', function() {
     confirmLogout();
 });
+
+// Transaction Create
+document.addEventListener('DOMContentLoaded', function () {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // Jika checkbox saat ini dicentang
+            if (this.checked) {
+                // Uncheck checkbox lainnya
+                checkboxes.forEach(function(otherCheckbox) {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+        });
+    });
+});

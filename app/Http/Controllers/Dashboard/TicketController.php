@@ -40,6 +40,7 @@ class TicketController extends Controller
             'description' => 'required'
         ]);
 
+        $validatedData['status'] = 'open';
         Ticket::create($validatedData);
 
         return redirect(route('ticket.index'))->with('success', "Berhasil membuat data tiket baru.");
@@ -76,7 +77,8 @@ class TicketController extends Controller
             'price' => 'required|numeric',
             'start_time' => 'required',                 // default 06:00
             'end_time' => 'required',                   // default 20:00
-            'description' => 'required'
+            'description' => 'required',
+            'status' => 'required|in:open,closed',
         ]);
 
         Ticket::where('id', $ticket->id)->update($validatedData);

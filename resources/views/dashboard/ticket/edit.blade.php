@@ -37,6 +37,19 @@
                     </div>
                 @enderror
             </div>
+            <div class="col-md-6">
+                <label class="form-label" for="status">Status Tiket</label>
+                <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
+                    <option disabled selected>Pilih Status Tiket</option>
+                    <option value="open" {{ old('status', $ticket->status) === 'open' ? 'selected' : '' }}>Open</option>
+                    <option value="closed" {{ old('status', $ticket->status) === 'closed' ? 'selected' : '' }}>Closed</option>
+                </select>
+                @error('status')
+                    <div class="invalid-feedback">
+                        Status tiket wajib diisi.
+                    </div>
+                @enderror
+            </div>
         </div>
         <div class="row g-3 py-3">
             <div class="col-md-6">

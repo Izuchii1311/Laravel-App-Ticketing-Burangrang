@@ -108,9 +108,15 @@
             </a>
         </li> --}}
         <li class="menu-item">
-            <a href="/dashboard/ticket" class="menu-link">
+            <a href="{{ route('ticket.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Documentation">Tiket</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('transaction.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-wallet"></i>
+                <div data-i18n="Documentation">Transaksi Tiket</div>
             </a>
         </li>
         {{-- EndTicket --}}
@@ -501,21 +507,6 @@
             </a>
         </li> --}}
 
-        <!-- Misc -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-        <li class="menu-item">
-            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Documentation</div>
-            </a>
-        </li>
-
         <!-- Account -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
         <li class="menu-item">
@@ -538,6 +529,21 @@
                     <button type="button" onclick="confirmLogout()" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">Logout</button>
                 </div>
             </form>
+        </li>
+
+        <!-- Help -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Help</span></li>
+        <li class="menu-item">
+            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div data-i18n="Support">Support</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Documentation">Documentation</div>
+            </a>
         </li>
     </ul>
 </aside>

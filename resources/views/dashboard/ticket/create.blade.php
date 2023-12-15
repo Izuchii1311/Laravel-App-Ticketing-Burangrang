@@ -28,11 +28,22 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="price">Harga Tiket</label>
-                <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Harga tiket"  value="{{ old('price') }}">
+                <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Harga tiket" value="{{ old('price') }}">
                 @error('price')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
                         Harga tiket wajib diisi.
+                    </div>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="status">Status Tiket</label>
+                <input type="text" id="status" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Harga tiket"  value="{{ old('status', 'Open') }}" readonly disabled>
+                <p class="fst-italic" style="font-size: 0.7em;">Default status open.</p>
+                @error('status')
+                    <div class="invalid-feedback">
+                        {{-- {{ $message }} --}}
+                        Status tiket wajib diisi.
                     </div>
                 @enderror
             </div>
