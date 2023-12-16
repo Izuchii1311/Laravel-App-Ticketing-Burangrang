@@ -43,7 +43,7 @@ class TicketController extends Controller
         $validatedData['status'] = 'open';
         Ticket::create($validatedData);
 
-        return redirect(route('ticket.index'))->with('success', "Berhasil membuat data tiket baru.");
+        return redirect(route('ticket.index'))->with('success', "Berhasil membuat data tiket baru. 🌟");
     }
 
     /**
@@ -83,7 +83,7 @@ class TicketController extends Controller
 
         Ticket::where('id', $ticket->id)->update($validatedData);
 
-        return redirect(route('ticket.index'))->with('success', "Berhasil membuat data tiket baru.");
+        return redirect(route('ticket.index'))->with('success', "Berhasil mengedit data tiket. 👍");
     }
 
     /**
@@ -92,6 +92,6 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket, Request $request)
     {
         Ticket::destroy($ticket->id);
-        return redirect(route('ticket.index'))->with('success', "Berhasil menghapus data tiket.");
+        return redirect(route('ticket.index'))->with('success', "Berhasil menghapus data tiket. 🗑️");
     }
 }

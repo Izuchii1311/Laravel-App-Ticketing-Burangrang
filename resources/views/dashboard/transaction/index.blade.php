@@ -8,11 +8,20 @@
             <div class="col-12 col-lg-8">
                 <p>Lakukan Transaksi pada aplikasi, dan dapatkan kemudahan dengan menggunakannya.</p>
             </div>
-            <div class="d-flex">
+            {{-- Alert --}}
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
+                    <strong>Selamat</strong>, Kamu {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            {{-- End Alert --}}
+            {{-- <div class="d-flex">
                 <a href="" class="btn btn-primary">Laporan Keuangan 📈</a>
                 <a href="" class="btn btn-success mx-4">Cetak Laporan 📋</a>
                 <a href="" class="btn btn-info">Download Laporan 📄</a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
@@ -70,10 +79,10 @@
                                                 <a href="/dashboard/transaction/{{ $transaction->id }}" class="dropdown-item">Detail Transaksi</a>
                                                 <a href="/dashboard/transaction/{{ $transaction->id }}/edit" class="dropdown-item">Edit Transaksi</a>
                                             <div class="dropdown-divider"></div>
-                                            <form action="/dashboard/transaction/{{ $transaction->id }}" method="post">
+                                            <form action="/dashboard/transaction/{{ $transaction->id }}" method="post" id="confirm-delete">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
+                                                <button type="button" class="dropdown-item delete-record text-danger" onclick="confirmDelete()">Hapus Transaksi</button>
                                             </form>
                                             </div>
                                         </div>

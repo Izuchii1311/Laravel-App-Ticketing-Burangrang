@@ -27,15 +27,19 @@ Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Page
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth'])->group(function () {
     // View Dashboard
-    Route::get('/dashboard', function() {
+    Route::get('/dashboard', function () {
         return view('dashboard/index');
     })->name('dashboard.index');
 
     // View Dashboard Ticket
-    Route::resource('/dashboard/ticket', TicketController::class)->middleware('cashier');
+    Route::middleware('cashier')->group(function () {
+        Route::resource('/dashboard/ticket', TicketController::class);
+    });
 
     // View Dashboard Transaction
-    Route::resource('/dashboard/transaction', TransactionController::class)->middleware('cashier');
+    Route::middleware('cashier')->group(function () {
+        Route::resource('/dashboard/transaction', TransactionController::class);
+    });
 });

@@ -77,7 +77,7 @@ class TransactionController extends Controller
 
         Transaction::create($validatedData);
 
-        return redirect(route('transaction.index'))->with('success', 'Transaksi berhasil dilakukan.');
+        return redirect(route('transaction.index'))->with('success', 'Transaksi berhasil dilakukan. 🌟');
     }
 
     /**
@@ -110,6 +110,6 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         Transaction::destroy($transaction->id);
-        return redirect(route('transaction.index'))->with('success', "Berhasil menghapus data tiket.");
+        return redirect(route('transaction.index'))->with('success', "Berhasil menghapus data transaksi. 🗑️");
     }
 }

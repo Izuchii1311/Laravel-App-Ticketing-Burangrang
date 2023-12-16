@@ -5,7 +5,7 @@
     <h5 class="card-header">Tambah Transaksi Tiket</h5>
     <div class="card-body">
 
-        <form action="/dashboard/transaction" method="post" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework">
+        <form action="{{ route('transaction.index') }}" method="post" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" onsubmit="save.data.disabled = true; return disabledButton();">
             @csrf
 
             <!-- Cashier Information -->
@@ -27,7 +27,7 @@
             {{-- Name Customer --}}
             <div class="col-md-6 fv-plugins-icon-container mb-4">
                 <label class="form-label" for="cus_name">Nama Pelanggan</label>
-                <input type="text" id="cus_name" class="form-control @error('cus_name') is-invalid @enderror" placeholder="Masukan nama pelanggan..." name="cus_name" value="{{ old('cus_name') }}">
+                <input type="text" id="cus_name" class="form-control @error('cus_name') is-invalid @enderror" placeholder="Masukan nama pelanggan..." name="cus_name" value="{{ old('cus_name') }}" autocomplete="off" autofocus>
                 @error('cus_name')
                     <div class="invalid-feedback">
                         Nama pelanggan wajib diisi dengan benar.
@@ -44,7 +44,7 @@
             {{-- Input Amount Ticket --}}
             <div class="col-md-6 fv-plugins-icon-container">
                 <label class="form-label" for="amount">Jumlah Tiket</label>
-                <input type="text" id="amount" class="form-control @error('amount') is-invalid @enderror" placeholder="Masukan jumlah pengunjung..." name="amount" value="{{ old('amount') }}">
+                <input type="text" id="amount" class="form-control @error('amount') is-invalid @enderror" placeholder="Masukan jumlah pengunjung..." name="amount" value="{{ old('amount') }}" autocomplete="off">
                 @error('amount')
                     <div class="invalid-feedback">
                         Jumlah pengunjung wajib diisi dengan benar.
@@ -54,6 +54,7 @@
 
             {{-- Choose Ticket --}}
             <div class="row gy-3 mt-0">
+                <p class="fst-italic mb-0">Pilih salah satu tiket.</p>
                 @forelse ($tickets as $ticket)
                     @if ($ticket->status === 'open')
                         <div class="col-xl-3 col-md-5 col-sm-6 col-12 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid">
@@ -116,11 +117,15 @@
             {{-- Button --}}
             @if ($tickets[0]->status === 'closed')
                 <div class="col-12">
-                    <button type="submit" name="submitButton" class="btn btn-primary" disabled>Submit</button>
+                    <button type="submit" class="btn btn-primary" name="save-data" id="submitButton" disabled>Tambah Transaksi</button>
+                    <button type="reset" class="btn btn-danger" disabled>Reset</button>
+                    <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</button>
                 </div>
             @else
                 <div class="col-12">
-                    <button type="submit" name="submitButton" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="save-data" id="submitButton">Tambah Transaksi</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</button>
                 </div>
             @endif
             <input type="hidden">

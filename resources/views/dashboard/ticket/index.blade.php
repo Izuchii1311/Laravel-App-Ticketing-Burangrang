@@ -2,41 +2,21 @@
 
 @section('content')
 <div class="card bg-transparent shadow-none border-0 my-4">
-    <div class="card-body row p-0 pb-3">
+    <div class="card-body row p-0">
         <div class="col-12 col-md-8 card-separator">
             <h3>Selamat datang kembali, {{ auth()->user()->name }} 👋🏻 </h3>
             <div class="col-12 col-lg-8">
                 <p>Kamu bisa menambahkan tiket baru untuk menyesuaikan kemudahan dalam pengelolaan tiket kawasan g.Burangrang</p>
             </div>
-            <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
-                <div class="d-flex align-items-center gap-3 me-4 me-sm-0">
-                    <span class=" bg-label-primary p-2 rounded">
-                        <i class="bx bx-laptop bx-sm"></i>
-                    </span>
-                    <div class="content-right">
-                        <p class="mb-0">Hours Spent</p>
-                        <h4 class="text-primary mb-0">34h</h4>
-                    </div>
+            {{-- Alert --}}
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
+                    <strong>Selamat</strong>, Kamu {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="bg-label-info p-2 rounded">
-                        <i class="bx bx-bulb bx-sm"></i>
-                    </span>
-                    <div class="content-right">
-                        <p class="mb-0">Test Results</p>
-                        <h4 class="text-info mb-0">82%</h4>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="bg-label-warning p-2 rounded">
-                        <i class="bx bx-check-circle bx-sm"></i>
-                    </span>
-                    <div class="content-right">
-                        <p class="mb-0">Course Completed </p>
-                        <h4 class="text-warning mb-0">14</h4>
-                    </div>
-                </div>
-            </div>
+            @endif
+            {{-- End Alert --}}
         </div>
 
         <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
@@ -101,10 +81,10 @@
                                                 <a href="/dashboard/ticket/{{ $ticket->id }}" class="dropdown-item">Detail Tiket</a>
                                                 <a href="/dashboard/ticket/{{ $ticket->id }}/edit" class="dropdown-item">Edit Tiket</a>
                                             <div class="dropdown-divider"></div>
-                                            <form action="/dashboard/ticket/{{ $ticket->id }}" method="post">
+                                            <form action="/dashboard/ticket/{{ $ticket->id }}" method="post" id="confirm-delete">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="dropdown-item delete-record text-danger">Hapus Tiket</button>
+                                                <button type="button" onclick="confirmDelete()" class="dropdown-item delete-record text-danger fw-bolder">Hapus Tiket</button>
                                             </form>
                                             </div>
                                         </div>

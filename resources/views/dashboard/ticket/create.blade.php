@@ -3,36 +3,36 @@
 @section('content')
 <div class="card mb-4">
     <h5 class="card-header">Buat Tiket Baru</h5>
-    <form class="card-body" action="/dashboard/ticket" method="post">
+    <form class="card-body" action="/dashboard/ticket" method="post" id="myForm">
         @csrf
         <div class="row g-3">
             <div class="col-md-6">
                 <label class="form-label" for="cd_ticket">Kode Tiket</label>
-                <input type="text" id="cd_ticket" name="cd_ticket" class="form-control @error('cd_ticket') is-invalid @enderror" placeholder="Kode tiket" value="{{ old('cd_ticket') }}">
+                <input type="text" id="cd_ticket" name="cd_ticket" class="form-control @error('cd_ticket') is-invalid @enderror" placeholder="Kode tiket" value="{{ old('cd_ticket') }}" autocomplete="off" autofocus>
                 @error('cd_ticket')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Kode tiket wajib diisi.
+                        Kode tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="name_ticket">Nama Tiket</label>
-                <input type="text" id="name_ticket" name="name_ticket" class="form-control @error('name_ticket') is-invalid @enderror" placeholder="Nama tiket" value="{{ old('name_ticket') }}">
+                <input type="text" id="name_ticket" name="name_ticket" class="form-control @error('name_ticket') is-invalid @enderror" placeholder="Nama tiket" value="{{ old('name_ticket') }}" autocomplete="off">
                 @error('name_ticket')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Nama tiket wajib diisi.
+                        Nama tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="price">Harga Tiket</label>
-                <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Harga tiket" value="{{ old('price') }}">
+                <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Harga tiket" value="{{ old('price') }}" autocomplete="off">
                 @error('price')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Harga tiket wajib diisi.
+                        Harga tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
@@ -43,7 +43,7 @@
                 @error('status')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Status tiket wajib diisi.
+                        Status tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
@@ -56,7 +56,7 @@
                 @error('start_time')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Jam buka tiket wajib diisi.
+                        Jam buka tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
@@ -67,7 +67,7 @@
                 @error('end_time')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Jam tutup tiket wajib diisi.
+                        Jam tutup tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
@@ -77,14 +77,15 @@
                 @error('description')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Deskripsi tiket wajib diisi.
+                        Deskripsi tiket wajib diisi dengan benar.
                     </div>
                 @enderror
             </div>
         </div>
         <div class="pt-4">
-            <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah Data</button>
-            <button type="reset" class="btn btn-label-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary me-sm-3 me-1" id="submitButton">Tambah Data</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+            <a href="{{ route('ticket.index') }}" class="btn btn-label-secondary">Kembali</button>
         </div>
     </form>
 </div>
