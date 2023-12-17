@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ticket extends Model
 {
@@ -11,12 +12,11 @@ class Ticket extends Model
 
     protected $guarded = ['id'];
 
-    // Status Ticket
-    public function isOpenForPurchase() {
-        // Get Time
-        $currentTime = now()->format('H:i:s');
+    public function transactions() {
+        return $this->hasMany(Transaction::class)->onDelete('cascade');
+    }
 
-        // Check Time
-        return $this->status === 'open' && $currentTime >= $this->start_time && $currentTime <= $this->end_time;
+    public function author() {
+        return $this->belongsTo(User::class, 'user_id')->onDelete('cascade');
     }
 }

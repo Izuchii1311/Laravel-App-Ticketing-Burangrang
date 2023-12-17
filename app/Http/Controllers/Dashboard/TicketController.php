@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Ticket;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
 {
@@ -89,9 +90,13 @@ class TicketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ticket $ticket, Request $request)
-    {
-        Ticket::destroy($ticket->id);
-        return redirect(route('ticket.index'))->with('success', "Berhasil menghapus data tiket. 🗑️");
+    public function destroy(Ticket $ticket, Request $request) {
+        // Hapus tiket
+        $ticket->delete();
+
+        // Hapus transaksi terkait
+        Transaction::where('ticket_id', $ticket->id)->delete();
+
+        return redirect()->route('ticket.index')->with('success', 'Berhasil menghapus data tiket. 🗑️');
     }
 }

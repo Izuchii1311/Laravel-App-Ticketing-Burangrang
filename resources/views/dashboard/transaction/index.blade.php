@@ -15,6 +15,12 @@
                     <strong>Selamat</strong>, Kamu {{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+            @elseif (session()->has('warning'))
+                <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
+                    {{ session('warning') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             @endif
             {{-- End Alert --}}
             {{-- <div class="d-flex">
@@ -76,10 +82,11 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="/dashboard/transaction/{{ $transaction->id }}" class="dropdown-item">Detail Transaksi</a>
-                                                <a href="/dashboard/transaction/{{ $transaction->id }}/edit" class="dropdown-item">Edit Transaksi</a>
+                                                <a href="{{ route('transaction.show', ['transaction' => $transaction->id]) }}" class="dropdown-item">Detail Transaksi</a>
+                                                <a href="{{ route('transaction.edit', ['transaction' => $transaction->id]) }}" class="dropdown-item">Edit Transaksi</a>
                                             <div class="dropdown-divider"></div>
-                                            <form action="/dashboard/transaction/{{ $transaction->id }}" method="post" id="confirm-delete">
+                                            {{-- <form action="/dashboard/transaction/{{ $transaction->id }}" method="post" id="confirm-delete"> --}}
+                                            <form action="{{ route('transaction.destroy', ['transaction' => $transaction->id]) }}" method="post" id="confirm-delete">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="dropdown-item delete-record text-danger" onclick="confirmDelete()">Hapus Transaksi</button>

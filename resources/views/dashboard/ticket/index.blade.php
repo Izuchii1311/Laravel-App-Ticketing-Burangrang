@@ -15,6 +15,12 @@
                     <strong>Selamat</strong>, Kamu {{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+            @elseif (session()->has('warning'))
+                <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
+                    {{ session('warning') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             @endif
             {{-- End Alert --}}
         </div>
@@ -92,7 +98,7 @@
                                 </td>
                             </tr>
                         @empty
-                            
+                            <p>Tidak ada tiket</p>
                         @endforelse
                     </tbody>
                 </table>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('cd_ticket')->unique();
             $table->string('name_ticket');
             $table->decimal('price', 10, 0);

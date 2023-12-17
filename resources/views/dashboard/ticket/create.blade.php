@@ -12,7 +12,7 @@
                 @error('cd_ticket')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Kode tiket wajib diisi dengan benar.
+                        Kode tiket wajib diisi dengan benar dan tidak boleh sama.
                     </div>
                 @enderror
             </div>
@@ -32,7 +32,7 @@
                 @error('price')
                     <div class="invalid-feedback">
                         {{-- {{ $message }} --}}
-                        Harga tiket wajib diisi dengan benar.
+                        Harga tiket wajib diisi dengan benar dan hanya bisa berupa angka.
                     </div>
                 @enderror
             </div>
@@ -85,7 +85,7 @@
         <div class="pt-4">
             <button type="submit" class="btn btn-primary me-sm-3 me-1" id="submitButton">Tambah Data</button>
             <button type="reset" class="btn btn-danger">Reset</button>
-            <a href="{{ route('ticket.index') }}" class="btn btn-label-secondary">Kembali</button>
+            <a href="{{ route('ticket.index') }}" class="btn btn-label-secondary">Kembali</a>
         </div>
     </form>
 </div>

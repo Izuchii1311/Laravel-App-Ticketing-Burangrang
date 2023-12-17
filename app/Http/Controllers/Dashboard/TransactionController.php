@@ -24,14 +24,21 @@ class TransactionController extends Controller
      */
     public function create(Ticket $ticket)
     {
-        $currentTime = now()->format('H:i:s');
+        $checkTicket = Ticket::all();
 
-        $tickets = $ticket->get()->map(function ($ticket) use ($currentTime) {
-            $ticket->isClosed = $currentTime > $ticket->end_time;
-            return $ticket;
+        // Check Status Ticket
+        $allClosed = $checkTicket->every(function ($item) {
+            return $item->status === 'closed';
         });
-    
-        return view('dashboard.transaction.create', compact('tickets'));
+
+        if($checkTicket->count() > 0) {
+            return view('dashboard.transaction.create', [
+                "tickets" => Ticket::get(),
+                "allClosed" => $allClosed
+            ]);
+        } else {
+            return redirect(route('ticket.index'))->with('warning', "Mohon untuk membuat tiket terlebih dahulu. 🙏");
+        }
     }
 
     /**
@@ -45,8 +52,8 @@ class TransactionController extends Controller
             'amount' => 'required|numeric',
             'cus_name' => 'required',
             'description' => 'required',
-            'transaction_date' => 'required',
         ]);
+
 
         $selectedTicketIds = $request->input('selectedTickets', []);
         $selectedTickets = Ticket::find($selectedTicketIds);
@@ -75,6 +82,8 @@ class TransactionController extends Controller
         $newCdTransactionNumber = str_pad((int)$lastCdTransactionNumber + 1, 5, '0', STR_PAD_LEFT);
         $validatedData['cd_transaction'] = 'KT-' . $newCdTransactionNumber;
 
+        $validatedData['transaction_date'] = now()->format('Y-m-d H:i:s');
+
         Transaction::create($validatedData);
 
         return redirect(route('transaction.index'))->with('success', 'Transaksi berhasil dilakukan. 🌟');
@@ -83,25 +92,70 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Transaction $transaction)
     {
-        //
+        return view('dashboard.transaction.show', compact('transaction'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Transaction $transaction)
     {
-        //
+        return view('dashboard.transaction.edit', [
+            "transaction" => $transaction,
+            "tickets" => Ticket::get()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Transaction $transaction)
     {
-        //
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'name_cashier' => 'required',
+            'amount' => 'required|numeric',
+            'cus_name' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($request->input('selectedTickets')) {
+            $selectedTicketIds = $request->input('selectedTickets', []);
+            $selectedTickets = Ticket::find($selectedTicketIds);
+
+            $ticketData = [];
+            foreach ($selectedTickets as $ticket) {
+                $ticketData[] = [
+                    'ticket_id' => $ticket->id,
+                    'cd_ticket' => $ticket->cd_ticket,
+                    'name_ticket' => $ticket->name_ticket,
+                    'price' => $ticket->price,
+                ];
+            }
+
+            $ticket = reset($ticketData);
+
+            $validatedData['ticket_id'] = $ticket['ticket_id'];
+            $validatedData['cd_ticket'] = $ticket['cd_ticket'];
+            $validatedData['name_ticket'] = $ticket['name_ticket'];
+            $validatedData['price'] = $ticket['price'];
+            $validatedData['total'] = $ticket['price'] * $request->amount;
+        } else {
+            $validatedData['ticket_id'] = $request->ticket_id;
+            $validatedData['cd_ticket'] = $request->cd_ticket;
+            $validatedData['name_ticket'] = $request->name_ticket;
+            $validatedData['price'] = $request->price;
+            $validatedData['total'] = $request['price'] * $request->amount;
+        }
+
+        $validatedData['cd_transaction'] = $request->cd_transaction;
+
+        Transaction::where('id', $transaction->id)->update($validatedData);
+
+        return redirect(route('transaction.index'))->with('success', "Berhasil mengedit data transaksi. 👍");
+
     }
 
     /**

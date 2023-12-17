@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard.index');
 
     // View Dashboard Ticket
-    Route::middleware('cashier')->group(function () {
+    Route::middleware(['cashier'])->group(function () {
         Route::resource('/dashboard/ticket', TicketController::class);
     });
 

@@ -90,7 +90,7 @@
         </div>
         <div class="pt-4">
             <button type="submit" class="btn btn-primary me-sm-3 me-1" id="submitButton">Update Data</button>
-            <a href="{{ route('ticket.index') }}" class="btn btn-label-secondary">Kembali</button>
+            <a href="{{ route('ticket.index') }}" class="btn btn-label-secondary">Kembali</a>
         </div>
     </form>
 </div>

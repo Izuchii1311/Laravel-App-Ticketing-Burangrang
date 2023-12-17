@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Ticket::create([
+            'user_id' => '1',
             'cd_ticket' => 'KD-001',
             'name_ticket' => 'Kawasan Gunung Burangrang',
             'price' => '20000',
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Ticket::create([
+            'user_id' => '1',
             'cd_ticket' => 'KD-002',
             'name_ticket' => 'Rumah Gunung',
             'price' => '15000',
