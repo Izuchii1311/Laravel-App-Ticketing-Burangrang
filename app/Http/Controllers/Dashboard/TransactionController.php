@@ -15,7 +15,7 @@ class TransactionController extends Controller
     public function index()
     {
         return view('dashboard.transaction.index', [
-            'transactions' => Transaction::get()
+            'transactions' => Transaction::all()
         ]);
     }
 
@@ -33,7 +33,7 @@ class TransactionController extends Controller
 
         if($checkTicket->count() > 0) {
             return view('dashboard.transaction.create', [
-                "tickets" => Ticket::get(),
+                "tickets" => $checkTicket,
                 "allClosed" => $allClosed
             ]);
         } else {
