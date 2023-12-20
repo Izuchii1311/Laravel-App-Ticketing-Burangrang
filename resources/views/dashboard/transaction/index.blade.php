@@ -23,11 +23,11 @@
                 </div>
             @endif
             {{-- End Alert --}}
-            {{-- <div class="d-flex">
-                <a href="" class="btn btn-primary">Laporan Keuangan 📈</a>
+            <div class="d-flex">
+                <a href="{{ route('transaction.laporan') }}" class="btn btn-primary">Laporan Keuangan 📈</a>
                 <a href="" class="btn btn-success mx-4">Cetak Laporan 📋</a>
                 <a href="" class="btn btn-info">Download Laporan 📄</a>
-            </div> --}}
+            </div>
         </div>
 
         <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
@@ -82,11 +82,11 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{ route('transaction.show', ['transaction' => $transaction->id]) }}" class="dropdown-item">Detail Transaksi</a>
-                                                <a href="{{ route('transaction.edit', ['transaction' => $transaction->id]) }}" class="dropdown-item">Edit Transaksi</a>
+                                                <a href="{{ route('transaction.show', ['transaction' => $transaction->cd_transaction]) }}" class="dropdown-item">Detail Transaksi</a>
+                                                <a href="{{ route('transaction.edit', ['transaction' => $transaction->cd_transaction]) }}" class="dropdown-item">Edit Transaksi</a>
                                             <div class="dropdown-divider"></div>
                                             {{-- <form action="/dashboard/transaction/{{ $transaction->id }}" method="post" id="confirm-delete"> --}}
-                                            <form action="{{ route('transaction.destroy', ['transaction' => $transaction->id]) }}" method="post" id="confirm-delete">
+                                            <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="dropdown-item delete-record text-danger" onclick="confirmDelete()">Hapus Transaksi</button>

@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('cus_name');
             $table->string('cd_transaction')->unique();
             $table->text('description');
-            $table->timestamp('transaction_date')->nullable();
+            $table->timestamp('transaction_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

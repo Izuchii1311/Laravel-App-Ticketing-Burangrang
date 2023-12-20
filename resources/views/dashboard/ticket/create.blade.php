@@ -6,6 +6,7 @@
     <form class="card-body" action="/dashboard/ticket" method="post" id="myForm">
         @csrf
         <div class="row g-3">
+            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <div class="col-md-6">
                 <label class="form-label" for="cd_ticket">Kode Tiket</label>
                 <input type="text" id="cd_ticket" name="cd_ticket" class="form-control @error('cd_ticket') is-invalid @enderror" placeholder="Kode tiket" value="{{ old('cd_ticket') }}" autocomplete="off" autofocus>

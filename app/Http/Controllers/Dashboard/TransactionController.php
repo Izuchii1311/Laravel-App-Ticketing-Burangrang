@@ -76,7 +76,7 @@ class TransactionController extends Controller
         $validatedData['price'] = $ticket['price'];
         $validatedData['total'] = $ticket['price'] * $request->amount;
 
-        $lastCdTransaction = Transaction::latest('created_at')->value('cd_transaction');
+        $lastCdTransaction = Transaction::withTrashed() ->latest('created_at') ->value('cd_transaction');
         $lastCdTransactionNumber = substr($lastCdTransaction, -3);
 
         $newCdTransactionNumber = str_pad((int)$lastCdTransactionNumber + 1, 5, '0', STR_PAD_LEFT);
@@ -150,8 +150,6 @@ class TransactionController extends Controller
             $validatedData['total'] = $request['price'] * $request->amount;
         }
 
-        $validatedData['cd_transaction'] = $request->cd_transaction;
-
         Transaction::where('id', $transaction->id)->update($validatedData);
 
         return redirect(route('transaction.index'))->with('success', "Berhasil mengedit data transaksi. 👍");
@@ -166,4 +164,19 @@ class TransactionController extends Controller
         Transaction::destroy($transaction->id);
         return redirect(route('transaction.index'))->with('success', "Berhasil menghapus data transaksi. 🗑️");
     }
+
+    public function laporan()
+    {
+        return view('dashboard.transaction.laporan', [
+            'transactions' => Transaction::onlyTrashed()->get()
+        ]);
+    }
+
+    // public function cetak_pdf()
+    // {
+    //     $transactions = Transaction::onlyTrashed()->get();
+
+    //     $pdf = PDF::loadview('transactions_pdf',['transactions'=>$transactions]);
+    //     return $pdf->download('laporan-transaksi-pdf');
+    // }
 }

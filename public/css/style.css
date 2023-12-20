@@ -16,11 +16,11 @@ body {
 
 a {
   text-decoration: none;
-  color: #67b0d1;
+  color: #21D375;
 }
 
 a:hover {
-  color: #8ec4dd;
+  color: #7EDFA0;
   text-decoration: none;
 }
 
@@ -47,7 +47,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 998;
-  background: #67b0d1;
+  background: #21D375;
   width: 40px;
   height: 40px;
   border-radius: 50px;
@@ -61,7 +61,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #86c0da;
+  background: #20c970;
   color: #fff;
 }
 
@@ -87,7 +87,7 @@ h6 {
   z-index: 997;
   transition: all 0.5s;
   padding: 24px 0;
-  background: rgba(103, 176, 209, 0.8);
+  background: rgba(63, 195, 128, 0.7);
 }
 
 #header.header-transparent {
@@ -95,7 +95,7 @@ h6 {
 }
 
 #header.header-scrolled {
-  background: rgba(55, 142, 181, 0.9);
+  background: rgba(38, 194, 129, 0.9);
   padding: 12px;
 }
 
@@ -213,7 +213,7 @@ h6 {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 .navbar .dropdown:hover>ul {
@@ -261,7 +261,7 @@ h6 {
 .navbar .megamenu ul li a:hover,
 .navbar .megamenu ul li .active,
 .navbar .megamenu ul li .active:hover {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 .navbar .megamenu:hover>ul {
@@ -322,7 +322,7 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(43, 111, 142, 0.9);
+  background: rgba(163, 195, 128, 0.9);
   transition: 0.3s;
 }
 
@@ -355,7 +355,7 @@ h6 {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 .navbar-mobile .getstarted,
@@ -390,7 +390,7 @@ h6 {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -406,7 +406,7 @@ h6 {
 .navbar-mobile .megamenu ul li a:hover,
 .navbar-mobile .megamenu ul li .active,
 .navbar-mobile .megamenu ul li .active:hover {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 /*--------------------------------------------------------------
@@ -415,7 +415,7 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)), url("/img/main/2.jpg") top center;
+  background: linear-gradient(rgba(147, 250, 165, 0.2), rgba(147, 250, 165, 0.1)), url("/img/main/2.jpg") top center;
   background-size: cover;
   position: relative;
   margin-bottom: -90px;
@@ -624,7 +624,7 @@ section {
 
 .about .content .about-btn {
   display: inline-block;
-  background: #67b0d1;
+  background: #21D375;
   padding: 6px 44px 8px 30px;
   color: #fff;
   border-radius: 50px;
@@ -649,7 +649,7 @@ section {
 
 .about .icon-boxes .icon-box i {
   font-size: 40px;
-  color: #67b0d1;
+  color: #21D375;
   margin-bottom: 10px;
 }
 
@@ -703,7 +703,7 @@ section {
 }
 
 .services .icon-box:hover::before {
-  background: #67b0d1;
+  background: #21D375;
   top: 0;
   border-radius: 0px;
 }
@@ -715,7 +715,7 @@ section {
 .services .icon i {
   font-size: 48px;
   line-height: 1;
-  color: #67b0d1;
+  color: #21D375;
   transition: all 0.3s ease-in-out;
 }
 
@@ -759,7 +759,7 @@ section {
 .counts .count-box i {
   display: block;
   font-size: 44px;
-  color: #67b0d1;
+  color: #21D375;
   float: left;
   line-height: 0;
 }
@@ -799,7 +799,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(103, 176, 209, 0.8), rgba(103, 176, 209, 0.8)), url("../img/cta-bg.jpg") fixed center center;
+  background: linear-gradient(rgba(63, 195, 128, 0.7), rgba(63, 195, 128, 0.7)), url("../img/cta-bg.jpg") fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -865,7 +865,7 @@ section {
 
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -918,7 +918,7 @@ section {
 }
 
 .portfolio .portfolio-wrap .portfolio-links a+a {
-  border-left: 1px solid #8ec4dd;
+  border-left: 1px solid #7EDFA0;
 }
 
 .portfolio .portfolio-wrap:hover::before {
@@ -955,11 +955,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #67b0d1;
+  border: 1px solid #21D375;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #67b0d1;
+  background-color: #21D375;
 }
 
 .portfolio-details .portfolio-info {
@@ -1089,11 +1089,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #67b0d1;
+  border: 1px solid #21D375;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #67b0d1;
+  background-color: #21D375;
 }
 
 /*--------------------------------------------------------------
@@ -1163,7 +1163,7 @@ section {
 }
 
 .team .member .social a:hover {
-  color: #67b0d1;
+  color: #21D375;
 }
 
 .team .member .social i {
@@ -1194,7 +1194,7 @@ section {
 
 .contact .info-box i {
   font-size: 32px;
-  color: #67b0d1;
+  color: #21D375;
   border-radius: 50%;
   padding: 8px;
   border: 2px dotted #f0f7fa;
@@ -1270,7 +1270,7 @@ section {
 
 .contact .php-email-form input::focus,
 .contact .php-email-form textarea::focus {
-  background-color: #67b0d1;
+  background-color: #21D375;
 }
 
 .contact .php-email-form input {
@@ -1282,7 +1282,7 @@ section {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #67b0d1;
+  background: #21D375;
   border: 0;
   padding: 10px 24px;
   color: #fff;
@@ -1290,7 +1290,7 @@ section {
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #8ec4dd;
+  background: #7EDFA0;
 }
 
 @keyframes animate-loading {
@@ -1322,7 +1322,7 @@ section {
   margin-bottom: 15px;
   background: white;
   color: #2f4d5a;
-  border-top: 4px solid #67b0d1;
+  border-top: 4px solid #21D375;
   text-align: center;
   padding: 30px 20px;
 }
@@ -1358,7 +1358,7 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #67b0d1;
+  background: #21D375;
   color: #fff;
   text-decoration: none;
 }
@@ -1432,7 +1432,7 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px;
-  background: #67b0d1;
+  background: #21D375;
   color: #fff;
   transition: 0.3s;
   border-radius: 4;

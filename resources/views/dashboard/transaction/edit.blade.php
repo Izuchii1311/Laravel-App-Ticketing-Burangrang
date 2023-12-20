@@ -17,7 +17,6 @@
 
             {{-- Id User --}}
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-            <input type="hidden" name="cd_transaction" value="{{ $transaction->cd_transaction }}">
 
             {{-- Name Cashier -> get from user name --}}
             <div class="col-md-6 fv-plugins-icon-container my-4">

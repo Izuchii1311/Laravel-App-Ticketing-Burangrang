@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Desa Nyalindung</title>
+    <title>Kampoeng Nyalindung - @yield('title')</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -26,18 +26,9 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: Squadfree
-    * Updated: Sep 18 2023 with Bootstrap v5.3.2
-    * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body>
-
     {{-- Header --}}
     @include('main.layouts.header')
     {{-- End Header --}}
@@ -64,6 +55,8 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('/js/main.js') }}"></script>
 
+    {{-- MyScript --}}
+    @yield('script')
 </body>
 
 </html>

@@ -20,6 +20,13 @@ use App\Http\Controllers\Dashboard\TransactionController;
 Route::get('/', function () {
     return view('main/index');
 })->name('main.index');
+Route::get('/berita', fn() => view('main.news'))->name('main.news');
+Route::get('/wisata', fn() => view('main.tour'))->name('main.tour');
+Route::get('/wisata', fn() => view('main.tour'))->name('main.tour');
+Route::get('/tentang-kami', fn() => view('main.about-us'))->name('main.about-us');
+Route::get('/profile/sejarah-nyalindung', fn() => view('main.history'))->name('main.history');
+Route::get('/profile/tentang-burangrang', fn() => view('main.about-burangrang'))->name('main.about-burangrang');
+Route::get('/profile/cooperation', fn() => view('main.cooperation'))->name('main.cooperation');
 
 // Authentication
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
@@ -33,13 +40,12 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard/index');
     })->name('dashboard.index');
 
-    // View Dashboard Ticket
+    // Middleware Cashier
     Route::middleware(['cashier'])->group(function () {
         Route::resource('/dashboard/ticket', TicketController::class);
     });
-
-    // View Dashboard Transaction
     Route::middleware('cashier')->group(function () {
+        Route::get('/dashboard/transaction/laporan', [TransactionController::class, 'laporan'])->name('transaction.laporan');
         Route::resource('/dashboard/transaction', TransactionController::class);
     });
 });

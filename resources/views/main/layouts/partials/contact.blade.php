@@ -3,32 +3,32 @@
     <div class="container" data-aos="fade-up">
 
     <div class="section-title">
-        <h2>Contact</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <h2>Hubungi Kami</h2>
+        <p>Kami senantiasa siap mendengar dan melayani Anda. Hubungi kami melalui kontak yang tersedia untuk segala pertanyaan, kebutuhan, atau masukan. Bersama-sama kita bangun Desa Burangrang menjadi tempat yang lebih baik untuk kita semua. Terima kasih atas partisipasi dan dukungan Anda.</p>
     </div>
 
     <div class="row">
         <div class="col-lg-6">
         <div class="info-box mb-4">
             <i class="bx bx-map"></i>
-            <h3>Our Address</h3>
-            <p>A108 Adam Street, New York, NY 535022</p>
+            <h3>Alamat</h3>
+            <p>Tugumukti, Cisarua, Kabupaten Bandung Barat, Jawa Barat 40551</p>
         </div>
         </div>
 
         <div class="col-lg-3 col-md-6">
         <div class="info-box  mb-4">
             <i class="bx bx-envelope"></i>
-            <h3>Email Us</h3>
-            <p>contact@example.com</p>
+            <h3>Email</h3>
+            <p>izuchii1311@gmail.com</p>
         </div>
         </div>
 
         <div class="col-lg-3 col-md-6">
         <div class="info-box  mb-4">
             <i class="bx bx-phone-call"></i>
-            <h3>Call Us</h3>
-            <p>+1 5589 55488 55</p>
+            <h3>Telfon</h3>
+            <p>+62 857 2258 4409</p>
         </div>
         </div>
 
@@ -37,7 +37,7 @@
     <div class="row">
 
         <div class="col-lg-6 ">
-        <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+            <iframe src="https://maps.google.com/maps?q=Tugumukti,%20Cisarua,%20West%20Bandung%20Regency,%20West%20Java%2040551&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
         </div>
 
         <div class="col-lg-6">

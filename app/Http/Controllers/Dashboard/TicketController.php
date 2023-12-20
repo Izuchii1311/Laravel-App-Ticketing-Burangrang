@@ -33,6 +33,7 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'user_id' => 'required',
             'cd_ticket' => 'required|unique:tickets',
             'name_ticket' => 'required|max:255',
             'price' => 'required|numeric',
