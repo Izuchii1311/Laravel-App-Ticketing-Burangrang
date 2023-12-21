@@ -1,5 +1,10 @@
+{{-- Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
+{{-- Title --}}
+@section('title', "Dashboard | Detail Ticket")
+
+{{-- Content --}}
 @section('content')
     <section class="container">
         <h3>Silahkan untuk melakukan print tiket 🖨 </h3>
@@ -33,11 +38,11 @@
         </div>
     </section>
 @endsection
+{{-- End Content --}}
 
+{{-- Style CSS --}}
 @section('style')
     <style>
-        /* Styles remain the same for the most part */
-
         .ticket-card {
             display: flex;
             background-color: #fff;
@@ -169,3 +174,4 @@
         }
     </style>
 @endsection
+{{-- End Style CSS --}}

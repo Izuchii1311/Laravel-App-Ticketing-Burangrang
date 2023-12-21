@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Ticket;
+use Barryvdh\DomPDF\PDF;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -165,18 +166,17 @@ class TransactionController extends Controller
         return redirect(route('transaction.index'))->with('success', "Berhasil menghapus data transaksi. 🗑️");
     }
 
-    public function laporan()
+    public function report()
     {
         return view('dashboard.transaction.laporan', [
-            'transactions' => Transaction::onlyTrashed()->get()
+            'transactions' => Transaction::withTrashed()->get()
         ]);
     }
 
-    // public function cetak_pdf()
-    // {
-    //     $transactions = Transaction::onlyTrashed()->get();
-
-    //     $pdf = PDF::loadview('transactions_pdf',['transactions'=>$transactions]);
-    //     return $pdf->download('laporan-transaksi-pdf');
-    // }
+    public function report_pdf() {
+        $transactions = Transaction::withTrashed()->get();
+        $pdf = app('dompdf.wrapper')->loadView('dashboard.transaction.laporanPdf', ['transactions' => $transactions]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->download('laporan-transaksi.pdf');
+    }
 }

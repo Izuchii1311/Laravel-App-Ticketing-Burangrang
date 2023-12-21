@@ -45,7 +45,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/dashboard/ticket', TicketController::class);
     });
     Route::middleware('cashier')->group(function () {
-        Route::get('/dashboard/transaction/laporan', [TransactionController::class, 'laporan'])->name('transaction.laporan');
+        Route::get('/dashboard/transaction/report', [TransactionController::class, 'report'])->name('transaction.report');
+        Route::get('/dashboard/transaction/report_pdf', [TransactionController::class, 'report_pdf'])->name('transaction.report_pdf');
         Route::resource('/dashboard/transaction', TransactionController::class);
     });
 });
