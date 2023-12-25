@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\TicketController;
+use App\Http\Controllers\Main\LandingPageController;
 use App\Http\Controllers\Dashboard\TransactionController;
 
 /*
@@ -17,9 +18,7 @@ use App\Http\Controllers\Dashboard\TransactionController;
 */
 
 // Main Page
-Route::get('/', function () {
-    return view('main/index');
-})->name('main.index');
+Route::get('/', fn() => view('main/index'))->name('main.index');
 Route::get('/berita', fn() => view('main.news'))->name('main.news');
 Route::get('/wisata', fn() => view('main.tour'))->name('main.tour');
 Route::get('/wisata', fn() => view('main.tour'))->name('main.tour');
@@ -27,6 +26,9 @@ Route::get('/tentang-kami', fn() => view('main.about-us'))->name('main.about-us'
 Route::get('/profile/sejarah-nyalindung', fn() => view('main.history'))->name('main.history');
 Route::get('/profile/tentang-burangrang', fn() => view('main.about-burangrang'))->name('main.about-burangrang');
 Route::get('/profile/cooperation', fn() => view('main.cooperation'))->name('main.cooperation');
+
+Route::post('/message', [LandingPageController::class, 'storePesan'])->name('main.message');
+
 
 // Authentication
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
