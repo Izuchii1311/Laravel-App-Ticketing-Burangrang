@@ -1,3 +1,16 @@
+$(document).ready(function () {
+    // ? Disable the button when the form is clicked
+    $("#transactionForm").submit(function (e) {
+        //* Disable the submit button
+        $("#submitButton").attr("disabled", true);
+        //* Continue with the form submission
+        return true;
+    });
+
+
+    // TODO: What next? :)
+});
+
 //* Sidebar Dashboard Confirm
 // Confirm Logout
 function confirmLogout() {
@@ -67,11 +80,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-//* Disabled Button Submit
-function disabledButton() {
-    let btn = document.getElementById('submitButton');
-    btn.disabled = true;
-    btn.innerHTML = 'Send Data...';
-    return true;
-}

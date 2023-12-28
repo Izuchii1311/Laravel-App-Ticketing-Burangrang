@@ -1,20 +1,20 @@
-{{-- Dashboard Layouts --}}
+{{-- ? Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- Title --}}
+{{-- ? Title --}}
 @section('title', "Dashboard | Data Transaksi")
 
-{{-- Content --}}
+{{-- ? Content --}}
 @section('content')
     <div class="card bg-transparent shadow-none border-0 my-4">
-        {{-- Information --}}
+        {{-- * Information --}}
         <div class="card-body row p-0 pb-3">
             <div class="col-12 col-md-8 card-separator">
                 <h3>Transaksi Tiketing </h3>
                 <div class="col-12 col-lg-8">
                     <p>Lakukan Transaksi pada aplikasi, dan dapatkan kemudahan dengan menggunakannya.</p>
                 </div>
-                {{-- Alert --}}
+                {{-- * Alert --}}
                 @if (session()->has('success'))
                     <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
                         <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
@@ -23,12 +23,18 @@
                     </div>
                 @elseif (session()->has('warning'))
                     <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
-                        <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
+                        <i class="menu-icon tf-icons bx bx-info-circle me-2 mb-1"></i>
                         {{ session('warning') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                @elseif (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
+                        <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endif
-                {{-- End Alert --}}
+
                 <div class="d-flex">
                     <a href="{{ route('transaction.report') }}" class="btn btn-primary">Laporan Keuangan 📈</a>
                     <a href="" class="btn btn-success mx-4">Cetak Laporan 📋</a>
@@ -56,10 +62,12 @@
         </div>
     </div>
 
-    {{-- Data --}}
+    {{-- * Data --}}
     <div class="row">
         <div class="col-md-12 col-lg-12 mb-0">
+            {{-- * Card --}}
             <div class="card">
+                {{-- * Information --}}
                 <h5 class="card-header fw-bolder">Data Tiket</h5>
                 <div class="card-datatable table-responsive">
                     <table class="invoice-list-table table">
@@ -99,11 +107,12 @@
                                                     <a href="{{ route('transaction.show', ['transaction' => $transaction->cd_transaction]) }}" class="dropdown-item">Detail Transaksi</a>
                                                     <a href="{{ route('transaction.edit', ['transaction' => $transaction->cd_transaction]) }}" class="dropdown-item">Edit Transaksi</a>
                                                 <div class="dropdown-divider"></div>
-                                                {{-- <form action="/dashboard/transaction/{{ $transaction->id }}" method="post" id="confirm-delete"> --}}
+                                                {{-- ! Delete Transaction --}}
                                                 <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="button" class="dropdown-item delete-record text-danger" onclick="confirmDelete()">Hapus Transaksi</button>
+                                                    {{-- <button type="button" class="dropdown-item delete-record text-danger" onclick="confirmDelete()">Hapus Transaksi</button> --}}
+                                                    <button type="submit" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
                                                 </form>
                                                 </div>
                                             </div>
@@ -128,4 +137,4 @@
         </div>
     </div>
 @endsection
-{{-- End Content --}}
+{{-- ? End Content --}}

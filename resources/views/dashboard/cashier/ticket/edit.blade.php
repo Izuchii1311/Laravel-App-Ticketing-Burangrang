@@ -1,17 +1,25 @@
-{{-- Dashboard Layouts --}}
+{{-- ? Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- Title --}}
+{{-- ? Title --}}
 @section('title', "Dashboard | Edit Tiket")
 
-{{-- Content --}}
+{{-- ? Content --}}
 @section('content')
 <div class="card mb-4">
+    {{-- * Information --}}
     <h5 class="card-header">Edit Tiket</h5>
-    <form class="card-body" action="{{ route('ticket.index', ['id' => $ticket->id]) }}" method="post">
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
+            <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    <form class="card-body" action="{{ route('ticket.update', ['ticket' => $ticket->cd_ticket]) }}" method="post"  id="transactionForm">
         @method('put')
         @csrf
-
         <div class="row g-3">
             <div class="col-md-6">
                 <label class="form-label" for="cd_ticket">Kode Tiket</label>
@@ -95,4 +103,4 @@
     </form>
 </div>
 @endsection
-{{-- End Content --}}
+{{-- ? End Content --}}

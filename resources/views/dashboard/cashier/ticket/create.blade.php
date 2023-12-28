@@ -1,15 +1,22 @@
-{{-- Dashboard Layouts --}}
+{{-- ? Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- Title --}}
+{{-- ? Title --}}
 @section('title', "Dashboard | Buat Ticket Baru")
 
-{{-- Content --}}
+{{-- ? Content --}}
 @section('content')
     <div class="card mb-4">
         <h5 class="card-header">Buat Tiket Baru</h5>
+        @if (session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
+                <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
-        <form class="card-body" action="/dashboard/ticket" method="post" id="myForm">
+        <form class="card-body" action="{{ route('ticket.store') }}" method="post" id="transactionForm">
             @csrf
 
             <div class="row g-3">
@@ -92,4 +99,4 @@
         </form>
     </div>
 @endsection
-{{-- End Content --}}
+{{-- ? End Content --}}

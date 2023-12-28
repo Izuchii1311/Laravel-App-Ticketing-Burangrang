@@ -11,14 +11,16 @@
     {{-- Bootstrap Stylesheet --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <title>Laporan Transaksi</title>
-    </head>
-    <body>
+</head>
+<body>
+    {{-- * Information --}}
     <div class="container my-4">
         <h3 class="text-center">Laporan Transaksi Tiketing</h3>
         <p class="text-center">Laporan ini mencakup semua data ticketing yang sudah dihapus dan belum pernah dihapus sama sekali</p>
     </div>
 
     <div class="mx-4">
+        {{-- * Table --}}
         <table class="table table-hover">
         <thead>
             <tr>

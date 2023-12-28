@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Exception;
 use App\Models\Ticket;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
@@ -14,90 +16,145 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('dashboard.ticket.index', [
+        // Showing View Index Ticket
+        return view('dashboard.cashier.ticket.index', [
             'tickets' => Ticket::get()
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('dashboard.ticket.create');
+        // Showing View Create New Ticket
+        return view('dashboard.cashier.ticket.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        // Validate Data
         $validatedData = $request->validate([
             'user_id' => 'required',
             'cd_ticket' => 'required|unique:tickets',
             'name_ticket' => 'required|max:255',
             'price' => 'required|numeric',
-            'start_time' => 'required',                 // default 06:00
-            'end_time' => 'required',                   // default 20:00
+            'start_time' => 'required', // default time 06:00
+            'end_time' => 'required',   // default time 20:00
             'description' => 'required'
         ]);
-
         $validatedData['status'] = 'open';
-        Ticket::create($validatedData);
 
-        return redirect(route('ticket.index'))->with('success', "Berhasil membuat data tiket baru. 🌟");
+        // Try Catch
+        try {
+            # Create New Data
+            Ticket::create($validatedData);
+            # Redirect to Route Index Ticket with message
+            return redirect(route('ticket.index'))
+                ->with('success', "Berhasil membuat data tiket baru. 🌟");
+        } catch (\Exception $e) {
+            # Get Error Message to laravel.log
+            Log::error('Error during transaction creation: ' . $e->getMessage());
+            # Handle the exception, log it, or redirect with an error message
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan. ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Ticket $ticket)
     {
-        return view('dashboard.ticket.show', [
+        // Showing View Show Data Ticket
+        return view('dashboard.cashier.ticket.show', [
             'ticket' => $ticket
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Ticket $ticket)
     {
-        return view('dashboard.ticket.edit', [
+        // Showing View Edit Data Ticket
+        return view('dashboard.cashier.ticket.edit', [
             'ticket' => $ticket
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Ticket $ticket)
     {
+        // Validate Data
         $validatedData = $request->validate([
-            'cd_ticket' => 'required|unique:tickets,cd_ticket,' . $ticket->id,
             'name_ticket' => 'required|max:255',
             'price' => 'required|numeric',
-            'start_time' => 'required',                 // default 06:00
-            'end_time' => 'required',                   // default 20:00
+            'start_time' => 'required', // default time 06:00
+            'end_time' => 'required',   // default time 20:00
             'description' => 'required',
             'status' => 'required|in:open,closed',
         ]);
 
-        Ticket::where('id', $ticket->id)->update($validatedData);
+        // Check if cd_ticket is being updated
+        if ($request->has('cd_ticket')) {
+            # Validate uniqueness only if cd_ticket is different
+            $request->validate([
+                'cd_ticket' => 'required|unique:tickets,cd_ticket,' . $ticket->id,
+            ]);
+            $validatedData['cd_ticket'] = $request->input('cd_ticket');
+        } else {
+            # If cd_ticket is not being updated, use the existing value
+            $validatedData['cd_ticket'] = $ticket->cd_ticket;
+        }
 
-        return redirect(route('ticket.index'))->with('success', "Berhasil mengedit data tiket. 👍");
+        // Try Catch
+        try {
+            # Update Data
+            Ticket::where('cd_ticket', $ticket->cd_ticket)->update($validatedData);
+            # Redirect to Route Index Ticket with message
+            return redirect(route('ticket.index'))
+                ->with('success', "Berhasil mengedit data tiket. 👍");
+        } catch (Exception $e) {
+            # Get Error Message to laravel.log
+            Log::error('Error during transaction creation: ' . $e->getMessage());
+            # Handle the exception, log it, or redirect with an error message
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan. ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ticket $ticket, Request $request) {
-        // Hapus tiket
-        $ticket->delete();
-
-        // Hapus transaksi terkait
-        Transaction::where('ticket_id', $ticket->id)->delete();
-
-        return redirect()->route('ticket.index')->with('success', 'Berhasil menghapus data tiket. 🗑️');
+    public function destroy(Ticket $ticket) {
+        return $ticket;
+        // Try Catch
+        try {
+            # Delete Transaction if Ticket Deleted
+            Transaction::where('cd_ticket', $ticket->cd_ticket)->delete();
+            # Delete Ticket
+            $ticket->delete();
+            # Redirect to Route Index with message
+            return redirect()->route('ticket.index')
+                ->with('success', 'Berhasil menghapus data tiket. 🗑️');
+        } catch (\Exception $e) {
+            # Get Error Message to laravel.log
+            Log::error('Error during transaction creation: ' . $e->getMessage());
+            # Handle the exception, log it, or redirect with an error message
+            return redirect()->route('ticket.index')
+                ->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
+        }
     }
 }

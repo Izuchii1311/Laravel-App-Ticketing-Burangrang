@@ -1,19 +1,30 @@
-{{-- Dashboard Layouts --}}
+{{-- ? Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- Title --}}
+{{-- ? Title --}}
 @section('title', "Dashboard | Edit Transaksi")
 
-{{-- Content --}}
+{{-- ? Content --}}
 @section('content')
+    {{-- * Card --}}
     <div class="card">
+        {{-- * Information --}}
         <h5 class="card-header">Edit Transaksi Tiket</h5>
+        @if (session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
+                <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <div class="card-body">
-            <form action="{{ route('transaction.update', ['transaction' => $transaction->id]) }}" method="post" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" onsubmit="save.data.disabled = true; return disabledButton();">
+            {{-- * Form --}}
+            <form action="{{ route('transaction.update', ['transaction' => $transaction->cd_transaction]) }}" method="post" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework"  id="transactionForm">
                 @method('put')
                 @csrf
 
-                <!-- Cashier Information -->
+                {{-- * Cashier Information --}}
                 <div class="col-12">
                     <h6>1. Informasi</h6>
                     <hr class="mt-0 p-0 m-0">
@@ -94,9 +105,9 @@
                             <p class="fst-italic mb-0">Pilih salah satu tiket.</p>
                             @forelse ($tickets as $ticket)
                                 @if ($ticket->status === 'open')
-                                    <div class="col-12 mt-2 fv-plugins-bootstrap5-row-valid">
+                                    <div class="col-6 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid mb-2">
                                         <div class="form-check custom-option custom-option-icon">
-                                            <input class="form-check-input" type="checkbox" name="selectedTickets[]" id="ticket{{ $ticket->id }}" value="{{ $ticket->id }}">
+                                            <input class="form-check-input" type="checkbox" name="selectedTicket[]" id="ticket{{ $ticket->id }}" value="{{ $ticket->id }}">
                                             <label class="form-check-label custom-option-content" for="ticket{{ $ticket->id }}">
                                                 <span class="custom-option-body">
                                                     <input type="hidden" name="ticket_id" value={{ $ticket->id }}>
@@ -104,7 +115,9 @@
                                                     <i class="bx bx-landscape"></i>
                                                     <span class="custom-option-title">{{ $ticket->name_ticket }}</span>
                                                     <br>
-                                                    <small>{{ $ticket->description }} (Rp. {{ $ticket->price }}/orang)</small>
+                                                    <small>{{ $ticket->description }}
+                                                        <span class="fw-bold">(Rp. {{ $ticket->price }}/orang)</span>
+                                                    </small>
                                                     <br>
                                                     <small>{{ $ticket->start_time }} - {{ $ticket->end_time }}</small>
                                                 </span>
@@ -113,15 +126,18 @@
                                     </div>
                                     {{-- Status Closed --}}
                                 @else
-                                    <div class="col-12 mt-2 fv-plugins-bootstrap5-row-valid">
+                                    <div class="col-6 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid mb-2">
                                         <div class="form-check custom-option custom-option-icon">
-                                            <input class="form-check-input" type="checkbox" name="selectedTickets[]" id="ticket{{ $ticket->id }}" value="{{ $ticket->id }}" disabled>
+                                            <input class="form-check-input" type="checkbox" disabled>
                                             <label class="form-check-label custom-option-content" for="ticket{{ $ticket->id }}">
                                                 <span class="custom-option-body">
                                                     <i class="bx bx-landscape text-danger"></i>
                                                     <span class="custom-option-title text-danger">{{ $ticket->name_ticket }} <span class="fw-bolder">(Closed)</span></span>
                                                     <br>
-                                                    <small class="text-danger">{{ $ticket->description }} (Rp. {{ $ticket->price }}/orang)</small>
+                                                    <small class="text-danger">
+                                                        {{ $ticket->description }}
+                                                        <span class="fw-bold">(Rp. {{ $ticket->price }}/orang)</span>
+                                                    </small>
                                                 </span>
                                             </label>
                                         </div>
@@ -136,22 +152,12 @@
 
                 <hr>
 
-                {{-- Button --}}
-                @if ($tickets[0]->status === 'closed')
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary" name="save-data" id="submitButton" disabled>Ubah Transaksi</button>
-                        <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</button>
-                    </div>
-                @else
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary" name="save-data" id="submitButton">Ubah Transaksi</button>
-                        <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</button>
-                    </div>
-                @endif
-                <input type="hidden">
-                </form>
-            </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" id="submitButton">Ubah Transaksi</button>
+                    <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
-{{-- End Content --}}
+{{-- ? End Content --}}

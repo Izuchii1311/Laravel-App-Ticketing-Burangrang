@@ -22,13 +22,35 @@
                 <div data-i18n="Dashboards">Dashboards</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item {{ Request::is('dashboard') ? "active" : "" }}">
                     <a href="{{ route('dashboard.index') }}" class="menu-link">
                         <div data-i18n="Home">Home</div>
                     </a>
                 </li>
+                <li class="menu-item {{ Request::is('dashboard/messages*') ? "active" : "" }}">
+                    <a href="{{ route('dashboard.message.show') }}" class="menu-link">
+                        <div data-i18n="PesanPengunjung">Pesan Pengunjung</div>
+                    </a>
+                </li>
             </ul>
         </li>
+
+        @can('admin')
+        {{-- Tickets --}}
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Ticketing</span></li>
+            <li class="menu-item">
+                <a href="{{ route('ticket.index') }}" class="menu-link">
+                    <i class='menu-icon tf-icons bx bxs-message-alt-detail'></i>
+                    <div data-i18n="Documentation">Pesan Pengunjung</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('transaction.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-wallet"></i>
+                    <div data-i18n="Documentation">Transaksi Tiket</div>
+                </a>
+            </li>
+        @endcan
 
         @can('cashier')
         {{-- Tickets --}}

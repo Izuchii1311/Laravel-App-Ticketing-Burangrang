@@ -88,51 +88,6 @@
 
                     <button type="submit" class="btn btn-primary rounded-0 border-0" style="background-color: #21D375">Kirim</button>
                 </form>
-                {{-- <form action="/message"  method="post" id="myForm" class="php-email-form">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Nama" required autofocus value="{{ old('name') }}" autocomplete="off">
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    Nama harus diisi dengan benar
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 form-group mt-3 mt-md-0">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required value="{{ old('email') }}" autocomplete="off">
-                            @error('email')
-                                <div class="invalid-feedback">
-                                    Email harus diisi dengan benar
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Judul" required value="{{ old('title') }}" autocomplete="off">
-                        @error('title')
-                                <div class="invalid-feedback">
-                                    Subjek Judul harus diisi dengan benar
-                                </div>
-                        @enderror
-                    </div>
-                    <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Pesan" required autocomplete="off"></textarea>
-                        @error('message')
-                                <div class="invalid-feedback">
-                                    Pesan harus diisi dengan benar
-                                </div>
-                        @enderror
-                    </div>
-                    <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" id="submitButton">Kirim Pesan</button>
-                    </div>
-                </form> --}}
             </div>
 
         </div>

@@ -1,20 +1,21 @@
-{{-- Dashboard Layouts --}}
+{{-- ? Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- Title --}}
+{{-- ? Title --}}
 @section('title', "Dashboard | Data Tiket")
 
-{{-- Content --}}
+{{-- ? Content --}}
 @section('content')
     <div class="card bg-transparent shadow-none border-0 my-4">
         <div class="card-body row p-0">
-            {{-- Information --}}
+            {{-- * Information --}}
             <div class="col-12 col-md-8 card-separator">
                 <h3>Selamat datang kembali, {{ auth()->user()->name }} 👋🏻 </h3>
                 <div class="col-12 col-lg-8">
                     <p>Kamu bisa menambahkan tiket baru untuk menyesuaikan kemudahan dalam pengelolaan tiket kawasan g.Burangrang</p>
                 </div>
-                {{-- Alert --}}
+
+                {{-- * Alert --}}
                 @if (session()->has('success'))
                     <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
                         <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
@@ -23,13 +24,20 @@
                     </div>
                 @elseif (session()->has('warning'))
                     <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
-                        <i class="menu-icon tf-icons bx bx-check me-2 mb-1"></i>
+                        <i class="menu-icon tf-icons bx bx-info-circle me-2 mb-1"></i>
                         {{ session('warning') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
+                        <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+                        {{ session('error') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
             </div>
 
+            {{-- * Create Ticket --}}
             <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
                 <div class="d-flex justify-content-between align-items-center" style="position: relative;">
                     <div>
@@ -51,11 +59,12 @@
 
     <div class="row">
         <div class="col-md-12 col-lg-12 mb-0">
-            {{-- Card --}}
+            {{-- * Card --}}
             <div class="card">
+                {{-- * Information --}}
                 <h5 class="card-header fw-bolder">Data Tiket</h5>
                 <div class="card-datatable table-responsive">
-                    {{-- Table --}}
+                    {{-- * Table --}}
                     <table class="invoice-list-table table">
                         <thead>
                             <tr>
@@ -86,19 +95,27 @@
                                     <td>{{ $ticket->start_time }}</td>
                                     <td>{{ $ticket->end_time }}</td>
                                     <td>
+                                        {{-- * Dropdown --}}
                                         <div class="d-flex align-items-center">
                                             <div class="dropdown">
                                                 <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a href="/dashboard/ticket/{{ $ticket->id }}" class="dropdown-item">Detail Tiket</a>
-                                                    <a href="/dashboard/ticket/{{ $ticket->id }}/edit" class="dropdown-item">Edit Tiket</a>
+                                                    <a href="{{ route('ticket.show', ['ticket' => $ticket->cd_ticket]) }}" class="dropdown-item">
+                                                        Detail Tiket
+                                                    </a>
+                                                    <a href="{{ route('ticket.edit', ['ticket' => $ticket->cd_ticket]) }}" class="dropdown-item">
+                                                        Edit Tiket
+                                                    </a>
                                                 <div class="dropdown-divider"></div>
-                                                <form action="/dashboard/ticket/{{ $ticket->id }}" method="post" id="confirm-delete">
+                                                {{-- ! Delete Ticket --}}
+                                                <form action="{{ route('ticket.destroy', ['ticket' => $ticket->cd_ticket]) }}" method="post" id="confirm-delete">
+                                                {{-- <form action="/dashboard/ticket/{{ $ticket->cd_ticket }}" method="post" id="confirm-delete"> --}}
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="button" onclick="confirmDelete()" class="dropdown-item delete-record text-danger fw-bolder">Hapus Tiket</button>
+                                                    {{-- <button type="button" onclick="confirmDelete()" class="dropdown-item delete-record text-danger fw-bolder">Hapus Tiket</button> --}}
+                                                    <button type="submit" class="dropdown-item delete-record text-danger fw-bolder">Hapus Tiket</button>
                                                 </form>
                                                 </div>
                                             </div>
@@ -124,4 +141,4 @@
         </div>
     </div>
 @endsection
-{{-- End Content --}}
+{{-- ? End Content --}}

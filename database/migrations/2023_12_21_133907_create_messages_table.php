@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('title');
             $table->text('message');
+            $table->boolean('recomend')->nullable();
             $table->timestamps();
         });
     }

@@ -1,10 +1,10 @@
-{{-- Dashboard Layouts --}}
+{{-- ? Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- Title --}}
+{{-- ? Title --}}
 @section('title', "Dashboard | Detail Ticket")
 
-{{-- Content --}}
+{{-- ? Content --}}
 @section('content')
     <section class="container">
         <h3>Silahkan untuk melakukan print tiket 🖨 </h3>
@@ -38,7 +38,7 @@
         </div>
     </section>
 @endsection
-{{-- End Content --}}
+{{-- ? End Content --}}
 
 {{-- Style CSS --}}
 @section('style')

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Ticket;
+use App\Models\Message;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -40,20 +41,73 @@ class DatabaseSeeder extends Seeder
             'remember_token' => null,
         ]);
 
+
+        // ? Seeder ke Table Ticket
         Ticket::create([
             'user_id' => '1',
             'cd_ticket' => 'KD-001',
             'name_ticket' => 'Kawasan Gunung Burangrang',
             'price' => '20000',
-            'description' => 'Tiket Gunung'
+            'description' => 'Tiket Menuju kawasan Gunung Burangrang'
         ]);
 
         Ticket::create([
             'user_id' => '1',
             'cd_ticket' => 'KD-002',
             'name_ticket' => 'Rumah Gunung',
-            'price' => '15000',
+            'price' => '75000',
             'description' => 'Tiket Fasilitas Penyewaan Rumah Gunung'
+        ]);
+
+        Ticket::create([
+            'user_id' => '1',
+            'cd_ticket' => 'KD-003',
+            'name_ticket' => 'Curug Cipalasari',
+            'price' => '10000',
+            'description' => 'Tiket Menuju Kawasan Curug Cipalasari'
+        ]);
+
+
+
+        // ? Seeder ke Table Messages
+        Message::create([
+            "name" => "Izuchii",
+            "email" => "izuchii@gmail.com",
+            "title" => "Wisata Curug Cipalasari",
+            "message" => "Curugnya Indah, apalagi jika musim hujan cuacanya sangat dingin menyenangkan dan air curug pun sangat besar dan memukau. Terkadang juga ada pelangi yang tercipta dari air curug tersebut.🤣🌟",
+            "recomend" => null
+        ]);
+
+        Message::create([
+            "name" => "Hutao",
+            "email" => "hutao@liyue.com",
+            "title" => "Warganya ramah",
+            "message" => "Pertama kali kesana, tiba tiba pas pasan sama warga dan ramah saling sapa, saling bantu. Asik banget disiniiii........",
+            "recomend" => null
+        ]);
+
+        Message::create([
+            "name" => "HuoHuo",
+            "email" => "huo_alchemy@yahoo.com",
+            "title" => "Huo Suka Suasana Malam",
+            "message" => "Huo merasa suasana malam di kawasan burangrang sangat menyenangkan, gelap, dingin, dan adanya suara suara yang mengerikan.",
+            "recomend" => null
+        ]);
+
+        Message::create([
+            "name" => "March 7th",
+            "email" => "march7th@starrail.pom",
+            "title" => "March Photography",
+            "message" => "Disana aku sedang memotret pemandangan, tiba tiba ada seekor anjing dan aku foto dia. Eh... ga lama tiba tiba dia marah dan ngejar aku... 😭😭",
+            "recomend" => null
+        ]);
+
+        Message::create([
+            "name" => "Luthfi Nur Ramadhan",
+            "email" => "luthfiramadhan.lr55@gmail.com",
+            "title" => "Pemandangan Kawasan Gunung Burangrang",
+            "message" => "Pemandangannya indah, dapat melihat pesona terbitnya matahari di pagi hari, sejuk, menyenangkan. Ada juga air terjun nan indah dan cantik.",
+            "recomend" => null
         ]);
     }
 }

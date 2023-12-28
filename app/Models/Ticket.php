@@ -12,6 +12,10 @@ class Ticket extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName() {
+        return 'cd_ticket';
+    }
+
     public function transactions() {
         return $this->hasMany(Transaction::class)->onDelete('cascade');
     }
