@@ -7,17 +7,25 @@ $(document).ready(function () {
         return true;
     });
 
+    // ? Logout
+    $('#logout-li-header, #logout-li-sidebar').click(function() {
+        confirmAlert('Apakah kamu Yakin ?', 'Kamu akan logout dari akun ini.', 'warning', 'logout-form');
+    });
+
+    // ! Form Delete
+    function confirmDelete(ticketId) {
+        confirmAlert('Apakah kamu yakin?', 'Kamu akan menghapus data ini.', 'warning', 'confirm-delete-' + ticketId);
+    }
 
     // TODO: What next? :)
 });
 
-//* Sidebar Dashboard Confirm
-// Confirm Logout
-function confirmLogout() {
+// ? Sweet Alert - Logout
+function confirmAlert(title, text, icon, element) {
     Swal.fire({
-        title: "Apakah kamu yakin?",
-        text: "Kamu akan logout dari akun ini.",
-        icon: "warning",
+        title: title,
+        text: text,
+        icon: icon,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         showCancelButton: true,
@@ -25,37 +33,8 @@ function confirmLogout() {
         confirmButtonText: "Ya, logout saja!"
     }).then((result) => {
         if (result.isConfirmed) {
-            // Jika pengguna mengonfirmasi, kirim formulir logout
-            document.getElementById('logout-form').submit();
-        }
-    });
-}
-
-//* Sidebar & Header Dashboard Confirm
-// Showing Sweet alert when li clicked.
-document.getElementById('logout-li-header').addEventListener('click', function() {
-    confirmLogout();
-});
-document.getElementById('logout-li-sidebar').addEventListener('click', function() {
-    confirmLogout();
-});
-
-//* Button Confirm
-// Confirm Delete
-function confirmDelete() {
-    Swal.fire({
-        title: "Apakah kamu yakin?",
-        text: "Kamu akan menghapus data ini.",
-        icon: "warning",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        showCancelButton: true,
-        cancelButtonText: "Batal",
-        confirmButtonText: "Ya, hapus!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Jika pengguna mengonfirmasi, kirim formulir logout
-            document.getElementById('confirm-delete').submit();
+            // If the user confirms, submit the logout form
+            document.getElementById(element).submit();
         }
     });
 }

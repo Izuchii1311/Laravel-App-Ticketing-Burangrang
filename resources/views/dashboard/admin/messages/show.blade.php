@@ -108,10 +108,10 @@
                                             <a href="{{ route('dashboard.message.detail', ['id' => $message->id]) }}" class="dropdown-item">Detail Pesan</a>
                                             <div class="dropdown-divider"></div>
                                             {{-- ! Delete Button --}}
-                                            <form action="{{ route('dashboard.message.delete', ['id' => $message->id]) }}" method="post" id="confirm-delete-message">
+                                            <form action="{{ route('dashboard.message.delete', ['id' => $message->id]) }}" method="post" id="confirm-delete-{{ $message->id }}">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" onclick="confirmDeleteMessage()" class="dropdown-item delete-record text-danger">Hapus Pesan Pengguna</button>
+                                                <button type="button" onclick="confirmDelete({{ $message->id }})" class="dropdown-item delete-record text-danger">Hapus Pesan Pengguna</button>
                                             </form>
                                         </div>
                                     </div>

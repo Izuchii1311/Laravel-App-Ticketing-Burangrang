@@ -75,7 +75,7 @@
                         <form action="{{ route('logout') }}" method="post" id="logout-form">
                             <div class="dropdown-item">
                                 @csrf
-                                <button type="button" onclick="confirmLogout()" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">
+                                <button type="button" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">
                                     <i class="bx bx-power-off me-2"></i>
                                     <span class="flex-grow-1 align-middle ms-1">Logout</span>
                                 </button>

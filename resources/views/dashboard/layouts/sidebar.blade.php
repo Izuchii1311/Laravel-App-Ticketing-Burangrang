@@ -27,11 +27,13 @@
                         <div data-i18n="Home">Home</div>
                     </a>
                 </li>
+                @can('admin')
                 <li class="menu-item {{ Request::is('dashboard/messages*') ? "active" : "" }}">
                     <a href="{{ route('dashboard.message.show') }}" class="menu-link">
                         <div data-i18n="PesanPengunjung">Pesan Pengunjung</div>
                     </a>
                 </li>
+                @endcan
             </ul>
         </li>
 
@@ -82,7 +84,7 @@
                 <div class="menu-link">
                     <i class="menu-icon tf-icons bx bx-log-out"></i>
                     @csrf
-                    <button type="button" onclick="confirmLogout()" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">Logout</button>
+                    <button type="button" class="align-middle border-0 bg-transparent" style="padding: 0; color: #697a8d;" data-i18n="Logout">Logout</button>
                 </div>
             </form>
         </li>

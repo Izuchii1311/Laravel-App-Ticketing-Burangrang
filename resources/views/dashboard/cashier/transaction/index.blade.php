@@ -108,11 +108,10 @@
                                                     <a href="{{ route('transaction.edit', ['transaction' => $transaction->cd_transaction]) }}" class="dropdown-item">Edit Transaksi</a>
                                                 <div class="dropdown-divider"></div>
                                                 {{-- ! Delete Transaction --}}
-                                                <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete">
+                                                <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete-{{ $transaction->cd_transaction }}">
                                                     @csrf
                                                     @method('delete')
-                                                    {{-- <button type="button" class="dropdown-item delete-record text-danger" onclick="confirmDelete()">Hapus Transaksi</button> --}}
-                                                    <button type="submit" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
+                                                    <button type="submit" onclick="confirmDelete({{ $transaction->cd_transaction }})" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
                                                 </form>
                                                 </div>
                                             </div>

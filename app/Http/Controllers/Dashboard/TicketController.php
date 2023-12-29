@@ -139,7 +139,6 @@ class TicketController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Ticket $ticket) {
-        return $ticket;
         // Try Catch
         try {
             # Delete Transaction if Ticket Deleted
