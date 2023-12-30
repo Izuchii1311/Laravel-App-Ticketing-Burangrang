@@ -110,7 +110,7 @@
                                                     </a>
                                                     <div class="dropdown-divider"></div>
                                                     {{-- ! Delete Ticket --}}
-                                                    <form action="/dashboard/ticket/{{ $ticket->cd_ticket }}" method="post" id="confirm-delete-{{ $ticket->cd_ticket }}">
+                                                    <form action="{{ route('ticket.destroy', ['ticket' => $ticket->cd_ticket]) }}" method="post" id="confirm-delete-{{ $ticket->cd_ticket }}">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="button" onclick="confirmDelete('{{ $ticket->cd_ticket }}')" class="dropdown-item delete-record text-danger fw-bolder">Hapus Tiket</button>

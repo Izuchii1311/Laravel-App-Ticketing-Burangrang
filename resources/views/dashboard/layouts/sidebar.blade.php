@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 @can('admin')
-                <li class="menu-item {{ Request::is('dashboard/messages*') ? "active" : "" }}">
+                <li class="menu-item {{ Request::is('dashboard/message*') ? "active" : "" }}">
                     <a href="{{ route('dashboard.message.show') }}" class="menu-link">
                         <div data-i18n="PesanPengunjung">Pesan Pengunjung</div>
                     </a>

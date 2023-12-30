@@ -74,6 +74,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Izuchii",
             "email" => "izuchii@gmail.com",
             "title" => "Wisata Curug Cipalasari",
+            "slug" => "wisata-curug-cipalasari",
             "message" => "Curugnya Indah, apalagi jika musim hujan cuacanya sangat dingin menyenangkan dan air curug pun sangat besar dan memukau. Terkadang juga ada pelangi yang tercipta dari air curug tersebut.🤣🌟",
             "recomend" => null
         ]);
@@ -82,6 +83,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Hutao",
             "email" => "hutao@liyue.com",
             "title" => "Warganya ramah",
+            "slug" => "warganya-ramah",
             "message" => "Pertama kali kesana, tiba tiba pas pasan sama warga dan ramah saling sapa, saling bantu. Asik banget disiniiii........",
             "recomend" => null
         ]);
@@ -90,6 +92,7 @@ class DatabaseSeeder extends Seeder
             "name" => "HuoHuo",
             "email" => "huo_alchemy@yahoo.com",
             "title" => "Huo Suka Suasana Malam",
+            "slug" => "huo-suka-suasana-malam",
             "message" => "Huo merasa suasana malam di kawasan burangrang sangat menyenangkan, gelap, dingin, dan adanya suara suara yang mengerikan.",
             "recomend" => null
         ]);
@@ -98,6 +101,7 @@ class DatabaseSeeder extends Seeder
             "name" => "March 7th",
             "email" => "march7th@starrail.pom",
             "title" => "March Photography",
+            "slug" => "march-photography",
             "message" => "Disana aku sedang memotret pemandangan, tiba tiba ada seekor anjing dan aku foto dia. Eh... ga lama tiba tiba dia marah dan ngejar aku... 😭😭",
             "recomend" => null
         ]);
@@ -106,6 +110,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Luthfi Nur Ramadhan",
             "email" => "luthfiramadhan.lr55@gmail.com",
             "title" => "Pemandangan Kawasan Gunung Burangrang",
+            "slug" => "pemandangan-kawasan-gunung-burangrang",
             "message" => "Pemandangannya indah, dapat melihat pesona terbitnya matahari di pagi hari, sejuk, menyenangkan. Ada juga air terjun nan indah dan cantik.",
             "recomend" => null
         ]);

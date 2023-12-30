@@ -89,7 +89,7 @@
                                     @if ($ticket->status === 'open')
                                         <div class="col-6 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid mb-2">
                                             <div class="form-check custom-option custom-option-icon">
-                                                <input class="form-check-input" type="checkbox" name="selectedTicket[]" id="ticket{{ $ticket->id }}" value="{{ $ticket->id }}" required>
+                                                <input class="form-check-input" type="checkbox" name="selectedTicket[]" id="ticket{{ $ticket->id }}" value="{{ $ticket->id }}">
                                                 <label class="form-check-label custom-option-content" for="ticket{{ $ticket->id }}">
                                                     <span class="custom-option-body">
                                                         <input type="hidden" name="ticket_id" value={{ $ticket->id }}>

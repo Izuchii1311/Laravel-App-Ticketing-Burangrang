@@ -15,6 +15,14 @@
             </div>
         </div>
 
+        @if (session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         {{-- ? Alert --}}
         <div class="alerts-container"></div>
         <br>
@@ -40,7 +48,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{ route('dashboard.message.detail', ['id' => $message->id]) }}" class="dropdown-item">Detail Pesan</a>
+                                                <a href="{{ route('dashboard.message.detail', ['slug' => $message->slug]) }}" class="dropdown-item">Detail Pesan</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a href="#" class="dropdown-item remove-to-menu text-danger" data-message-id="{{ $message->id }}">Hapus dari Menu Utama</a>
                                             </div>
@@ -61,6 +69,7 @@
                 </div>
             @endforelse
         @endif
+
     </div>
 
     <hr class="mb-2">
@@ -105,13 +114,15 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="{{ route('dashboard.message.detail', ['id' => $message->id]) }}" class="dropdown-item">Detail Pesan</a>
+                                            <a href="{{ route('dashboard.message.detail', ['slug' => $message->slug]) }}" class="dropdown-item">Detail Pesan</a>
+
                                             <div class="dropdown-divider"></div>
+
                                             {{-- ! Delete Button --}}
-                                            <form action="{{ route('dashboard.message.delete', ['id' => $message->id]) }}" method="post" id="confirm-delete-{{ $message->id }}">
-                                                @csrf
+                                            <form action="{{ route('dashboard.message.delete', ['slug' => $message->slug]) }}" method="post" id="confirm-delete-{{ $message->slug }}">
                                                 @method('delete')
-                                                <button type="button" onclick="confirmDelete({{ $message->id }})" class="dropdown-item delete-record text-danger">Hapus Pesan Pengguna</button>
+                                                @csrf
+                                                <button type="submit" class="dropdown-item delete-record text-danger">Hapus Pesan Pengguna</button>
                                             </form>
                                         </div>
                                     </div>

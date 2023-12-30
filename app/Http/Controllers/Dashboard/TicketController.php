@@ -59,10 +59,10 @@ class TicketController extends Controller
                 ->with('success', "Berhasil membuat data tiket baru. 🌟");
         } catch (\Exception $e) {
             # Get Error Message to laravel.log
-            Log::error('Error during transaction creation: ' . $e->getMessage());
+            Log::error('Transaction Store Error : ' . $e->getMessage());
             # Handle the exception, log it, or redirect with an error message
             return redirect()->back()
-                ->with('error', 'Terjadi kesalahan. ' . $e->getMessage());
+                ->with('error', 'Terjadi kesalahan, Silahkan coba lagi nanti.');
         }
     }
 
@@ -127,10 +127,10 @@ class TicketController extends Controller
                 ->with('success', "Berhasil mengedit data tiket. 👍");
         } catch (Exception $e) {
             # Get Error Message to laravel.log
-            Log::error('Error during transaction creation: ' . $e->getMessage());
+            Log::error('Transaction Update Error: ' . $e->getMessage());
             # Handle the exception, log it, or redirect with an error message
             return redirect()->back()
-                ->with('error', 'Terjadi kesalahan. ' . $e->getMessage());
+                ->with('error', 'Terjadi kesalahan, Silahkan coba lagi nanti.');
         }
     }
 
@@ -150,10 +150,10 @@ class TicketController extends Controller
                 ->with('success', 'Berhasil menghapus data tiket. 🗑️');
         } catch (\Exception $e) {
             # Get Error Message to laravel.log
-            Log::error('Error during transaction creation: ' . $e->getMessage());
+            Log::error('Transaction Delete Error : ' . $e->getMessage());
             # Handle the exception, log it, or redirect with an error message
             return redirect()->route('ticket.index')
-                ->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
+                ->with('error', 'Terjadi kesalahan, Silahkan coba lagi nanti.');
         }
     }
 }

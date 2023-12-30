@@ -9,19 +9,31 @@ $(document).ready(function () {
 
     // ? Logout
     $('#logout-li-header, #logout-li-sidebar').click(function() {
-        confirmAlert('Apakah kamu Yakin ?', 'Kamu akan logout dari akun ini.', 'warning', 'logout-form');
+        confirmAlert(
+            'Apakah kamu Yakin ?',
+            'Kamu akan logout dari akun ini.',
+            'warning',
+            'Batal',
+            'Ya, logout saja!',
+            'logout-form');
     });
-
-    // ! Form Delete
-    function confirmDelete(ticketId) {
-        confirmAlert('Apakah kamu yakin?', 'Kamu akan menghapus data ini.', 'warning', 'confirm-delete-' + ticketId);
-    }
 
     // TODO: What next? :)
 });
 
+// ! Form Delete
+function confirmDelete(id) {
+    confirmAlert(
+        'Apakah kamu yakin?',
+        'Kamu akan menghapus data ini.',
+        'warning',
+        'Batal',
+        'Ya, hapus saja!',
+        'confirm-delete-' + id);
+}
+
 // ? Sweet Alert - Logout
-function confirmAlert(title, text, icon, element) {
+function confirmAlert(title, text, icon, cancelText, confirmText, element) {
     Swal.fire({
         title: title,
         text: text,
@@ -29,8 +41,8 @@ function confirmAlert(title, text, icon, element) {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         showCancelButton: true,
-        cancelButtonText: "Batal",
-        confirmButtonText: "Ya, logout saja!"
+        cancelButtonText: cancelText,
+        confirmButtonText: confirmText
     }).then((result) => {
         if (result.isConfirmed) {
             // If the user confirms, submit the logout form
@@ -38,6 +50,7 @@ function confirmAlert(title, text, icon, element) {
         }
     });
 }
+
 
 //* Transacion Input Checked
 // Transaction Create Get Input
@@ -58,4 +71,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-

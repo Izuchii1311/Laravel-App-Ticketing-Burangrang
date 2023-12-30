@@ -46,12 +46,12 @@ Route::middleware(['auth'])->group(function () {
     //* Middleware Admin
     Route::middleware(['admin'])->group(function() {
         //* Message
-        Route::get('/dashboard/messages', [MessageController::class, 'showMessage'])->name('dashboard.message.show');
-        Route::get('/dashboard/messages/detail/{id}', [MessageController::class, 'detailMessage'])->name('dashboard.message.detail');
-        Route::delete('/dashboard/messages/{id}', [MessageController::class, 'deleteMessage'])->name('dashboard.message.delete');
+        Route::get('/dashboard/message', [MessageController::class, 'showMessage'])->name('dashboard.message.show');
+        Route::get('/dashboard/message/detail/{slug}', [MessageController::class, 'detailMessage'])->name('dashboard.message.detail');
+        Route::delete('/dashboard/message/{slug}', [MessageController::class, 'deleteMessage'])->name('dashboard.message.delete');
 
-        Route::post('/dashboard/message/{id}/add-to-menu', [MessageController::class, 'addToMenu'])->name('dashboard.message.addToMenu');
-        Route::post('/dashboard/message/{id}/remove-to-menu', [MessageController::class, 'removeToMenu'])->name('dashboard.message.removeToMenu');
+        Route::post('/dashboard/message/{slug}/add-to-menu', [MessageController::class, 'addToMenu'])->name('dashboard.message.addToMenu');
+        Route::post('/dashboard/message/{slug}/remove-to-menu', [MessageController::class, 'removeToMenu'])->name('dashboard.message.removeToMenu');
     });
 
     //* Middleware Cashier

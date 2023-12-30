@@ -23,6 +23,14 @@
                 <h4 class="mb-2">Selamat Datang! 👋</h4>
                 <p class="mb-4">Tolong masukkan informasi data login anda.</p>
 
+                @if (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                        <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 {{-- Form --}}
                 <form id="formAuthentication" class="mb-3" action="/login" method="post">
                     @csrf

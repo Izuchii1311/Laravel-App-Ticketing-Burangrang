@@ -111,7 +111,7 @@
                                                 <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete-{{ $transaction->cd_transaction }}">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" onclick="confirmDelete({{ $transaction->cd_transaction }})" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
+                                                    <button type="button" onclick="confirmDelete('{{ $transaction->cd_transaction }}')" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
                                                 </form>
                                                 </div>
                                             </div>
