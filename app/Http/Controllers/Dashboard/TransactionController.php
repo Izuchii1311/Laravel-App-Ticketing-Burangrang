@@ -19,7 +19,7 @@ class TransactionController extends Controller
     {
         // Showing View Index Transaction
         return view('dashboard.cashier.transaction.index', [
-            'transactions' => Transaction::all()
+            'transactions' => Transaction::paginate(25)->withQueryString(),
         ]);
     }
 

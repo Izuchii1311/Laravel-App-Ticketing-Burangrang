@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 0);
             $table->decimal('total', 10, 0);
             $table->string('cus_name');
-            $table->string('cd_transaction')->unique();
+            $table->string('cd_transaction')->unique()->nullable();
             $table->text('description');
             $table->timestamp('transaction_date');
             $table->softDeletes();

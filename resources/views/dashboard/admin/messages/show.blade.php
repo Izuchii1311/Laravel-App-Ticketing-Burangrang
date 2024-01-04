@@ -11,7 +11,14 @@
         <div class="col-12 card-separator">
             <h3>Rekomendasi Pesan Para Pengunjung ✌</h3>
             <div class="col-12 col-md-8">
-                <p>Pesan para pengunjung ini akan ditampilkan di halaman landing page, kamu bisa menambahkan atau menghapus pesan rekomendasi para pengunjung...</p>
+                <p>Pesan para pengunjung ini akan ditampilkan di halaman landing page, kamu bisa menambahkan atau menghapus pesan rekomendasi para pengunjung...
+                    <br><br>
+                    <span class="fst-italic">
+                        (Hanya 10 Pesan yang Akan di Tampilkan Di Menu Utama.)
+                        -
+                        Kamu bisa memilih pesan pengunjung sesuai dengan yang diinginkan
+                    </span>
+                </p>
             </div>
         </div>
 
@@ -28,19 +35,19 @@
         <br>
 
         {{-- ? Check if last message deleted / isEmpty --}}
-        @if ($messages->isEmpty() || $messages->where('recomend', 1)->isEmpty())
+        @if ($recomends->isEmpty() || $recomends->where('recomend', 1)->isEmpty())
             <div class="col-12">
-                <p class="text-danger y-5">{{ $messages->isEmpty() ? 'Tidak ada pesan.' : 'Tidak ada pesan yang direkomendasikan' }}</p>
+                <p class="text-danger y-5">{{ $recomends->isEmpty() ? 'Tidak ada pesan.' : 'Tidak ada pesan yang direkomendasikan' }}</p>
             </div>
         @else
-            @forelse ($messages as $message)
-                @if ($message->recomend == 1)
+            @forelse ($recomends as $recomend)
+                @if ($recomend->recomend == 1)
                     <div class="col-6 col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
                                 {{-- ? Card Body --}}
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="card-title">{{ $message->title }}</h5>
+                                    <h5 class="card-title">{{ Str::limit($recomend->title, 35) }}</h5>
                                     {{-- ? Dropdown --}}
                                     <div class="d-flex align-items-center">
                                         <div class="dropdown">
@@ -48,31 +55,31 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{{ route('dashboard.message.detail', ['slug' => $message->slug]) }}" class="dropdown-item">Detail Pesan</a>
+                                                <a href="{{ route('dashboard.message.detail', ['slug' => $recomend->slug]) }}" class="dropdown-item">Detail Pesan</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a href="#" class="dropdown-item remove-to-menu text-danger" data-message-id="{{ $message->id }}">Hapus dari Menu Utama</a>
+                                                <a href="#" class="dropdown-item remove-to-menu text-danger" data-message-id="{{ $recomend->id }}">Hapus dari Menu Utama</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <p class="fst-italic card-subtitle mb-2 text-body-secondary" style="font-size: 12px;">
-                                    {{ $message->name }} | {{ $message->email }}
+                                    {{ $recomend->name }} | {{ $recomend->email }}
                                 </p>
-                                <p class="card-text">{{ Str::limit($message->message, 150) }}</p>
+                                <p class="card-text">{{ Str::limit($recomend->message, 150) }}</p>
                             </div>
                         </div>
                     </div>
                 @endif
             @empty
                 <div class="col-12">
-                    <p class="text-danger">{{ count($messages) > 0 ? 'Tidak ada pesan yang direkomendasikan' : 'Tidak ada pesan.' }}</p>
+                    <p class="text-danger">{{ count($recomends) > 0 ? 'Tidak ada pesan yang direkomendasikan' : 'Tidak ada pesan.' }}</p>
                 </div>
             @endforelse
         @endif
 
     </div>
 
-    <hr class="mb-2">
+    <hr class="my-5">
 
     {{-- ? Showing All Messages --}}
     <div class="row">
@@ -98,8 +105,7 @@
                         <div class="card-body">
                             {{-- ? Card Body --}}
                             <div class="d-flex justify-content-between">
-                                <h5 class="card-title">{{ $message->title }}
-                                <h5 class="card-title">{{ $message->id }}
+                                <h5 class="card-title">{{ Str::limit($message->title, 35) }}
                                     {{-- ? Check icon recomend--}}
                                     @if($message->recomend == 1)
                                         <a href="#" class="card-link remove-to-menu" data-message-id="{{ $message->id }}"><i class='bx bxs-star'></i></a>
@@ -147,6 +153,15 @@
                 </div>
             @endforelse
         @endif
+        <div class="my-4 d-flex justify-content-between">
+            <div>
+                Showing {{($messages->currentpage()-1)*$messages->perpage()+1}} to {{$messages->currentpage()*$messages->perpage()}}
+                of  {{$messages->total()}} entries.
+            </div>
+            <div>
+                {{ $messages->onEachSide(1)->links() }}
+            </div>
+        </div>
     </div>
 @endsection
 {{-- *End Content --}}
@@ -155,8 +170,6 @@
 @section('script')
     <script>
         $(document).ready(function() {
-
-
             // Function to handle adding or removing from the menu
             function updateMenu(action, messageId) {
                 $.ajax({
@@ -169,7 +182,11 @@
                     success: function(response) {
                         console.log('Success:', response);
                         const successMessage = (action === 'add') ? 'ditambahkan ke' : 'dihilangkan dari';
-                        showAlert('success', 'Berhasil ' + successMessage + ' Menu utama!');
+                        if (response.success) {
+                            showAlert('success', 'Berhasil ' + successMessage + ' Menu utama!');
+                        } else {
+                            showAlert('error', response.error);
+                        }
                     },
                     error: function(error) {
                         console.log('Error:', error);

@@ -129,9 +129,18 @@
                                         </p>
                                     </td>
                                 </tr>
-                            @endforelse
+                                @endforelse
                         </tbody>
                     </table>
+                    <div class="my-4 d-flex justify-content-between mx-4">
+                        <div>
+                            Showing {{($tickets->currentpage()-1)*$tickets->perpage()+1}} to {{$tickets->currentpage()*$tickets->perpage()}}
+                            of  {{$tickets->total()}} entries.
+                        </div>
+                        <div>
+                            {{ $tickets->onEachSide(1)->links() }}
+                        </div>
+                    </div>
 
                 </div>
             </div>

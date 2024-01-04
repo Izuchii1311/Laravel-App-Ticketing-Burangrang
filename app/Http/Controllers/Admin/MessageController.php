@@ -43,9 +43,13 @@ class MessageController extends Controller
     // ? Dashboard Admin Show Message
     public function showMessage() {
         return view('dashboard.admin.messages.show', [
-            "messages" => Message::all()
+            // paginate(15, ['*'], 'messages') = membagi hasil kueri menjadi beberapa halaman.
+            // ['*'] = mengambil semua dari tabel messages
+            "messages" => Message::latest()->paginate(15, ['*'], 'messages')->withQueryString(),
+            "recomends" => Message::where('recomend', 1)->orderBy('updated_at', 'desc')->get()
         ]);
     }
+
 
 
     // ? Dashboard Detail Message
@@ -94,10 +98,19 @@ class MessageController extends Controller
         try {
             # Find Message
             $message = Message::findOrFail($slug);
-            # Update Message Recomend
-            $message->update(['recomend' => true]);
-            # Return Response
-            return response()->json(['message' => 'Added to Menu successfully']);
+
+            # Check Data Recomend
+            $dataRecomend = Message::where('recomend', 1)->count();
+            $maxRecomend = 10;
+
+            if ($dataRecomend < $maxRecomend) {
+                # Update Message Recomend
+                $message->update(['recomend' => true]);
+                # Return Response
+                return response()->json(['success' => true, 'message' => 'Added to Menu successfully']);
+            } else {
+                return response()->json(['success' => false, 'error' => 'Batas pesan yang ingin ditampilkan sudah maksimum.']);
+            }
         } catch (\Exception $e) {
             # Get Error Message to laravel.log
             Log::error('Add To Menu Message Error: ' . $e->getMessage());
@@ -116,7 +129,7 @@ class MessageController extends Controller
             # Update Message
             $message->update(['recomend' => null]);
             # Return Response
-            return response()->json(['message' => 'Removed from Menu successfully']);
+            return response()->json(['success' => true, 'message' => 'Added to Menu successfully']);
         } catch (\Exception $e) {
             # Get Error Message to laravel.log
             Log::error('Add To Menu Message Error: ' . $e->getMessage());

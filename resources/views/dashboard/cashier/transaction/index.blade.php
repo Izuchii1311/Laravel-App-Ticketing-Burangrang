@@ -108,11 +108,11 @@
                                                     <a href="{{ route('transaction.edit', ['transaction' => $transaction->cd_transaction]) }}" class="dropdown-item">Edit Transaksi</a>
                                                 <div class="dropdown-divider"></div>
                                                 {{-- ! Delete Transaction --}}
-                                                <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete-{{ $transaction->cd_transaction }}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="button" onclick="confirmDelete('{{ $transaction->cd_transaction }}')" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
-                                                </form>
+                                                    <form action="{{ route('transaction.destroy', ['transaction' => $transaction->cd_transaction]) }}" method="post" id="confirm-delete-{{ $transaction->cd_transaction }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="button" onclick="confirmDelete('{{ $transaction->cd_transaction }}')" class="dropdown-item delete-record text-danger">Hapus Transaksi</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -131,6 +131,15 @@
 
                         </tbody>
                     </table>
+                    <div class="my-4 d-flex justify-content-between mx-4">
+                        <div>
+                            Showing {{($transactions->currentpage()-1)*$transactions->perpage()+1}} to {{$transactions->currentpage()*$transactions->perpage()}}
+                            of  {{$transactions->total()}} entries.
+                        </div>
+                        <div>
+                            {{ $transactions->onEachSide(1)->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -68,6 +68,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        // ? Factory Transaction
+        \App\Models\Transaction::factory(50)->create();
+
 
         // ? Seeder ke Table Messages
         Message::create([
@@ -114,5 +117,7 @@ class DatabaseSeeder extends Seeder
             "message" => "Pemandangannya indah, dapat melihat pesona terbitnya matahari di pagi hari, sejuk, menyenangkan. Ada juga air terjun nan indah dan cantik.",
             "recomend" => null
         ]);
+
+        \App\Models\Message::factory(100)->create();
     }
 }

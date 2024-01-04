@@ -18,7 +18,7 @@ class TicketController extends Controller
     {
         // Showing View Index Ticket
         return view('dashboard.cashier.ticket.index', [
-            'tickets' => Ticket::get()
+            'tickets' => Ticket::paginate(10)->withQueryString(),
         ]);
     }
 
