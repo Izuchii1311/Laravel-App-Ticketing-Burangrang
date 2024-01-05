@@ -62,7 +62,19 @@
             {{-- * Card --}}
             <div class="card">
                 {{-- * Information --}}
-                <h5 class="card-header fw-bolder">Data Tiket</h5>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-header fw-bolder">Data Ticket</h5>
+                    {{-- ? Search --}}
+                    <div class="mx-4 col-md-6">
+                        <form action="{{ route('ticket.index') }}" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari Tiket" name="search" value="{{ request('search') }}">
+                                <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="card-datatable table-responsive">
                     {{-- * Table --}}
                     <table class="invoice-list-table table">
@@ -125,7 +137,6 @@
                                     <td colspan="8" class="text-center py-5">
                                         <p class="">
                                             <h3>Tidak ada tiket.</h3>
-                                            <a href="{{ route('ticket.create') }}" class="text-secondary">Buat ticket baru</a>
                                         </p>
                                     </td>
                                 </tr>
@@ -133,13 +144,15 @@
                         </tbody>
                     </table>
                     <div class="my-4 d-flex justify-content-between mx-4">
-                        <div>
-                            Showing {{($tickets->currentpage()-1)*$tickets->perpage()+1}} to {{$tickets->currentpage()*$tickets->perpage()}}
-                            of  {{$tickets->total()}} entries.
-                        </div>
-                        <div>
-                            {{ $tickets->onEachSide(1)->links() }}
-                        </div>
+                        @if ($tickets->count() > 0 )
+                            <div>
+                                Showing {{($tickets->currentpage()-1)*$tickets->perpage()+1}} to {{$tickets->currentpage()*$tickets->perpage()}}
+                                of  {{$tickets->total()}} data ticket.
+                            </div>
+                            <div>
+                                {{ $tickets->onEachSide(1)->links() }}
+                            </div>
+                        @endif
                     </div>
 
                 </div>

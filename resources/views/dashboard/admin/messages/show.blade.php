@@ -84,10 +84,19 @@
     {{-- ? Showing All Messages --}}
     <div class="row">
         {{-- ? Information --}}
-        <div class="col-12 card-separator mb-3">
-            <h5>Pesan Para Pengunjung Kawasan Gunung Burangrang.</h5>
-            <div class="col-12 col-md-8">
-                <p>Pesan para pengunjung mengenai website beserta daerah kawasan nyalindung dan juga Gunung Burangrang</p>
+        <div class="col-12 card-separator mb-3 d-flex">
+            <div class="col-md-6">
+                <h5>Pesan Para Pengunjung Kawasan Gunung Burangrang.</h5>
+                    <p>Pesan para pengunjung mengenai website beserta daerah kawasan nyalindung dan juga Gunung Burangrang</p>
+            </div>
+            {{-- ? Search --}}
+            <div class="col-md-6">
+                <form action="{{ route('dashboard.message.show') }}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cari Pesan Pengunjung" name="search" value="{{ request('search') }}">
+                        <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -154,13 +163,15 @@
             @endforelse
         @endif
         <div class="my-4 d-flex justify-content-between">
-            <div>
-                Showing {{($messages->currentpage()-1)*$messages->perpage()+1}} to {{$messages->currentpage()*$messages->perpage()}}
-                of  {{$messages->total()}} entries.
-            </div>
-            <div>
-                {{ $messages->onEachSide(1)->links() }}
-            </div>
+            @if ($messages->count() > 0 )
+                <div>
+                    Showing {{($messages->currentpage()-1)*$messages->perpage()+1}} to {{$messages->currentpage()*$messages->perpage()}}
+                    of {{$messages->total()}} data message.
+                </div>
+                <div>
+                    {{ $messages->onEachSide(1)->links() }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection

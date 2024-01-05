@@ -23,4 +23,11 @@ class Ticket extends Model
     public function author() {
         return $this->belongsTo(User::class, 'user_id')->onDelete('cascade');
     }
+
+    public function scopeFilter($query, array $filters) {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where('cd_ticket', 'like', '%' . request('search') . '%')
+                    ->orWhere('name_ticket', 'like', '%' . request('search') . '%');
+        });
+    }
 }

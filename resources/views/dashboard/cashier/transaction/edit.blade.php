@@ -154,7 +154,7 @@
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary" id="submitButton">Ubah Transaksi</button>
-                    <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</button>
+                    <a href="{{ url()->previous() }}" class="btn btn-label-secondary">Kembali</button>
                 </div>
             </form>
         </div>

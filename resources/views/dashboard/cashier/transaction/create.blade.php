@@ -138,13 +138,13 @@
                     <div class="col-12">
                         <button type="button" class="btn btn-primary" disabled>Tambah Transaksi</button>
                         <button type="reset" class="btn btn-danger" disabled>Reset</button>
-                        <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</a>
+                        <a href="{{ url()->previous() }}" class="btn text-decoration-none">Kembali</a>
                     </div>
                 @else
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary" id="submitButton">Tambah Transaksi</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
-                        <a href="{{ route('transaction.index') }}" class="btn btn-label-secondary">Kembali</a>
+                        <a href="{{ url()->previous() }}" class="btn text-decoration-none">Kembali</a>
                     </div>
                 @endif
                 </form>

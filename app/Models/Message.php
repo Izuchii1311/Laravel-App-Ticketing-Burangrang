@@ -26,4 +26,13 @@ class Message extends Model
     public function getRouteKeyName() {
         return 'slug';
     }
+
+    // ? Search
+    public function scopeFilter($query, array $filters) {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where('name', 'like', '%' . request('search') . '%')
+                    ->orWhere('email', 'like', '%' . request('search') . '%')
+                    ->orWhere('title', 'like', '%' . request('search') . '%');
+        });
+    }
 }

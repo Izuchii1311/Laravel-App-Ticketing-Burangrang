@@ -16,19 +16,19 @@
     {{-- Sidebar Items --}}
     <ul class="menu-inner py-1">
         {{-- Dashboard --}}
-        <li class="menu-item active open">
+        <li class="menu-item {{ Request::is('dashboard*') ? "active open" : "" }}">
             <a href="{{ route('dashboard.index') }}" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('dashboard') ? "active" : "" }}">
+                <li class="menu-item {{ Request::is('dashboard') ? "active open" : "" }}">
                     <a href="{{ route('dashboard.index') }}" class="menu-link">
                         <div data-i18n="Home">Home</div>
                     </a>
                 </li>
                 @can('admin')
-                <li class="menu-item {{ Request::is('dashboard/message*') ? "active" : "" }}">
+                <li class="menu-item {{ Request::is('dashboard/message*') ? "active open" : "" }}">
                     <a href="{{ route('dashboard.message.show') }}" class="menu-link">
                         <div data-i18n="PesanPengunjung">Pesan Pengunjung</div>
                     </a>
@@ -39,7 +39,7 @@
 
         @can('admin')
         {{-- Tickets --}}
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Ticketing</span></li>
+            {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Ticketing</span></li>
             <li class="menu-item">
                 <a href="{{ route('ticket.index') }}" class="menu-link">
                     <i class='menu-icon tf-icons bx bxs-message-alt-detail'></i>
@@ -51,19 +51,19 @@
                     <i class="menu-icon tf-icons bx bx-wallet"></i>
                     <div data-i18n="Documentation">Transaksi Tiket</div>
                 </a>
-            </li>
+            </li> --}}
         @endcan
 
         @can('cashier')
         {{-- Tickets --}}
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Ticketing</span></li>
-            <li class="menu-item">
+            <li class="menu-item {{ Request::is('dashboard/ticket*') ? "active" : "" }}">
                 <a href="{{ route('ticket.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-file"></i>
                     <div data-i18n="Documentation">Tiket</div>
                 </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ Request::is('dashboard/transaction*') ? "active" : "" }}">
                 <a href="{{ route('transaction.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-wallet"></i>
                     <div data-i18n="Documentation">Transaksi Tiket</div>
@@ -73,13 +73,13 @@
 
         {{-- Acounts --}}
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('/') ? "active" : "" }}">
             <a href="{{ route('main.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-alt-2"></i>
                 <div data-i18n="HalamanUtama">Halaman Utama</div>
             </a>
         </li>
-        <li class="menu-item" id="logout-li-sidebar" style="cursor: pointer;">
+        <li class="menu-item {{ Request::is('logout') ? "active" : "" }}" id="logout-li-sidebar" style="cursor: pointer;">
             <form action="{{ route('logout') }}" method="post" id="logout-form">
                 <div class="menu-link">
                     <i class="menu-icon tf-icons bx bx-log-out"></i>

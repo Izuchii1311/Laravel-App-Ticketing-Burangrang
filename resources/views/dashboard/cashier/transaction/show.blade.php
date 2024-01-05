@@ -32,7 +32,7 @@
                         </p>
                         <p><small class="text-muted">Created in {{ $transaction->created_at->diffForHumans() }}</small></p>
 
-                        <a href="{{ route('transaction.index') }}" class="text-decoration-none">Kembali</a>
+                        <a href="{{ url()->previous() }}" class="text-decoration-none">Kembali</a>
                     </div>
 
                 </div>

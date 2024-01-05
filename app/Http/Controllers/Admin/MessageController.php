@@ -45,7 +45,7 @@ class MessageController extends Controller
         return view('dashboard.admin.messages.show', [
             // paginate(15, ['*'], 'messages') = membagi hasil kueri menjadi beberapa halaman.
             // ['*'] = mengambil semua dari tabel messages
-            "messages" => Message::latest()->paginate(15, ['*'], 'messages')->withQueryString(),
+            "messages" => Message::latest()->filter(request(['search']))->paginate(15, ['*'], 'messages')->withQueryString(),
             "recomends" => Message::where('recomend', 1)->orderBy('updated_at', 'desc')->get()
         ]);
     }

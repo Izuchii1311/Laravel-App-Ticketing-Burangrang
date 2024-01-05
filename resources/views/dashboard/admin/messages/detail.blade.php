@@ -31,7 +31,7 @@
                             <br>
                             <span class="card-text">{{ $message->message }}</span>
                         </p>
-                        <a href="{{ route('dashboard.message.show') }}" class="card-link mt-5">Kembali</a>
+                        <a href="{{ url()->previous() }}" class="text-decoration-none card-link mt-5">Kembali</a>
                     </div>
                 </div>
             </div>

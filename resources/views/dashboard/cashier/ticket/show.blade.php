@@ -33,9 +33,10 @@
                         {{ $ticket->description }}
                     </p>
                 </div>
-                <a href="/dashboard/ticket/ticket">Print</a>
+                <a href="/dashboard/ticket/ticket"><i class='bx bx-printer'></i></a>
             </div>
         </div>
+        <a href="{{ url()->previous() }}" class="text-decoration-none">Kembali</a>
     </section>
 @endsection
 {{-- ? End Content --}}

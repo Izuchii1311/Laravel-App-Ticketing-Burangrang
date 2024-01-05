@@ -68,7 +68,19 @@
             {{-- * Card --}}
             <div class="card">
                 {{-- * Information --}}
-                <h5 class="card-header fw-bolder">Data Tiket</h5>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-header fw-bolder">Data Transaksi</h5>
+                    {{-- ? Search --}}
+                    <div class="mx-4 col-md-6">
+                        <form action="{{ route('transaction.index') }}" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari Transaksi" name="search" value="{{ request('search') }}">
+                                <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="card-datatable table-responsive">
                     <table class="invoice-list-table table">
                         <thead>
@@ -123,7 +135,6 @@
                                 <td colspan="10" class="text-center py-5">
                                     <p class="">
                                         <h3>Tidak ada transaksi.</h3>
-                                        <a href="{{ route('transaction.create') }}" class="text-secondary">Buat transaksi baru</a>
                                     </p>
                                 </td>
                             </tr>
@@ -132,13 +143,15 @@
                         </tbody>
                     </table>
                     <div class="my-4 d-flex justify-content-between mx-4">
-                        <div>
-                            Showing {{($transactions->currentpage()-1)*$transactions->perpage()+1}} to {{$transactions->currentpage()*$transactions->perpage()}}
-                            of  {{$transactions->total()}} entries.
-                        </div>
-                        <div>
-                            {{ $transactions->onEachSide(1)->links() }}
-                        </div>
+                        @if ($transactions->count() > 0 )
+                            <div>
+                                Showing {{($transactions->currentpage()-1)*$transactions->perpage()+1}} to {{$transactions->currentpage()*$transactions->perpage()}}
+                                of  {{$transactions->total()}} data transaction.
+                            </div>
+                            <div>
+                                {{ $transactions->onEachSide(1)->links() }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
