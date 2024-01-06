@@ -42,7 +42,7 @@
                 <div class="d-flex justify-content-between align-items-center" style="position: relative;">
                     <div>
                         <div>
-                            <h5 class="mb-2"><a href="{{ route('ticket.create') }}" class="text-primary">Tambah Tiket Baru</a></h5>
+                            <h5 class="mb-2"><a href="{{ route('ticket.create') }}">Tambah Tiket Baru</a></h5>
                             <p class="mb-4">Weekly report</p>
                         </div>
                         <div class="time-spending-chart">
@@ -64,19 +64,15 @@
                 {{-- * Information --}}
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h5 class="card-header fw-bolder">Data Ticket</h5>
-                    <div class="d-flex justify-content-end">
-                        {{-- ? Search --}}
-                        <div class="mx-2 col-md-12">
-                            <form action="{{ route('ticket.index') }}" method="get">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari Tiket" name="search" value="{{ request('search') }}">
-                                    <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        @include('dashboard.cashier.ticket.filters')
+                    {{-- ? Search --}}
+                    <div class="mx-4 col-md-6">
+                        <form action="{{ route('ticket.index') }}" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari Tiket" name="search" value="{{ request('search') }}">
+                                <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
 
                 <div class="card-datatable table-responsive">
@@ -86,7 +82,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kode Tiket</th>
-                                <th>Nama Tiket</th>
+                                <th>@sortablelink('name_ticket', 'Nama Tiket')</th>
                                 <th>Harga</th>
                                 <th>Status</th>
                                 <th>Jam Buka</th>
@@ -154,8 +150,8 @@
                                 of  {{$tickets->total()}} data ticket.
                             </div>
                             <div>
-                                {{ $tickets->onEachSide(1)->links() }}
-                                {{-- {{ $tickets->appends(Request::except('page'))->render() }} --}}
+                                {{-- {{ $tickets->onEachSide(1)->links() }} --}}
+                                {{ $tickets->appends(Request::except('page'))->render() }}
                             </div>
                         @endif
                     </div>

@@ -18,9 +18,29 @@ class TicketController extends Controller
     {
         // Showing View Index Ticket
         return view('dashboard.cashier.ticket.index', [
-            'tickets' => Ticket::latest()->filter(request(['search']))->paginate(25)->withQueryString(),
+            'tickets' => Ticket::sortable()->filter(request(['search']))->paginate(25)->withQueryString(),
         ]);
     }
+
+
+    // public function indexSort(Request $request) {
+    //     $filter = $request->query('filter');
+
+    //     if (!empty($filter)) {
+    //         $tickets = Ticket::shortable()
+    //                         ->where('name_ticket', 'like', '%' . $filter . '%')
+    //                         ->filter(request(['search']))
+    //                         ->paginate(25)
+    //                         ->withQueryString();
+    //     } else {
+    //         $tickets = Ticket::sortable()
+    //                         ->filter(request(['search']))
+    //                         ->paginate(25)
+    //                         ->withQueryString();
+    //     }
+
+    //     return view('dashboard.cashier.ticket.indexFilter')->with('tickets', $tickets)->with('filter', $filter);
+    // }
 
 
     /**

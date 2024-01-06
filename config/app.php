@@ -170,6 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
     ])->toArray(),
 
     /*

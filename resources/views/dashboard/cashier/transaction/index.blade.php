@@ -46,7 +46,7 @@
                 <div class="d-flex justify-content-between align-items-center" style="position: relative;">
                     <div>
                         <div>
-                            <h5 class="mb-2"><a href="{{ route('transaction.create') }}">Tambah Transaksi Baru</a></h5>
+                            <h5 class="mb-2"><a href="{{ route('transaction.create') }}" class="text-primary">Tambah Transaksi Baru</a></h5>
                             <p class="mb-4">Ceritanya Buat Filter</p>
                         </div>
                     </div>
