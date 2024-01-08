@@ -71,13 +71,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-// Sortable
-// const sortable = document.querySelector('.sortable');
-
-// // sortable.addEventListener('click', function(e) {
-// //     if (e.target.className = 'name_sort')
-// //     {
-// //         e.target.setAttribute('checked');
-// //     }
-// // });

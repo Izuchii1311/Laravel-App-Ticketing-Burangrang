@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\TicketController;
 use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/dashboard/message/{slug}/add-to-menu', [MessageController::class, 'addToMenu'])->name('dashboard.message.addToMenu');
         Route::post('/dashboard/message/{slug}/remove-to-menu', [MessageController::class, 'removeToMenu'])->name('dashboard.message.removeToMenu');
+
+        //* Posts
+        Route::resource('/dashboard/posts', PostController::class);
     });
 
     //* Middleware Cashier

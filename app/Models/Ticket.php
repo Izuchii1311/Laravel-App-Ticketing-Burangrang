@@ -17,12 +17,6 @@ class Ticket extends Model
         return 'cd_ticket';
     }
 
-    // Sortable
-    public $sortable = [
-        'name_ticket',
-        'created_at'
-    ];
-
     public function transactions() {
         return $this->hasMany(Transaction::class)->onDelete('cascade');
     }

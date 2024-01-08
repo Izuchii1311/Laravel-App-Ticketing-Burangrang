@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="{{ asset('/vendor/dashboard/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/dashboard/libs/apex-charts/apex-charts.css') }}" />
 
+    {{-- CKEditor CDN --}}
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script> --}}
+    <script src="{{ asset('js/ckEditor/ckeditor5.js') }}"></script>
+
     {{-- Sweet Alert --}}
     <link rel="stylesheet" href="{{ asset('js/dashboard/sweetalert2@11.js') }}">
     <script src="{{ asset('js/dashboard/sweetalert2@11.js') }}"></script>
@@ -94,5 +98,21 @@
     {{-- Dashboard Script JS & Script JS --}}
     <script src="{{ asset('js/dashboard/script.js') }}"></script>
     @yield('script')
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+                allowedContent: true, // Allow all content, including HTML
+                extraAllowedContent: '*(*)', // Allow any attribute on any element
+            })
+            .then(editor => {
+                // Editor instance is ready
+                // console.log(editor);
+            })
+            .catch(error => {
+                // Handle initialization errors
+                // console.error(error);
+            });
+    </script>
 </body>
 </html>

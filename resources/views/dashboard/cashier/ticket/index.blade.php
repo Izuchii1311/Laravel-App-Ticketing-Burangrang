@@ -64,17 +64,14 @@
                 {{-- * Information --}}
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h5 class="card-header fw-bolder">Data Ticket</h5>
-                    <div class="d-flex justify-content-end">
-                        {{-- ? Search --}}
-                        <div class="mx-2 col-md-12">
-                            <form action="{{ route('ticket.index') }}" method="get">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari Tiket" name="search" value="{{ request('search') }}">
-                                    <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        @include('dashboard.cashier.ticket.filters')
+                    {{-- ? Search --}}
+                    <div class="mx-2 col-md-6">
+                        <form action="{{ route('ticket.index') }}" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari Tiket" name="search" value="{{ request('search') }}">
+                                <button type="submit" id="search" class="input-group-text bg-secondary text-white"><i class='bx bx-search-alt-2'></i></button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
