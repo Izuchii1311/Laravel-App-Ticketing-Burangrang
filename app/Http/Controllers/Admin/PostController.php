@@ -102,9 +102,69 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $slug)
+    public function destroy($slug)
     {
         Post::where('slug', $slug)->delete();
         return redirect(route('posts.index'))->with('success', "Data Berhasil Dihapus");
+    }
+
+    public function uploadImage(Request $request)
+    {
+        try {
+            if ($request->hasFile('upload')) {
+                $uploadedFile = $request->file('upload');
+
+                // Validate file type
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                if (!in_array($uploadedFile->getClientOriginalExtension(), $allowedExtensions)) {
+                    throw new \Exception('Invalid file type. Allowed types: jpg, jpeg, png, gif');
+                }
+
+                // Generate unique filename
+                $fileName = 'image_' . time() . '_' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+
+                // Move file to destination folder
+                $uploadedFile->move(public_path('post-images'), $fileName);
+
+                $url = asset('post-images/' . $fileName);
+                
+                return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+            }
+        } catch (\Exception $e) {
+            // Log the error for debugging purposes
+            \Log::error('Error uploading image: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'Error uploading image: ' . $e->getMessage()
+            ], 500);
+        }
+
+        // !Error Spatie
+        // try {
+        //     // spatie library, install
+        //     // https://spatie.be/docs/laravel-medialibrary/v11/installation-setup
+        //     $post = new Post();
+        //     $post->id = 0;
+        //     $post->exists = true;
+
+        //     $images = $post->addMediaFromRequest('upload')->toMediaCollection('post-images');
+
+        //     return response()->json([
+        //         'url' => $images->getUrl()
+        //     ]);
+        // } catch (\Exception $e) {
+        //     // Log the error for debugging purposes
+        //     \Log::error('Error uploading image: ' . $e->getMessage());
+
+        //     return response()->json([
+        //         'error' => 'Error uploading image'
+        //     ], 500);
+        // }
+    }
+
+    public function test() {
+        return view('dashboard.admin.posts.tets', [
+            "post" => Post::where('id', 1)->first()
+        ]);
     }
 }

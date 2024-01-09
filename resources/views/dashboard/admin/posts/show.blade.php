@@ -17,7 +17,9 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="mt-4">{{ $post->title }}</p>
-                        <p>{!! $post->description !!}</p>
+                        <div class="description">
+                            {!! $post->description !!}
+                        </div>
                         <a href="{{ url()->previous() }}" class="text-decoration-none card-link mt-5">Kembali</a>
                     </div>
                 </div>
@@ -26,3 +28,36 @@
     </div>
 @endsection
 {{-- End Content --}}
+
+@push('script')
+    <script>
+        const description = document.querySelector('.description');
+        const images = description.querySelectorAll('img');
+        const figures = description.querySelectorAll('figure');
+
+        // Figure Styling
+        figures.forEach(function (figure) {
+            // Change Image Style
+            const isImageFigure = figure.classList.contains('image');
+            const isSideImageFigure = figure.classList.contains('image-style-side');
+
+            if (isImageFigure) {
+                figure.classList.add('mx-auto', 'text-center');
+                if (isSideImageFigure) {
+                    figure.classList.remove('mx-auto', 'text-center');
+                }
+            }
+
+            // Change Table Position
+            const isTable = figure.querySelector('.table');
+            
+        });
+
+        // Change Image Size
+        images.forEach(function(image) {
+            image.style.width = '600px';
+            image.classList.add('img-fluid');
+
+        })
+    </script>
+@endpush

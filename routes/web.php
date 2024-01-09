@@ -56,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
 
         //* Posts
         Route::resource('/dashboard/posts', PostController::class);
+        //* Upload image from ckeditor
+        Route::post('/dashboard/upload', [PostController::class, 'uploadImage'])->name('ckeditor.upload');
+        Route::get('/dashboard/test', [PostController::class, 'test']);
     });
 
     //* Middleware Cashier

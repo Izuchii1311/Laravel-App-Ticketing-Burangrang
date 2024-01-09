@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory, sluggable;
+    use HasFactory, sluggable, InteractsWithMedia;
 
+    // Tidak Boleh diisi selain id
     protected $guarded = ['id'];
 
-    // ? Eloquent Slugggable
+    // Slug
     public function sluggable(): array
     {
         return [
@@ -22,10 +26,17 @@ class Post extends Model
         ];
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images');
+    }
+
+    // Route Berdasarkan Slug
     public function getRouteKeyName() {
         return 'slug';
     }
 
+    // Check Unique Title
     public static function boot()
     {
         parent::boot();
