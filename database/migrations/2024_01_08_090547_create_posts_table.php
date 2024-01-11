@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }

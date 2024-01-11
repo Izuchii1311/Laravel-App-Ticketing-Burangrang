@@ -51,103 +51,21 @@
 {{-- Add Script --}}
 @push('script')
     <script>
-        class MyUploadAdapter {
-            constructor( loader ) {
-                // The file loader instance to use during the upload.
-                this.loader = loader;
-            }
-
-            // Starts the upload process.
-            upload() {
-                return this.loader.file
-                    .then( file => new Promise( ( resolve, reject ) => {
-                        this._initRequest();
-                        this._initListeners( resolve, reject, file );
-                        this._sendRequest( file );
-                    } ) );
-            }
-
-            // Aborts the upload process.
-            abort() {
-                if ( this.xhr ) {
-                    this.xhr.abort();
-                }
-            }
-
-            // Initializes the XMLHttpRequest object using the URL passed to the constructor.
-            _initRequest() {
-                const xhr = this.xhr = new XMLHttpRequest();
-
-                xhr.open( 'POST', '{{ route('ckeditor.upload') }}', true );
-                xhr.setRequestHeader('x-csrf-token', '{{ csrf_token() }}');
-                xhr.responseType = 'json';
-            }
-
-            // Initializes XMLHttpRequest listeners.
-            _initListeners( resolve, reject, file ) {
-                const xhr = this.xhr;
-                const loader = this.loader;
-                const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-
-                xhr.addEventListener( 'error', () => reject( genericErrorText ) );
-                xhr.addEventListener( 'abort', () => reject() );
-                xhr.addEventListener( 'load', () => {
-                    const response = xhr.response;
-
-                    if ( !response || response.error ) {
-                        return reject( response && response.error ? response.error.message : genericErrorText );
-                    }
-
-                    resolve( {
-                        default: response.url
-                    } );
-                } );
-
-                if ( xhr.upload ) {
-                    xhr.upload.addEventListener( 'progress', evt => {
-                        if ( evt.lengthComputable ) {
-                            loader.uploadTotal = evt.total;
-                            loader.uploaded = evt.loaded;
-                        }
-                    } );
-                }
-            }
-
-            // Prepares the data and sends the request.
-            _sendRequest( file ) {
-                // Prepare the form data.
-                const data = new FormData();
-
-                data.append( 'upload', file );
-                // Send the request.
-                this.xhr.send( data );
-            }
-        }
-
-        function uploadPlugin( editor ) {
-            editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-                return new MyUploadAdapter( loader );
-            };
-        }
-
-        ClassicEditor
-            .create( document.querySelector( '#description' ), {
-                extraPlugins: [ uploadPlugin ],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                    ]
-                },
-                placeholder: 'Ayo buat konten berita menarik...',
-            } )
-            .catch( error => {
-                console.log( error );
-            } );
+        $(document).ready(function() {
+            $('#description').summernote({
+                placeholder: 'Hello stand alone ui',
+                tabsize: 5,
+                height: 500,
+                toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'italic']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
     </script>
 @endpush

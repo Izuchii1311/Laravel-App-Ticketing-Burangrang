@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use DOMDocument;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostController extends Controller
@@ -32,22 +35,52 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi
+        $request->validate([
+            'title' => 'required|unique:posts,title',
+            'description' => 'required',
+        ]);
+
+        // Check if the post already exists
         $checkPost = Post::where('title', $request->title)->first();
         if ($checkPost) {
             return redirect(route('posts.create'))
-                    ->with('warning',
-                        "Postingan dengan judul " . "'" . "<span class='fw-bold'>" . $request->title . "</span>" . "'" . " sudah ada, " . "<span class='fst-italic'>pastikan judul tidak sama.</span>"
-                    );
+                ->with('warning',
+                    "Postingan dengan judul " . "'" . "<span class='fw-bold'>" . $request->title . "</span>" . "'" . " sudah ada, " . "<span class='fst-italic'>pastikan judul tidak sama.</span>"
+                );
         }
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:100',
-            'description' => 'required'
+        // Image Processing
+        $description = $request->description;
+
+        // DOM in HTML elements
+        $dom = new DOMDocument;
+        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        // Get all tag Image
+        $images = $dom->getElementsByTagName('img');
+
+        // If there is an image, save it to storage and reset the src
+        foreach ($images as $key => $img) {
+            $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+            $image_name = "post-images/" . time() . $key . '.png';
+
+            // Save the image in a public directory using Storage::put
+            Storage::put($image_name, $data);
+
+            // Reset src Attribute
+            $img->removeAttribute('src');
+            $img->setAttribute('src', asset($image_name));
+        }
+
+        // Save as HTML
+        $description = $dom->saveHTML();
+
+        Post::create([
+            'title' => $request->title,
+            'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
+            'description' => $description
         ]);
-
-        $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $request->title);
-
-        Post::create($validatedData);
 
         return redirect(route('posts.index'))->with('success', "Data Berhasil Ditambahkan");
     }
@@ -75,28 +108,54 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $slug)
     {
-        $checkPost = Post::where('title', $request->title)->first();
-        if ($checkPost && $checkPost->id !== $post->id) {
-            return redirect(route('posts.edit', ['post' => $post->slug]))
-                    ->with('warning',
-                        "Postingan dengan judul " . "'" . "<span class='fw-bold'>" . $request->title . "</span>" . "'" . " sudah ada, " . "<span class='fst-italic'>pastikan judul tidak sama.</span>"
-                    );
-        }
+        $post = Post::where('slug', $slug)->first();
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:100',
-            'description' => 'required'
+        // Validasi
+        $request->validate([
+            'title' => 'required|unique:posts,title',
+            'description' => 'required',
         ]);
 
-        if ($post->title !== $request->title) {
-            $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $description = $request->description;
+        $dom = new DOMDocument;
+        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    
+        $images = $dom->getElementsByTagName('img');
+    
+        foreach ($images as $key => $img) {
+            // Check if the image is a new one
+            if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $image_name = "post-images/" . time() . $key . '.png';
+
+                // Save the image in a public directory using Storage::put
+                Storage::put($image_name, $data);
+
+                // Hapus gambar sebelumnya jika ada
+                if ($post->image_path) {
+                    Storage::delete($post->image_path);
+                }
+
+                // Set Ulang Attribute src
+                $img->removeAttribute('src');
+                $img->setAttribute('src', asset($image_name));
+    
+                // Update path gambar di database
+                $post->update(['image_path' => $image_name]);
+            }
         }
-
-        Post::where('slug', $post->slug)->update($validatedData);
-
-        return redirect(route('posts.index'))->with('success', "Data Berhasil Ditambahkan");
+    
+        $description = $dom->saveHTML();
+    
+        $post->update([
+            'title' => $request->title,
+            'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
+            'description' => $description
+        ]);
+    
+        return redirect(route('posts.index'))->with('success', "Data Berhasil Diperbarui");
     }
 
     /**
@@ -104,67 +163,30 @@ class PostController extends Controller
      */
     public function destroy($slug)
     {
-        Post::where('slug', $slug)->delete();
-        return redirect(route('posts.index'))->with('success', "Data Berhasil Dihapus");
-    }
+        $post = Post::where('slug', $slug)->first();
 
-    public function uploadImage(Request $request)
-    {
-        try {
-            if ($request->hasFile('upload')) {
-                $uploadedFile = $request->file('upload');
+        // DOM in HTML elements
+        $dom = new DOMDocument;
+        $dom->loadHTML($post->description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-                // Validate file type
-                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-                if (!in_array($uploadedFile->getClientOriginalExtension(), $allowedExtensions)) {
-                    throw new \Exception('Invalid file type. Allowed types: jpg, jpeg, png, gif');
-                }
+        // Get all tag Image
+        $images = $dom->getElementsByTagName('img');
 
-                // Generate unique filename
-                $fileName = 'image_' . time() . '_' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+        // If there is an image, save it to storage and reset the src
+        foreach ($images as $img) {
+            $imagePath = public_path($img->getAttribute('src'));
 
-                // Move file to destination folder
-                $uploadedFile->move(public_path('post-images'), $fileName);
+            // Retrieve only the file name from the full path
+            $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
 
-                $url = asset('post-images/' . $fileName);
-                
-                return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+            // Delete the image from storage if there is one
+            if (Storage::exists("post-images/{$imageName}")) {
+                Storage::delete("post-images/{$imageName}");
             }
-        } catch (\Exception $e) {
-            // Log the error for debugging purposes
-            \Log::error('Error uploading image: ' . $e->getMessage());
-
-            return response()->json([
-                'error' => 'Error uploading image: ' . $e->getMessage()
-            ], 500);
         }
 
-        // !Error Spatie
-        // try {
-        //     // spatie library, install
-        //     // https://spatie.be/docs/laravel-medialibrary/v11/installation-setup
-        //     $post = new Post();
-        //     $post->id = 0;
-        //     $post->exists = true;
+        $post->delete();
 
-        //     $images = $post->addMediaFromRequest('upload')->toMediaCollection('post-images');
-
-        //     return response()->json([
-        //         'url' => $images->getUrl()
-        //     ]);
-        // } catch (\Exception $e) {
-        //     // Log the error for debugging purposes
-        //     \Log::error('Error uploading image: ' . $e->getMessage());
-
-        //     return response()->json([
-        //         'error' => 'Error uploading image'
-        //     ], 500);
-        // }
-    }
-
-    public function test() {
-        return view('dashboard.admin.posts.tets', [
-            "post" => Post::where('id', 1)->first()
-        ]);
+        return redirect(route('posts.index'))->with('success', "Data Berhasil Dihapus");
     }
 }

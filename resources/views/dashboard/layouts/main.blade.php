@@ -36,6 +36,14 @@
     <script src="{{ asset('js/ckEditor/ckeditor5.js') }}"></script>
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script> --}}
 
+    {{-- Summernote --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> --}}
+
     {{-- Sweet Alert --}}
     <link rel="stylesheet" href="{{ asset('js/dashboard/sweetalert2@11.js') }}">
     <script src="{{ asset('js/dashboard/sweetalert2@11.js') }}"></script>
@@ -79,7 +87,7 @@
     </div>
 
     {{-- Core JS --}}
-    <script src="{{ asset('/vendor/dashboard/libs/jquery/jquery.js') }}"></script>
+    {{-- <script src="{{ asset('/vendor/dashboard/libs/jquery/jquery.js') }}"></script> --}}
     <script src="{{ asset('/vendor/dashboard/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('/vendor/dashboard/js/bootstrap.js') }}"></script>
     <script src="{{ asset('/vendor/dashboard/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
@@ -90,6 +98,8 @@
     <script src="{{ asset('/js/dashboard/main.js') }}"></script>
     {{-- Page JS --}}
     <script src="{{ asset('/js/dashboard/dashboards-analytics.js') }}"></script>
+    {{-- Summernote --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
 
     {{-- Custom Scripts --}}
     <script src="{{ asset('js/dashboard/script.js') }}"></script>
