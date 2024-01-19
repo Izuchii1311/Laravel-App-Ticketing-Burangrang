@@ -7,7 +7,6 @@
 {{-- Content --}}
 @section('content')
     <div class="row justify-content-center">
-        {{-- Information --}}
         <div class="col-12 card-separator">
             <h3>Detail Pesan ✌ </h3>
             <div class="col-12 col-md-8">
@@ -38,4 +37,3 @@
         </div>
     </div>
 @endsection
-{{-- End Content --}}

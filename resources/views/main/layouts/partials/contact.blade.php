@@ -2,13 +2,11 @@
 <section id="contact" class="contact section-bg">
     <div class="container" data-aos="fade-up">
 
-        {{-- Information --}}
         <div class="section-title">
             <h2>Hubungi Kami</h2>
             <p>Kami senantiasa siap mendengar dan melayani Anda. Hubungi kami melalui kontak yang tersedia untuk segala pertanyaan, kebutuhan, atau masukan. Bersama-sama kita bangun Desa Burangrang menjadi tempat yang lebih baik untuk kita semua. Terima kasih atas partisipasi dan dukungan Anda.</p>
         </div>
 
-        {{-- Content --}}
         <div class="row">
             <div class="col-lg-6">
                 <div class="info-box mb-4">
@@ -79,18 +77,8 @@
                         @enderror
                     </div>
 
-                    @if(session()->has("success"))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Selamat, </strong>{{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @elseif (session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-                            <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-                            {{ session('error') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
+                    {{-- Alert --}}
+                    @include('main.layouts.partials.alert')
 
                     <button type="submit" class="btn btn-primary rounded-0 border-0" style="background-color: #21D375">Kirim</button>
                 </form>
@@ -100,4 +88,3 @@
 
     </div>
 </section>
-{{-- End Contact Section5 --}}

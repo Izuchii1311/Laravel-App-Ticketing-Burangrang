@@ -1,46 +1,35 @@
-{{-- ? Dashboard Layouts --}}
+{{-- Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- ? Title --}}
+{{-- Title --}}
 @section('title', "Dashboard | Edit Transaksi")
 
-{{-- ? Content --}}
+{{-- Content --}}
 @section('content')
-    {{-- * Card --}}
     <div class="card">
-        {{-- * Information --}}
         <h5 class="card-header">Edit Transaksi Tiket</h5>
-        @if (session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
-                <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+
+        {{-- Alert --}}
+        @include('dashboard.layouts.partials.alert')
 
         <div class="card-body">
-            {{-- * Form --}}
             <form action="{{ route('transaction.update', ['transaction' => $transaction->cd_transaction]) }}" method="post" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework"  id="transactionForm">
                 @method('put')
                 @csrf
 
-                {{-- * Cashier Information --}}
                 <div class="col-12">
                     <h6>1. Informasi</h6>
                     <hr class="mt-0 p-0 m-0">
                 </div>
 
-                {{-- Id User --}}
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
-                {{-- Name Cashier -> get from user name --}}
                 <div class="col-md-6 fv-plugins-icon-container my-4">
                     <label class="form-label" for="name_cashier">Nama Kasir</label>
                     <input type="hidden" name="name_cashier" value="{{ auth()->user()->name }}">
                     <input type="text" id="name_cashier" class="form-control" placeholder="Izuchii" name="name_cashier" value="{{ auth()->user()->name }}" readonly disabled>
                 </div>
 
-                {{-- Name Customer --}}
                 <div class="col-md-6 fv-plugins-icon-container my-4">
                     <label class="form-label" for="cus_name">Nama Pelanggan</label>
                     <input type="text" id="cus_name" class="form-control @error('cus_name') is-invalid @enderror" placeholder="Masukan nama pelanggan..." name="cus_name" value="{{ old('cus_name', $transaction->cus_name) }}" autocomplete="off" autofocus>
@@ -51,7 +40,6 @@
                     @enderror
                 </div>
 
-                <!-- Ticket Information -->
                 <div class="col-12">
                     <h6>2. Informasi Tiket</h6>
                     <hr class="mt-0 p-0 m-0">
@@ -59,7 +47,6 @@
 
                 <div class="row my-4">
                     <div class="col-md-6 d-flex flex-column">
-                        {{-- Input Amount Ticket --}}
                         <div class="col-md-12 mt-2">
                             <label class="form-label" for="amount">Jumlah Tiket</label>
                             <input type="text" id="amount" class="form-control @error('amount') is-invalid @enderror" placeholder="Masukan jumlah pengunjung..." name="amount" value="{{ old('amount', $transaction->amount) }}" autocomplete="off">
@@ -70,7 +57,6 @@
                             @enderror
                         </div>
 
-                        {{-- Description --}}
                         <div class="col-md-12 mt-2">
                             <label class="form-label" for="description">Keterangan</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description', $transaction->description) }}</textarea>
@@ -100,10 +86,10 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
-                        {{-- Choose Ticket --}}
                         <div class="row gy-3 mt-0">
                             <p class="fst-italic mb-0">Pilih salah satu tiket.</p>
                             @forelse ($tickets as $ticket)
+
                                 @if ($ticket->status === 'open')
                                     <div class="col-6 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid mb-2">
                                         <div class="form-check custom-option custom-option-icon">
@@ -124,7 +110,6 @@
                                             </label>
                                         </div>
                                     </div>
-                                    {{-- Status Closed --}}
                                 @else
                                     <div class="col-6 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid mb-2">
                                         <div class="form-check custom-option custom-option-icon">
@@ -143,6 +128,7 @@
                                         </div>
                                     </div>
                                 @endif
+
                             @empty
                                 <div>Tidak ada tiket</div>
                             @endforelse
@@ -160,4 +146,3 @@
         </div>
     </div>
 @endsection
-{{-- ? End Content --}}

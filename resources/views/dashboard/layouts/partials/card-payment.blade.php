@@ -20,4 +20,3 @@
         </div>
     </div>
 </div>
-{{-- End Card Payment --}}

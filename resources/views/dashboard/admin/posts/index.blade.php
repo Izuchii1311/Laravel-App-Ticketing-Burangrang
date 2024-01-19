@@ -1,13 +1,12 @@
-{{-- ? Dashboard Layouts --}}
+{{-- Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- ? Title --}}
+{{-- Title --}}
 @section('title', "Dashboard | Semua Postingan")
 
-{{-- ? Content --}}
+{{-- Content --}}
 @section('content')
     <div class="card bg-transparent shadow-none border-0 my-4">
-        {{-- * Information --}}
         <div class="card-body row p-0 pb-3">
             <div class="col-md-8 card-separator">
                 <h3>Postingan</h3>
@@ -15,8 +14,8 @@
                     <p>Kelola postingan, tambah edit dan hapus postingan sesuai dengan keinginan anda.</p>
                 </div>
 
-                {{-- * Alert --}}
-                @include('dashboard.admin.posts.partials.alert')
+                {{-- Alert --}}
+                @include('dashboard.layouts.partials.alert')
             </div>
             <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
                 <div class="d-flex justify-content-between align-items-center" style="position: relative;">
@@ -31,17 +30,13 @@
         </div>
     </div>
 
-    {{-- * Data --}}
     <div class="row">
         <div class="col-md-12 col-lg-12 mb-0">
 
-            {{-- * Card --}}
             <div class="card">
 
-                {{-- * Information --}}
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h5 class="card-header fw-bolder">Data Transaksi</h5>
-                    {{-- ? Search --}}
                     <div class="mx-4 col-md-6">
                         <form action="{{ route('posts.index') }}" method="get">
                             <div class="input-group">
@@ -80,7 +75,6 @@
                                                     <a href="{{ route('posts.show', ['post' => $post->slug]) }}" class="dropdown-item">Detail Postingan</a>
                                                     <a href="{{ route('posts.edit', ['post' => $post->slug]) }}" class="dropdown-item">Edit Postingan</a>
                                                 <div class="dropdown-divider"></div>
-                                                {{-- ! Delete Postingan --}}
                                                     <form action="{{ route('posts.destroy', ['post' => $post->slug]) }}" method="post" id="confirm-delete-{{ $post->slug }}">
                                                         @csrf
                                                         @method('delete')
@@ -97,10 +91,8 @@
                         </tbody>
                     </table>
 
-                    {{-- Pagination --}}
                 </div>
             </div>
         </div>
     </div>
 @endsection
-{{-- ? End Content --}}

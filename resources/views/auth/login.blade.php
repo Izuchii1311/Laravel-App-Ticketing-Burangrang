@@ -8,30 +8,21 @@
 @section('content')
     <div class="authentication-inner">
 
-    {{-- Login --}}
         <div class="card">
             <div class="card-body">
 
-                {{-- Logo --}}
                 <div class="app-brand justify-content-center">
                     <a href="#" class="app-brand-link gap-2">
                         <span class="app-brand-text demo text-body fw-bold">Halaman Login</span>
                     </a>
                 </div>
 
-                {{-- Information --}}
                 <h4 class="mb-2">Selamat Datang! 👋</h4>
                 <p class="mb-4">Tolong masukkan informasi data login anda.</p>
 
-                @if (session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-                        <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-                        {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
+                {{-- Alert --}}
+                @include('auth.layouts.partials.alert')
 
-                {{-- Form --}}
                 <form id="formAuthentication" class="mb-3" action="/login" method="post">
                     @csrf
                     <div class="mb-3">
@@ -67,6 +58,4 @@
         </div>
 
     </div>
-    {{-- End Login --}}
 @endsection
-{{-- End Content --}}

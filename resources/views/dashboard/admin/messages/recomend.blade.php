@@ -1,5 +1,4 @@
 <div class="row justify-content-center">
-    {{-- ? Information --}}
     <div class="col-12 card-separator">
         <h3>Rekomendasi Pesan Para Pengunjung ✌</h3>
         <div class="col-12 col-md-8">
@@ -7,19 +6,9 @@
         </div>
     </div>
 
-    @if (session()->has('error'))
-        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-            <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    {{-- Alert --}}
+    @include('dashboard.layouts.partials.alert')
 
-    {{-- ? Alert --}}
-    <div class="alerts-container"></div>
-    <br>
-
-    {{-- ? Check if last message deleted / isEmpty --}}
     @if ($messages->isEmpty() || $messages->where('recomend', 1)->isEmpty())
         <div class="col-12">
             <p class="text-danger y-5">{{ $messages->isEmpty() ? 'Tidak ada pesan.' : 'Tidak ada pesan yang direkomendasikan' }}</p>
@@ -30,10 +19,8 @@
                 <div class="col-6 col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            {{-- ? Card Body --}}
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">{{ Str::limit($re->title, 35) }}</h5>
-                                {{-- ? Dropdown --}}
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown">
                                         <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">

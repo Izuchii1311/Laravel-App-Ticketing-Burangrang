@@ -9,9 +9,8 @@
                     "Kampung Nyalindung dengan bangga melakukan kerjasama dengan organisasi mahasiswa yaitu BEM (Badan Eksekutif Mahasiswa) dari Kampus STMIK AMIK Bandung. Kolaborasi ini membawa semangat baru untuk mengembangkan potensi lokal dan mendukung keberlanjutan inisiatif bersama."
                 </em>
             </p>
-            {{-- <a class="cta-btn" href="#">Lihat  </a> --}}
+            {{-- <a class="cta-btn" href="#">Lihat</a> --}}
         </div>
 
     </div>
 </section>
-{{-- End CTA Section --}}

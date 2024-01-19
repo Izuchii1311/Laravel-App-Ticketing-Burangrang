@@ -1,4 +1,4 @@
-{{-- History Page --}}
+{{-- Main Layouts --}}
 @extends('main.layouts.main')
 
 {{-- Title --}}
@@ -6,9 +6,7 @@
 
 {{-- Container --}}
 @section('container')
-    {{-- Main Section --}}
     <main id="main">
-        {{-- Breadcrumbs --}}
         <section class="breadcrumbs">
             <div class="container">
 
@@ -16,29 +14,27 @@
                     <h2>Inner Page</h2>
                     <ol>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('main.index') }}">Home</a>
                         </li>
                         <li>Inner Page</li>
                     </ol>
                 </div>
 
             </div>
-            </section>
+        </section>
 
-            {{-- Content --}}
-            <section class="inner-page">
-                <div class="container">
-                    <p> Sejarah Nyalindung </p>
-                </div>
+        <section class="inner-page">
+            <div class="container">
+                <p> Sejarah Nyalindung </p>
+            </div>
         </section>
     </main>
-    {{-- End Main Section --}}
 @endsection
 
-{{-- Sript --}}
-@section('script')
+{{-- Script --}}
+@push('script')
     <script>
         const header = document.querySelector('#header.header-transparent');
         header.classList.remove('header-transparent');
     </script>
-@endsection
+@endpush

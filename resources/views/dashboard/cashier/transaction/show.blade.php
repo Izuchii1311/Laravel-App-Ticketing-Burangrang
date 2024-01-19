@@ -1,10 +1,10 @@
-{{-- ? Dashboard Layouts --}}
+{{-- Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- ? Title --}}
+{{-- Title --}}
 @section('title', 'Dashboard | Detail Transaksi')
 
-{{-- ? Content --}}
+{{-- Content --}}
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -40,4 +40,3 @@
         </div>
     </div>
 @endsection
-{{-- ? End Content --}}

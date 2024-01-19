@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use DOMDocument;
 use App\Models\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -37,18 +38,10 @@ class PostController extends Controller
     {
         // Validasi
         $request->validate([
-            'title' => 'required|unique:posts,title',
+            'title' => 'required',
             'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-
-        // Check if the post already exists
-        $checkPost = Post::where('title', $request->title)->first();
-        if ($checkPost) {
-            return redirect(route('posts.create'))
-                ->with('warning',
-                    "Postingan dengan judul " . "'" . "<span class='fw-bold'>" . $request->title . "</span>" . "'" . " sudah ada, " . "<span class='fst-italic'>pastikan judul tidak sama.</span>"
-                );
-        }
 
         // Image Processing
         $description = $request->description;
@@ -62,15 +55,20 @@ class PostController extends Controller
 
         // If there is an image, save it to storage and reset the src
         foreach ($images as $key => $img) {
-            $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
-            $image_name = "post-images/" . time() . $key . '.png';
+            // Get Original Name
+            $dataFileName = $img->getAttribute('data-filename');
+            $dataName = explode('.', $dataFileName);
+            $removeExstension = array_pop($dataName);
+            $originalName = implode('.', $dataName);
 
-            // Save the image in a public directory using Storage::put
+            // $data mewakili biner dari gambarnya
+            $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+            $image_name = "images/post-images/" . time() . $originalName . uniqid() . '.png';
             Storage::put($image_name, $data);
 
             // Reset src Attribute
             $img->removeAttribute('src');
-            $img->setAttribute('src', asset($image_name));
+            $img->setAttribute('src', asset("storage/{$image_name}"));
         }
 
         // Save as HTML
@@ -110,53 +108,83 @@ class PostController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        // Get Data from Post Model
         $post = Post::where('slug', $slug)->first();
 
         // Validasi
         $request->validate([
-            'title' => 'required|unique:posts,title',
+            'title' => 'required',
             'description' => 'required',
         ]);
 
-        $description = $request->description;
-        $dom = new DOMDocument;
-        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-    
-        $images = $dom->getElementsByTagName('img');
-    
-        foreach ($images as $key => $img) {
-            // Check if the image is a new one
-            if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
-                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
-                $image_name = "post-images/" . time() . $key . '.png';
+        // Check if the post has a description
+        if ($post->description) {
+            // DOM in HTML elements
+            $dom = new DOMDocument;
 
-                // Save the image in a public directory using Storage::put
-                Storage::put($image_name, $data);
+            // Check if the HTML is well-formed before loading
+            libxml_use_internal_errors(true);
+            $dom->loadHTML($post->description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            libxml_clear_errors();
 
-                // Hapus gambar sebelumnya jika ada
-                if ($post->image_path) {
-                    Storage::delete($post->image_path);
+            // Get all tag Image
+            $images = $dom->getElementsByTagName('img');
+
+            // If there is an image, delete it from storage
+            foreach ($images as $img) {
+                $imagePath = public_path($img->getAttribute('src'));
+                $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
+
+                if (Storage::exists("post-images/{$imageName}")) {
+                    Storage::delete("post-images/{$imageName}");
                 }
-
-                // Set Ulang Attribute src
-                $img->removeAttribute('src');
-                $img->setAttribute('src', asset($image_name));
-    
-                // Update path gambar di database
-                $post->update(['image_path' => $image_name]);
             }
         }
-    
-        $description = $dom->saveHTML();
-    
+
+        if ($request->description != null) {
+            // Image Processing
+            $description = $request->description;
+
+            // DOM in HTML elements
+            $dom = new DOMDocument;
+            libxml_use_internal_errors(true);
+            $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            libxml_clear_errors();
+
+            // Get all tag Image
+            $images = $dom->getElementsByTagName('img');
+
+            // If there is an image, save it to storage and reset the src
+            foreach ($images as $key => $img) {
+                $srcAttribute = $img->getAttribute('src');
+                $dataParts = explode(';', $srcAttribute);
+
+                // Check if array key 1 exists before accessing it
+                $data = isset($dataParts[1]) ? base64_decode(explode(',', $dataParts[1])[1]) : null;
+
+                if ($data !== null) {
+                    $image_name = "post-images/" . time() . uniqid() . $key . '.png';
+
+                    Storage::put($image_name, $data);
+
+                    $img->removeAttribute('src');
+                    $img->setAttribute('src', asset("storage/{$image_name}"));
+                }
+            }
+
+            // Save as HTML
+            $description = $dom->saveHTML();
+        }
+
         $post->update([
             'title' => $request->title,
             'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-            'description' => $description
+            'description' => $description,
         ]);
-    
+
         return redirect(route('posts.index'))->with('success', "Data Berhasil Diperbarui");
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -165,28 +193,42 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->first();
 
-        // DOM in HTML elements
         $dom = new DOMDocument;
         $dom->loadHTML($post->description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        // Get all tag Image
+        
         $images = $dom->getElementsByTagName('img');
 
-        // If there is an image, save it to storage and reset the src
-        foreach ($images as $img) {
-            $imagePath = public_path($img->getAttribute('src'));
+        foreach ($images as $key => $img) {
+            // Access image attributes
+            $src = $img->getAttribute('src');
+            $alt = $img->getAttribute('alt');
+            $srcImg = basename($src);
+            // Print or dump the attributes
+            // echo "Image $key: src=". basename($src).", alt=$alt\n\n\n";
 
-            // Retrieve only the file name from the full path
-            $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
-
-            // Delete the image from storage if there is one
-            if (Storage::exists("post-images/{$imageName}")) {
-                Storage::delete("post-images/{$imageName}");
+            
+            if (Storage::exists("images/post-images/{$srcImg}")) {
+                Storage::delete("images/post-images/{$srcImg}");
             }
         }
-
+        
+        
         $post->delete();
 
         return redirect(route('posts.index'))->with('success', "Data Berhasil Dihapus");
+        // foreach ($images as $key => $img) {
+        //     $src = $img->getAttribute('src');
+        //     // $path = Str::of($src)->after('/');
+        //     $srcImg = basename($src);
+        //     dd($src);
+
+        //     // if (Storage::exists("images/post-images/{$srcImg}")) {
+        //     //     Storage::delete("images/post-images/{$srcImg}");
+        //     // }
+        // }
+
+        // $post->delete();
+
+        // return redirect(route('posts.index'))->with('success', "Data Berhasil Dihapus");
     }
 }

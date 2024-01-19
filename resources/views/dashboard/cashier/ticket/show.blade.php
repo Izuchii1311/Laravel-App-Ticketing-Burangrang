@@ -1,10 +1,10 @@
-{{-- ? Dashboard Layouts --}}
+{{-- Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- ? Title --}}
+{{-- Title --}}
 @section('title', "Dashboard | Detail Ticket")
 
-{{-- ? Content --}}
+{{-- Content --}}
 @section('content')
     <section class="container">
         <h3>Silahkan untuk melakukan print tiket 🖨 </h3>
@@ -39,10 +39,9 @@
         <a href="{{ url()->previous() }}" class="text-decoration-none">Kembali</a>
     </section>
 @endsection
-{{-- ? End Content --}}
 
-{{-- Style CSS --}}
-@section('style')
+{{-- Style --}}
+@push('style')
     <style>
         .ticket-card {
             display: flex;
@@ -174,5 +173,4 @@
             }
         }
     </style>
-@endsection
-{{-- End Style CSS --}}
+@endpush

@@ -7,7 +7,6 @@
 {{-- Content --}}
 @section('content')
     <div class="row justify-content-center">
-        {{-- Information --}}
         <div class="col-12 card-separator">
             <h3>Detail Pesan ✌ </h3>
             <div class="col-12 col-md-8">
@@ -27,7 +26,6 @@
         </div>
     </div>
 @endsection
-{{-- End Content --}}
 
 @push('script')
     <script>
@@ -50,14 +48,12 @@
 
             // Change Table Position
             const isTable = figure.querySelector('.table');
-            
         });
 
         // Change Image Size
         images.forEach(function(image) {
             image.style.width = '600px';
             image.classList.add('img-fluid');
-
-        })
+        });
     </script>
 @endpush

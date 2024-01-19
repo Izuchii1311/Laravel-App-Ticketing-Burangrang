@@ -1,13 +1,12 @@
-{{-- *Dashboard Layout --}}
+{{-- Dashboard Layout --}}
 @extends('dashboard.layouts.main')
 
-{{-- *Title --}}
-@section('title', 'Dashboard | Pesan Pengunjung')
+{{-- Title --}}
+@section('title', 'Pesan Pengunjung')
 
-{{-- *Content --}}
+{{-- Content --}}
 @section('content')
     <div class="row justify-content-center">
-        {{-- ? Information --}}
         <div class="col-12 card-separator">
             <h3>Rekomendasi Pesan Para Pengunjung ✌</h3>
             <div class="col-12 col-md-8">
@@ -22,19 +21,9 @@
             </div>
         </div>
 
-        @if (session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-                <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+        {{-- Alert --}}
+        @include('dashboard.layouts.partials.alert')
 
-        {{-- ? Alert --}}
-        <div class="alerts-container"></div>
-        <br>
-
-        {{-- ? Check if last message deleted / isEmpty --}}
         @if ($recomends->isEmpty() || $recomends->where('recomend', 1)->isEmpty())
             <div class="col-12">
                 <p class="text-danger y-5">{{ $recomends->isEmpty() ? 'Tidak ada pesan.' : 'Tidak ada pesan yang direkomendasikan' }}</p>
@@ -45,10 +34,8 @@
                     <div class="col-6 col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                {{-- ? Card Body --}}
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title">{{ Str::limit($recomend->title, 35) }}</h5>
-                                    {{-- ? Dropdown --}}
                                     <div class="d-flex align-items-center">
                                         <div class="dropdown">
                                             <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
@@ -81,9 +68,7 @@
 
     <hr class="my-5">
 
-    {{-- ? Showing All Messages --}}
     <div class="row">
-        {{-- ? Information --}}
         <div class="col-12 card-separator mb-3 d-flex">
             <div class="col-md-6">
                 <h5>Pesan Para Pengunjung Kawasan Gunung Burangrang.</h5>
@@ -102,7 +87,6 @@
 
         <br>
 
-        {{-- ? Check if last message deleted / isEmpty --}}
         @if ($messages->isEmpty())
             <div class="col-12">
                 <p class="text-danger y-5">{{ $messages->isEmpty() ? 'Tidak ada pesan.' : 'Tidak ada pesan yang direkomendasikan' }}</p>
@@ -112,17 +96,14 @@
                 <div class="col-3 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            {{-- ? Card Body --}}
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">{{ Str::limit($message->title, 35) }}
-                                    {{-- ? Check icon recomend--}}
                                     @if($message->recomend == 1)
                                         <a href="#" class="card-link remove-to-menu" data-message-id="{{ $message->id }}"><i class='bx bxs-star'></i></a>
                                     @else
                                         <a href="#" class="card-link add-to-menu" data-message-id="{{ $message->id }}"><i class='bx bx-star'></i></a>
                                     @endif
                                 </h5>
-                                {{-- ? Dropdown --}}
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown">
                                         <a href="" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown">
@@ -133,7 +114,6 @@
 
                                             <div class="dropdown-divider"></div>
 
-                                            {{-- ! Delete Button --}}
                                             <form action="{{ route('dashboard.message.delete', ['slug' => $message->slug]) }}" method="post" id="confirm-delete-{{ $message->slug }}">
                                                 @method('delete')
                                                 @csrf
@@ -175,10 +155,9 @@
         </div>
     </div>
 @endsection
-{{-- *End Content --}}
 
-{{-- *Script --}}
-@section('script')
+{{-- Script --}}
+@push('script')
     <script>
         $(document).ready(function() {
             // Function to handle adding or removing from the menu
@@ -238,7 +217,5 @@
                 }, 1);
             }
         });
-        
     </script>
-@endsection
-{{-- *End Script --}}
+@endpush

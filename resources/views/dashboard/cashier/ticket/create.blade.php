@@ -1,20 +1,16 @@
-{{-- ? Dashboard Layouts --}}
+{{-- Dashboard Layouts --}}
 @extends('dashboard.layouts.main')
 
-{{-- ? Title --}}
+{{-- Title --}}
 @section('title', "Dashboard | Buat Ticket Baru")
 
-{{-- ? Content --}}
+{{-- Content --}}
 @section('content')
     <div class="card mb-4">
         <h5 class="card-header">Buat Tiket Baru</h5>
-        @if (session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mx-4" role="alert">
-                <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+
+        {{-- Alert --}}
+        @include('dashboard.layouts.partials.alert')
 
         <form class="card-body" action="{{ route('ticket.store') }}" method="post" id="transactionForm">
             @csrf
@@ -30,6 +26,7 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="name_ticket">Nama Tiket</label>
                     <input type="text" id="name_ticket" name="name_ticket" class="form-control @error('name_ticket') is-invalid @enderror" placeholder="Nama tiket" value="{{ old('name_ticket') }}" autocomplete="off">
@@ -39,6 +36,7 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="price">Harga Tiket</label>
                     <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Harga tiket" value="{{ old('price') }}" autocomplete="off">
@@ -48,6 +46,7 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="status">Status Tiket</label>
                     <input type="text" id="status" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Harga tiket"  value="{{ old('status', 'Open') }}" readonly disabled>
@@ -59,6 +58,7 @@
                     @enderror
                 </div>
             </div>
+
             <div class="row g-3 py-3">
                 <div class="col-md-6">
                     <label class="form-label" for="start_time">Jam Buka</label>
@@ -70,6 +70,7 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="end_time">Jam Tutup</label>
                     <input type="time" id="end_time" name="end_time" class="form-control @error('end_time') is-invalid @enderror" value="20:00 PM" value="{{ old('end_time') }}"/>
@@ -80,6 +81,7 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="col-md-12">
                     <label class="form-label" for="description">Deskripsi</label>
                     <textarea class="form-control @error('description') is-invalid @enderror" rows="3" id="description" name="description" placeholder="Berikan detail keterangan tentang tiket..">{{ old('description') }}</textarea>
@@ -90,6 +92,7 @@
                     @enderror
                 </div>
             </div>
+
             <div class="pt-4">
                 <button type="submit" class="btn btn-primary me-sm-3 me-1" id="submitButton">Tambah Data</button>
                 <button type="reset" class="btn btn-danger">Reset</button>
@@ -99,4 +102,3 @@
         </form>
     </div>
 @endsection
-{{-- ? End Content --}}

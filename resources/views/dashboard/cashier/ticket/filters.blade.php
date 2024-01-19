@@ -16,6 +16,7 @@
                         @sortablelink('name_ticket', 'sort a - z', ['name' => 'asc'])
                     </label>
                 </div>
+
                 <div class="form-check">
                     <input class="form-check-input name_sort" type="radio">
                     <label class="form-check-label">
@@ -33,6 +34,7 @@
                         @sortablelink('created_at', 'terbaru')
                     </label>
                 </div>
+
                 <div class="form-check">
                     <input class="form-check-input" type="radio" checked>
                     <label class="form-check-label">

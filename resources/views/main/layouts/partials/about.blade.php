@@ -2,7 +2,6 @@
 <section id="about" class="about">
     <div class="container">
 
-        {{-- Information --}}
         <div class="row no-gutters">
             <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
                 <div class="content">
@@ -14,7 +13,6 @@
                 </div>
             </div>
 
-            {{-- Content --}}
             <div class="col-xl-7 d-flex align-items-stretch">
                 <div class="icon-boxes d-flex flex-column justify-content-center">
                     <div class="row">
@@ -46,4 +44,3 @@
 
     </div>
 </section>
-{{-- End About Section --}}

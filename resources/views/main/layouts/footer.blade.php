@@ -4,7 +4,6 @@
         <div class="container">
             <div class="row">
 
-            {{-- Footer Description --}}
             <div class="col-lg-4 col-md-6 footer-newsletter">
                 <h3 class="fw-bolder">Kampung Nyalindung</h3>
                 <p class="mt-2">
@@ -21,7 +20,6 @@
                 </div>
             </div>
 
-            {{-- Links --}}
             <div class="col-lg-2 col-md-6 footer-links">
                 <h4>Link Terkait</h4>
                 <ul>
@@ -33,7 +31,6 @@
                 </ul>
             </div>
 
-            {{-- Another Links --}}
             <div class="col-lg-2 col-md-6 footer-links">
                 <h4>Link Lainnya</h4>
                 <ul>
@@ -49,10 +46,9 @@
                 </ul>
             </div>
 
-            {{-- About us --}}
             <div class="col-lg-4 col-md-6 footer-newsletter">
                 <h4>Tentang kami</h4>
-                <p class="pb-3"><em>Kampung Nyalindung, tempat di mana keindahan alam menyatu, dari puncak Pegunungan Burangrang hingga ke pesona Curug Cipalasari, menghadirkan ketenangan dan keajaiban yang tak terlupakan. Kami harap anda tertarik untuk terus berkunjung ke tempat wisata...</em></p>
+                <p class="pb-3">Kampung Nyalindung, tempat di mana keindahan alam menyatu, dari puncak Pegunungan Burangrang hingga ke pesona Curug Cipalasari, menghadirkan ketenangan dan keajaiban yang tak terlupakan. Kami harap anda tertarik untuk terus berkunjung ke tempat wisata...</p>
             </div>
 
             </div>
@@ -64,8 +60,7 @@
             &copy; Copyright <strong><span>Kampung Nyalindung</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Created by <a href="#"><strong>BEM</strong> STMIK "AMIK BANDUNG"</a>
+            Created by <a href="{{ route('main.index') }}"><strong>BEM</strong> STMIK "AMIK BANDUNG"</a>
         </div>
     </div>
 </footer>
-{{-- End Footer --}}

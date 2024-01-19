@@ -22,4 +22,3 @@
         @include('main.layouts.partials.contact')
     </main>
 @endsection
-{{-- End Container --}}

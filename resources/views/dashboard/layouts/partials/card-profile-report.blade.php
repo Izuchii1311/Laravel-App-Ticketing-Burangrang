@@ -20,4 +20,3 @@
         </div>
     </div>
 </div>
-{{-- End Card Profile Report --}}

@@ -47,4 +47,3 @@
         </div>
     </div>
 </div>
-{{-- End Card Total Revenue --}}

@@ -1,7 +1,7 @@
 {{-- Include Main Layout Dashboard --}}
 @extends('dashboard.layouts.main')
 
-{{-- Give a Title Page --}}
+{{-- Title --}}
 @section('title', "Dashboard | Buat Postingan Baru")
 
 {{-- Content --}}
@@ -9,8 +9,9 @@
     <div class="card mb-4">
         <h5 class="card-header">Buat Postingan Baru</h5>
         <div class="mx-4">
-            {{-- Include partials Alert --}}
-            @include('dashboard.admin.posts.partials.alert')
+
+            {{-- Alert --}}
+            @include('dashboard.layouts.partials.alert')
         </div>
 
         <form class="card-body" action="{{ route('posts.store') }}" method="post" id="postForm" enctype="multipart/form-data">
@@ -46,9 +47,8 @@
 
     </div>
 @endsection
-{{-- End Content --}}
 
-{{-- Add Script --}}
+{{-- Script --}}
 @push('script')
     <script>
         $(document).ready(function() {
@@ -63,7 +63,6 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
                 ]
             });
         });

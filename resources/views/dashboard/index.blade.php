@@ -2,19 +2,11 @@
 @extends('dashboard.layouts.main')
 
 {{-- Title --}}
-@section('title', 'Dashboard | Home')
+@section('title', 'Home')
 
 {{-- Content --}}
 @section('content')
-    {{-- @if (session()->has('error'))
-        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-            <i class="menu-icon tf-icons bx bx-error-circle me-2 mb-1"></i>
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif --}}
 
-    {{-- Cards --}}
     <div class="row">
         {{-- Congratulation Card --}}
         @include('dashboard.layouts.partials.congratulation-card')
@@ -28,7 +20,6 @@
             </div>
         </div>
 
-        {{-- Total Revenue --}}
         @include('dashboard.layouts.partials.card-total-revenue')
 
         <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
@@ -44,7 +35,6 @@
         </div>
     </div>
 
-    {{-- Cards --}}
     <div class="row">
         {{-- Order Statistic --}}
         @include('dashboard.layouts.partials.card-order-statistic')
@@ -56,4 +46,3 @@
         @include('dashboard.layouts.partials.card-transactions')
     </div>
 @endsection
-{{-- End Content --}}

@@ -18,7 +18,7 @@ use App\Http\Controllers\Admin\PostController;
 |
 */
 
-//TODO: Main Page
+// TODO: User (Guest) Page
 Route::get('/', fn() => view('main/index'))->name('main.index');
 Route::get('/berita', fn() => view('main.news'))->name('main.news');
 Route::get('/wisata', fn() => view('main.tour'))->name('main.tour');
@@ -28,7 +28,7 @@ Route::get('/profile/sejarah-nyalindung', fn() => view('main.history'))->name('m
 Route::get('/profile/tentang-burangrang', fn() => view('main.about-burangrang'))->name('main.about-burangrang');
 Route::get('/profile/cooperation', fn() => view('main.cooperation'))->name('main.cooperation');
 
-//* Guest Create Message
+# Guest Page
 Route::post('/message', [MessageController::class, 'storeMessage'])->name('main.message');
 
 
@@ -37,16 +37,18 @@ Route::get('/login', [AuthController::class, 'index'])->name('login')->middlewar
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//TODO: Admin Page
+
+//TODO: Dashboard Page with Authentication
 Route::middleware(['auth'])->group(function () {
-    //* View Dashboard
+    # Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard/index');
     })->name('dashboard.index');
 
-    //* Middleware Admin
+
+    //TODO: Dashboard Admin
     Route::middleware(['admin'])->group(function() {
-        //* Message
+        # Message
         Route::get('/dashboard/message', [MessageController::class, 'showMessage'])->name('dashboard.message.show');
         Route::get('/dashboard/message/detail/{slug}', [MessageController::class, 'detailMessage'])->name('dashboard.message.detail');
         Route::delete('/dashboard/message/{slug}', [MessageController::class, 'deleteMessage'])->name('dashboard.message.delete');
@@ -54,17 +56,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/dashboard/message/{slug}/add-to-menu', [MessageController::class, 'addToMenu'])->name('dashboard.message.addToMenu');
         Route::post('/dashboard/message/{slug}/remove-to-menu', [MessageController::class, 'removeToMenu'])->name('dashboard.message.removeToMenu');
 
-        //* Posts
+        # Posts
         Route::resource('/dashboard/posts', PostController::class);
     });
 
-    //* Middleware Cashier
-    # Route ticket
+
+    // TODO: Dashboard Cashier
     Route::middleware(['cashier'])->group(function () {
+        # Ticket
         Route::resource('/dashboard/ticket', TicketController::class);
-    });
-    # Route Transaction
-    Route::middleware('cashier')->group(function () {
+        # Transaction
         Route::get('/dashboard/transaction/report', [TransactionController::class, 'report'])->name('transaction.report');
         Route::get('/dashboard/transaction/report_pdf', [TransactionController::class, 'report_pdf'])->name('transaction.report_pdf');
         Route::resource('/dashboard/transaction', TransactionController::class);

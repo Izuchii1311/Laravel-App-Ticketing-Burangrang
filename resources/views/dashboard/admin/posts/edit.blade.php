@@ -1,7 +1,7 @@
 {{-- Include Main Layout Dashboard --}}
 @extends('dashboard.layouts.main')
 
-{{-- Give a Title Page --}}
+{{-- Title --}}
 @section('title', "Dashboard | Edit Postingan")
 
 {{-- Content --}}
@@ -9,13 +9,15 @@
     <div class="card mb-4">
         <h5 class="card-header">Edit Postingan</h5>
         <div class="mx-4">
-            {{-- Include partials Alert --}}
-            @include('dashboard.admin.posts.partials.alert')
+
+            {{-- Alert --}}
+            @include('dashboard.layouts.partials.alert')
         </div>
 
         <form class="card-body" action="{{ route('posts.update', ['post' => $post->slug]) }}" method="post" id="postForm" enctype="multipart/form-data">
             @method('put')
             @csrf
+
             <div class="row g-3">
                 <div class="col-md-12">
                     <label class="form-label" for="title">Judul Postingan</label>
@@ -47,9 +49,8 @@
 
     </div>
 @endsection
-{{-- End Content --}}
 
-{{-- Add Script --}}
+{{-- Script --}}
 @push('script')
     <script>
         $(document).ready(function() {
@@ -58,13 +59,12 @@
                 tabsize: 5,
                 height: 500,
                 toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'italic']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'italic']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
                 ]
             });
         });

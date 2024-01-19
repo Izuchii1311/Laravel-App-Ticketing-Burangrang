@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Kampung Nyalindung - @yield('title')</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
+    <title>Kampung Nyalindung - @yield('title', "Kampung Nyalindung")</title>
+
+    {{-- Favicons --}}
     <link href="{{ asset('/img/main/HuoIcon.ico') }}" rel="icon">
     <link href="{{ asset('/img/main/HuoIcon.ico') }}" rel="apple-touch-icon">
 
@@ -28,7 +28,7 @@
     <link href="{{ asset('/css/main/style.css') }}" rel="stylesheet">
 
     {{-- Style CSS --}}
-    @yield('style')
+    @stack('style')
 </head>
 
 <body>
@@ -37,12 +37,11 @@
 
     {{-- Container --}}
     @yield('container')
-    {{-- End Container --}}
 
     {{-- Footer --}}
     @include('main.layouts.footer')
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#hero" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     {{-- Vendor Js Files --}}
     <script src="{{ asset('/vendor/main/purecounter/purecounter_vanilla.js') }}"></script>
@@ -57,7 +56,6 @@
     <script src="{{ asset('/js/main/main.js') }}"></script>
 
     {{-- Script --}}
-    @yield('script')
+    @stack('script')
 </body>
-
 </html>

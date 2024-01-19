@@ -7,20 +7,21 @@
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        {{-- User Information --}}
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <div class="fst-italic text-center">{{ ucwords(request()->path()) }}</div>
+                <div class="fst-italic text-center">
+                    {{ ucwords(request()->path()) }}
+                </div>
             </div>
         </div>
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            {{-- Welcome --}}
             <li class="nav-item lh-1 me-3">
-                <a class="text-gray" href="#">Welcome, <span class="fw-bold">{{ auth()->user()->name }}</span></a >
+                <a class="text-gray" href="#">
+                    Welcome, <span class="fw-bold">{{ auth()->user()->name }}</span>
+                </a>
             </li>
 
-            {{-- User --}}
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
@@ -89,4 +90,3 @@
 
     </div>
 </nav>
-{{-- End Navbar Section --}}

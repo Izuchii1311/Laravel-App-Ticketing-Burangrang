@@ -1,14 +1,13 @@
 <!DOCTYPE html>
+<html lang="en" class="light-style layout-wide customizer-hide">
 
-<html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default" data-template="vertical-menu-template-free">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>@yield('title')</title>
-    <meta name="description" content="" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    {{-- Favicon --}}
-    {{-- <link rel="icon" type="image/x-icon" href="{{ asset('/img/dashboard/favicon/favicon.ico') }}" /> --}}
+    <title>Dashboard | @yield('title')</title>
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,17 +31,15 @@
     <script src="{{ asset('/js/dashboard/config.js') }}"></script>
 
     {{-- Style CSS --}}
-    @yield('style')
+    @stack('style')
 </head>
 
 <body>
-    {{-- Content --}}
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
             @yield('content')
         </div>
     </div>
-    {{-- End Content --}}
 
     {{-- Vendor JS --}}
     <script src="{{ asset('/vendor/dashboard/libs/jquery/jquery.js') }}"></script>
@@ -58,6 +55,6 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     {{-- Script JS --}}
-    @yield('script')
+    @stack('script')
 </body>
 </html>

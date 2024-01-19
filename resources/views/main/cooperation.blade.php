@@ -1,4 +1,4 @@
-{{-- Cooperation Page --}}
+{{-- Main Layouts --}}
 @extends('main.layouts.main')
 
 {{-- Title --}}
@@ -6,9 +6,7 @@
 
 {{-- Container --}}
 @section('container')
-    {{-- Main Section --}}
     <main id="main">
-        {{-- Breadcrumbs --}}
         <section class="breadcrumbs">
             <div class="container">
 
@@ -23,22 +21,20 @@
                 </div>
 
             </div>
-            </section>
+        </section>
 
-            {{-- Content --}}
-            <section class="inner-page">
-                <div class="container">
-                    <p> Kerja Sama </p>
-                </div>
+        <section class="inner-page">
+            <div class="container">
+                <p> Kerja Sama </p>
+            </div>
         </section>
     </main>
-    {{-- End Main Section --}}
 @endsection
 
-{{-- Sript --}}
-@section('script')
+{{-- Script --}}
+@push('script')
     <script>
         const header = document.querySelector('#header.header-transparent');
         header.classList.remove('header-transparent');
     </script>
-@endsection
+@endpush
